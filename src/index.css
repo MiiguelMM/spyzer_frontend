@@ -5,6 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Background moderno con patrones cyan/turquesa */
+  background: 
+    radial-gradient(circle at 20% 20%, rgba(6, 182, 212, 0.15) 2px, transparent 2px),
+    radial-gradient(circle at 80% 20%, rgba(34, 211, 238, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at 20% 80%, rgba(14, 116, 144, 0.08) 1px, transparent 1px),
+    linear-gradient(135deg, transparent 30%, rgba(6, 182, 212, 0.06) 30%, rgba(6, 182, 212, 0.06) 32%, transparent 32%),
+    linear-gradient(45deg, transparent 68%, rgba(34, 211, 238, 0.05) 68%, rgba(34, 211, 238, 0.05) 70%, transparent 70%),
+    radial-gradient(ellipse at center, rgba(6, 182, 212, 0.03) 50%, transparent 50%),
+    linear-gradient(135deg, #f0fdff 0%, #cffafe 100%);
+    
+  background-size: 80px 80px, 60px 60px, 40px 40px, 120px 120px, 120px 120px, 200px 200px;
+  height: 100vw;
+  width: 100vw;
 }
 
 code {

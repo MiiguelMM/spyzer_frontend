@@ -1,0 +1,37 @@
+/* Section1.css - EXACTAMENTE IDÉNTICO al Header */
+.section1 {
+  /* GRADIENTE EXACTO del header */
+  background: linear-gradient(85deg, #5BA3D0 0%, #6BB6E3 25%, #7BC8F6 50%, #8BD9FF 75%, #9BE5FF 100%);
+  /* EFECTOS EXACTOS del header */
+  box-shadow: 
+    0 12px 40px rgba(91, 163, 208, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.08),
+    inset 0 2px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+  height: 180vw;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.section1__wrapper {
+  /* Wrapper MÍNIMO para no alterar el color */
+  background-color: white;
+  backdrop-filter: blur(1px);
+  height: 88%;
+  width: 93%;
+  border-radius: 32px;
+  /* Solo sombras externas mínimas */
+  box-shadow: 
+    inset 0 1px 1px rgba(255, 255, 255, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
