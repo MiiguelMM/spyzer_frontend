@@ -1,0 +1,140 @@
+/* ChartTypeSwitcher.css - Actualizado para combinar con Header.css */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap');
+
+.chart-type-switcher {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  /* Glassmorphism matching header wrapper */
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(227, 242, 253, 0.9) 50%,
+    rgba(187, 222, 251, 0.85) 100%);
+  backdrop-filter: blur(30px) saturate(180%);
+  width: 95%;
+  height: 10%;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: none;
+  border-bottom: 1px solid rgba(107, 182, 227, 0.1);
+  box-shadow: 
+    inset 0 3px 6px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 4px rgba(91, 163, 208, 0.15),
+    0 12px 32px rgba(91, 163, 208, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-type-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Satoshi', Arial, sans-serif;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  background: transparent;
+  color: #5BA3D0;
+  min-width: 60px;
+  gap: 4px;
+  position: relative;
+  overflow: hidden;
+  /* Subtle inner shadow */
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.chart-type-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.chart-type-button.active {
+  /* Matching header profile/menu gradient */
+  background: linear-gradient(135deg, #6BB6E3 0%, #7EC7EC 100%);
+  color: white;
+  box-shadow: 
+    0 6px 20px rgba(91, 163, 208, 0.5),
+    0 3px 8px rgba(0, 0, 0, 0.12),
+    inset 0 2px 4px rgba(255, 255, 255, 0.35),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
+}
+
+.chart-type-button:not(.active):not(:disabled):hover {
+  background: rgba(107, 182, 227, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 
+    0 4px 12px rgba(107, 182, 227, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.chart-type-icon {
+  font-size: 18px;
+  margin-bottom: 2px;
+  transition: transform 0.3s ease;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.chart-type-button:hover .chart-type-icon {
+  transform: scale(1.1);
+}
+
+.chart-type-button.active .chart-type-icon {
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.chart-type-label {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  transition: all 0.3s ease;
+}
+
+.chart-type-button.active .chart-type-label {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Ripple effect matching header style */
+.chart-type-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+}
+
+.chart-type-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .chart-type-switcher {
+    height: 8%;
+    gap: 8px;
+  }
+  
+  .chart-type-button {
+    min-width: 50px;
+    padding: 6px 8px;
+  }
+  
+  .chart-type-icon {
+    font-size: 16px;
+  }
+  
+  .chart-type-label {
+    font-size: 9px;
+  }
+}

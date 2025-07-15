@@ -1,0 +1,333 @@
+/* MetricsCards.css - Actualizado para combinar con Header.css */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap');
+
+.metrics-container {
+  display: flex;
+  gap: 6px;
+  /* Glassmorphism matching header wrapper */
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(227, 242, 253, 0.9) 50%,
+    rgba(187, 222, 251, 0.85) 100%);
+  backdrop-filter: blur(30px) saturate(180%);
+  border-radius: 0 0 16px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: none;
+  box-shadow: 
+    inset 0 3px 6px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 4px rgba(91, 163, 208, 0.15),
+    0 12px 32px rgba(91, 163, 208, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+  width: 95%;
+  height: 20%;
+  position: relative;
+  overflow: hidden;
+}
+
+.loading-container,
+.error-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(227, 242, 253, 0.9) 50%,
+    rgba(187, 222, 251, 0.85) 100%);
+  backdrop-filter: blur(30px) saturate(180%);
+  border-radius: 0 0 16px 16px;
+  font-family: 'Satoshi', Arial, sans-serif;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-top: none;
+  box-shadow: 
+    inset 0 3px 6px rgba(255, 255, 255, 0.95),
+    inset 0 -2px 4px rgba(91, 163, 208, 0.15),
+    0 12px 32px rgba(91, 163, 208, 0.25),
+    0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.loading-container {
+  color: #6BB6E3;
+}
+
+.error-container {
+  color: #ef5350;
+}
+
+.loading-icon,
+.error-icon {
+  margin-right: 10px;
+  font-size: 18px;
+}
+
+.metrics-card {
+  flex: 1;
+  /* Enhanced glassmorphism for cards */
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.98) 0%, 
+    rgba(240, 248, 255, 0.85) 50%,
+    rgba(227, 242, 253, 0.8) 100%);
+  backdrop-filter: blur(20px) saturate(150%);
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 6px 20px rgba(107, 182, 227, 0.15),
+    inset 0 2px 4px rgba(255, 255, 255, 0.9),
+    inset 0 -1px 2px rgba(91, 163, 208, 0.1);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.metrics-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 8px 25px rgba(107, 182, 227, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.95),
+    inset 0 -1px 2px rgba(91, 163, 208, 0.15);
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 8px;
+}
+
+.card-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-indicator.today {
+  background: linear-gradient(135deg, #6BB6E3 0%, #7EC7EC 100%);
+  box-shadow: 
+    0 0 8px rgba(107, 182, 227, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-indicator.yesterday {
+  background: linear-gradient(135deg, #84CCEF 0%, #8AD1F2 100%);
+  box-shadow: 
+    0 0 8px rgba(132, 204, 239, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-indicator.positive {
+  background: linear-gradient(135deg, #26a69a 0%, #4db6ac 100%);
+  box-shadow: 
+    0 0 8px rgba(38, 166, 154, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-indicator.negative {
+  background: linear-gradient(135deg, #ef5350 0%, #f44336 100%);
+  box-shadow: 
+    0 0 8px rgba(239, 83, 80, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #5BA3D0;
+  font-family: 'Satoshi', Arial, sans-serif;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  letter-spacing: 0.3px;
+}
+
+.card-content {
+  font-size: 10px;
+  color: #6BB6E3;
+  font-family: 'Satoshi', Arial, sans-serif;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.metric-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+  padding: 2px 0;
+  transition: all 0.2s ease;
+}
+
+.metric-row:hover {
+  background: rgba(107, 182, 227, 0.05);
+  border-radius: 4px;
+  padding: 2px 4px;
+}
+
+.metric-row.high,
+.metric-row.low {
+  margin-bottom: 5px;
+  padding: 3px 0;
+}
+
+.metric-row.close {
+  padding: 2px 0;
+  border-top: 1px solid rgba(107, 182, 227, 0.15);
+  margin-top: 6px;
+  padding-top: 8px;
+}
+
+.metric-row.yesterday-close {
+  padding: 3px 0;
+  border-top: 1px solid rgba(107, 182, 227, 0.15);
+  margin-top: 8px;
+  padding-top: 10px;
+}
+
+.metric-row.change-amount,
+.metric-row.change-percent {
+  margin-bottom: 5px;
+  padding: 3px 0;
+}
+
+.metric-row.change-percent {
+  margin-bottom: 10px;
+}
+
+.metric-label {
+  font-weight: 600;
+  color: #5BA3D0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.metric-value {
+  font-weight: 700;
+  color: #5BA3D0;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.metric-value.high {
+  color: #26a69a;
+  text-shadow: 0 1px 2px rgba(38, 166, 154, 0.2);
+}
+
+.metric-value.low {
+  color: #ef5350;
+  text-shadow: 0 1px 2px rgba(239, 83, 80, 0.2);
+}
+
+.metric-value.close {
+  font-weight: 800;
+  color: #5BA3D0;
+  font-size: 11px;
+}
+
+.metric-value.yesterday-close {
+  font-weight: 800;
+  color: #5BA3D0;
+  font-size: 12px;
+}
+
+.metric-value.positive {
+  font-weight: 800;
+  color: #26a69a;
+  text-shadow: 0 1px 2px rgba(38, 166, 154, 0.3);
+}
+
+.metric-value.negative {
+  font-weight: 800;
+  color: #ef5350;
+  text-shadow: 0 1px 2px rgba(239, 83, 80, 0.3);
+}
+
+.metric-value.change-amount {
+  font-size: 11px;
+}
+
+.metric-value.change-percent {
+  font-size: 12px;
+}
+
+.change-indicator {
+  text-align: center;
+  padding: 8px;
+  border-radius: 8px;
+  margin-top: 6px;
+  border: 1px solid;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
+}
+
+.change-indicator:hover {
+  transform: scale(1.02);
+}
+
+.change-indicator.positive {
+  background: linear-gradient(135deg, 
+    rgba(38, 166, 154, 0.15) 0%, 
+    rgba(77, 182, 172, 0.08) 100%);
+  border-color: rgba(38, 166, 154, 0.3);
+  box-shadow: 
+    0 4px 12px rgba(38, 166, 154, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.change-indicator.negative {
+  background: linear-gradient(135deg, 
+    rgba(239, 83, 80, 0.15) 0%, 
+    rgba(244, 67, 54, 0.08) 100%);
+  border-color: rgba(239, 83, 80, 0.3);
+  box-shadow: 
+    0 4px 12px rgba(239, 83, 80, 0.1),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+.change-icon {
+  font-size: 12px;
+  margin-bottom: 2px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.change-label {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  font-family: 'Satoshi', Arial, sans-serif;
+}
+
+.change-label.positive {
+  color: #26a69a;
+  text-shadow: 0 1px 1px rgba(38, 166, 154, 0.2);
+}
+
+.change-label.negative {
+  color: #ef5350;
+  text-shadow: 0 1px 1px rgba(239, 83, 80, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .metrics-container {
+    height: 15%;
+    gap: 4px;
+  }
+  
+  .metrics-card {
+    padding: 8px;
+  }
+  
+  .card-title {
+    font-size: 11px;
+  }
+  
+  .card-content {
+    font-size: 9px;
+  }
+  
+  .metric-value.yesterday-close {
+    font-size: 11px;
+  }
+  
+  .metric-value.change-percent {
+    font-size: 11px;
+  }
+}

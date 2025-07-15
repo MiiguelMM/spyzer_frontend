@@ -1,4 +1,4 @@
-/* Header Component CSS - Paleta Perfectamente Integrada con Logo Azul */
+/* Header Component CSS - Degradado Más Sutil y Uniforme */
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap');
 
 .header {
@@ -7,7 +7,8 @@
   align-items: center;
   padding: 0.5rem 1.5rem;
 
-  background: linear-gradient(105deg, #5BA3D0 0%, #6BB6E3 25%, #7BC8F6 50%, #8BD9FF 75%, #9BE5FF 100%);
+  /* DEGRADADO MÁS SUTIL - Variaciones más pequeñas del mismo azul */
+  background: linear-gradient(105deg, #6BB6E3 0%, #72BCE6 20%, #78C1E9 40%, #7EC7EC 60%, #84CCEF 80%, #8AD1F2 100%);
   box-shadow: 
     0 12px 40px rgba(91, 163, 208, 0.4),
     0 4px 16px rgba(0, 0, 0, 0.08),
@@ -17,12 +18,7 @@
   height: 78px;
   position: relative;
   overflow: hidden;
-
-
 }
-
-
-
 
 .header__logo {
   width: 35%;
@@ -35,9 +31,8 @@
   transition: filter 0.3s ease;
 }
 
-
 .header__name {
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   color: #ffffff;
   text-shadow: 
     0 2px 8px rgba(0, 0, 0, 0.4),
@@ -67,7 +62,7 @@
 .header__logo img {
   width: 100%;
   height: auto;
-  max-height: 51px;
+  max-height: 48px;
   object-fit: contain;
   filter: 
     drop-shadow(0 6px 12px rgba(0, 0, 0, 0.2))
@@ -101,25 +96,6 @@
   overflow: hidden;
 }
 
-/* Efecto de cristal líquido */
-.header__wrapper::before {
-  content: '';
-  position: absolute;
-  top: -100%;
-  left: -100%;
-  width: 300%;
-  height: 300%;
-  background: 
-    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(91, 163, 208, 0.1) 0%, transparent 50%);
-  animation: liquidFlow 8s ease-in-out infinite;
-}
-
-@keyframes liquidFlow {
-  0%, 100% { transform: rotate(0deg) translate(0, 0); }
-  33% { transform: rotate(120deg) translate(50px, -50px); }
-  66% { transform: rotate(240deg) translate(-50px, 50px); }
-}
 
 /* Profile & Menu Styles - Azul vibrante del logo */
 .header__profile,
@@ -127,58 +103,25 @@
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  /* Gradiente que coincide con el logo */
-  background: linear-gradient(135deg, #5BA3D0 0%, #7BC8F6 100%);
+  /* Gradiente que coincide con el logo - más sutil */
+  background: linear-gradient(135deg, #6BB6E3 0%, #7EC7EC 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   position: relative;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
   box-shadow: 
     0 6px 20px rgba(91, 163, 208, 0.5),
     0 3px 8px rgba(0, 0, 0, 0.12),
     inset 0 2px 4px rgba(255, 255, 255, 0.35),
     inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-  border: 2px solid rgba(255, 255, 255, 0.4);
+  
   overflow: hidden;
 }
 
-/* Efecto de energía pulsante */
-.header__profile::before,
-.header__menu::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.8) 0%, transparent 70%);
-  transform: translate(-50%, -50%) scale(0);
-  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
 
-.header__profile:hover,
-.header__menu:hover {
-  transform: translateY(-3px) scale(1.1) rotate(-5deg);
-  background: linear-gradient(135deg, #7BC8F6 0%, #9BE5FF 100%);
-  box-shadow: 
-    0 10px 30px rgba(91, 163, 208, 0.6),
-    0 6px 15px rgba(0, 0, 0, 0.15),
-    inset 0 2px 6px rgba(255, 255, 255, 0.4),
-    0 0 40px rgba(123, 200, 246, 0.5);
-  border-color: rgba(255, 255, 255, 0.6);
-}
 
-.header__profile:hover::before,
-.header__menu:hover::before {
-  transform: translate(-50%, -50%) scale(1.2);
-}
-
-.header__profile:active,
-.header__menu:active {
-  transform: translateY(-1px) scale(1.05) rotate(-3deg);
-}
 
 .header__profile-avatar {
   width: 100%;
@@ -201,60 +144,17 @@
   letter-spacing: 1px;
 }
 
-.notification-item,
-.menu-item {
-  padding: 16px 20px;
-  border-bottom: 1px solid rgba(91, 163, 208, 0.1);
-  cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  color: #1a5490;
-  font-weight: 500;
-  position: relative;
-  overflow: hidden;
-  font-family: 'Satoshi', sans-serif;
-}
 
-.notification-item::before,
-.menu-item::before {
-  content: '';
-  position: absolute;
-  left: -100%;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(90deg, 
-    transparent 0%, 
-    #5BA3D0 50%, 
-    transparent 100%);
-  transition: left 0.5s ease;
-  opacity: 0.3;
-}
 
-.notification-item:hover,
-.menu-item:hover {
-  color: white;
-  background: linear-gradient(90deg, #5BA3D0 0%, #7BC8F6 100%);
-  padding-left: 26px;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  transform: translateX(4px);
-}
 
-.notification-item:hover::before,
-.menu-item:hover::before {
-  left: 100%;
-}
 
-.notification-item:last-child,
-.menu-item:last-child {
-  border-bottom: none;
-}
 
 /* Menu icon con animación mejorada */
 .header__menu-icon {
   display: flex;
   flex-direction: column;
   gap: 3px;
-  transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
 }
 
 .header__menu-icon span {
@@ -267,30 +167,12 @@
   position: relative;
 }
 
-.header__menu:hover .header__menu-icon {
-  transform: rotate(180deg);
-}
-
-.header__menu:hover .header__menu-icon span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-  background-color: #FFE66D;
-}
-
-.header__menu:hover .header__menu-icon span:nth-child(2) {
-  opacity: 0;
-  transform: scale(0);
-}
-
-.header__menu:hover .header__menu-icon span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-  background-color: #FFE66D;
-}
 
 /* Responsive improvements */
 @media (max-width: 768px) {
   .header {
     padding: 0.5rem 1rem;
-    height: 64px;
+    height: 59px;
   }
   
   .header__logo {
@@ -299,7 +181,7 @@
   
   .header__wrapper {
     width: 28%;
-    height: 67%;
+    height: 75%;
     padding: 0 2px;
   }
   

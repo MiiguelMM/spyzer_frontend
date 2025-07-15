@@ -37,14 +37,14 @@ export default function Header() {
                         <span></span>
                         <span></span>
                     </div>
-                    {showMenu && (
+                    {/* {showMenu && (
                         <div className='header__menu-dropdown'>
                             <div className='menu-item'>Notificaciones</div>
                             <div className='menu-item'>Configuración</div>
                             <div className='menu-item'>Ayuda</div>
                             <div className='menu-item'>Cerrar Sesión</div>
                         </div>
-                    )}
+                    )} */}
                 </div>
             </div>
         </div>
