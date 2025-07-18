@@ -4,24 +4,12 @@
 .metrics-container {
   display: flex;
   gap: 6px;
-  /* Glassmorphism matching header wrapper */
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(227, 242, 253, 0.9) 50%,
-    rgba(187, 222, 251, 0.85) 100%);
-  backdrop-filter: blur(30px) saturate(180%);
-  border-radius: 0 0 16px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-top: none;
-  box-shadow: 
-    inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -2px 4px rgba(91, 163, 208, 0.15),
-    0 12px 32px rgba(91, 163, 208, 0.25),
-    0 4px 12px rgba(0, 0, 0, 0.06);
-  width: 95%;
-  height: 20%;
+  width: 90%;
+  height: 11.5%;
   position: relative;
   overflow: hidden;
+  background-color: transparent;
+  margin-top: 5%;
 }
 
 .loading-container,
@@ -29,18 +17,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.95) 0%, 
-    rgba(227, 242, 253, 0.9) 50%,
-    rgba(187, 222, 251, 0.85) 100%);
-  backdrop-filter: blur(30px) saturate(180%);
+  background: white;
   border-radius: 0 0 16px 16px;
   font-family: 'Satoshi', Arial, sans-serif;
   font-weight: 600;
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-top: none;
   box-shadow: 
-    inset 0 3px 6px rgba(255, 255, 255, 0.95),
     inset 0 -2px 4px rgba(91, 163, 208, 0.15),
     0 12px 32px rgba(91, 163, 208, 0.25),
     0 4px 12px rgba(0, 0, 0, 0.06);
@@ -62,19 +45,15 @@
 
 .metrics-card {
   flex: 1;
-  /* Enhanced glassmorphism for cards */
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.98) 0%, 
-    rgba(240, 248, 255, 0.85) 50%,
-    rgba(227, 242, 253, 0.8) 100%);
-  backdrop-filter: blur(20px) saturate(150%);
+  background-color: #f3f8fc;
   border-radius: 12px;
   padding: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.7);
+   border: 1.5px solid rgba(255, 255, 255, 0.8);
   box-shadow: 
-    0 6px 20px rgba(107, 182, 227, 0.15),
-    inset 0 2px 4px rgba(255, 255, 255, 0.9),
-    inset 0 -1px 2px rgba(91, 163, 208, 0.1);
+  0 2px 8px rgba(91, 163, 208, 0.15),
+  0 1px 3px rgba(0, 0, 0, 0.05),
+  inset 0 1px 1px rgba(255, 255, 255, 0.1),
+  inset 0 -1px 1px rgba(0, 0, 0, 0.05);
   position: relative;
   overflow: hidden;
   transition: all 0.3s ease;
@@ -93,6 +72,7 @@
   align-items: center;
   margin-bottom: 8px;
   gap: 8px;
+  height: 50%;
 }
 
 .card-indicator {
@@ -151,8 +131,8 @@
 .metric-row {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 4px;
-  padding: 2px 0;
+  margin-bottom: 5px;
+  padding: 3px 0;
   transition: all 0.2s ease;
 }
 
@@ -162,36 +142,7 @@
   padding: 2px 4px;
 }
 
-.metric-row.high,
-.metric-row.low {
-  margin-bottom: 5px;
-  padding: 3px 0;
-}
-
-.metric-row.close {
-  padding: 2px 0;
-  border-top: 1px solid rgba(107, 182, 227, 0.15);
-  margin-top: 6px;
-  padding-top: 8px;
-}
-
-.metric-row.yesterday-close {
-  padding: 3px 0;
-  border-top: 1px solid rgba(107, 182, 227, 0.15);
-  margin-top: 8px;
-  padding-top: 10px;
-}
-
-.metric-row.change-amount,
-.metric-row.change-percent {
-  margin-bottom: 5px;
-  padding: 3px 0;
-}
-
-.metric-row.change-percent {
-  margin-bottom: 10px;
-}
-
+/* Clases específicas para colores y bold (se mantienen) */
 .metric-label {
   font-weight: 600;
   color: #5BA3D0;
@@ -214,18 +165,6 @@
   text-shadow: 0 1px 2px rgba(239, 83, 80, 0.2);
 }
 
-.metric-value.close {
-  font-weight: 800;
-  color: #5BA3D0;
-  font-size: 11px;
-}
-
-.metric-value.yesterday-close {
-  font-weight: 800;
-  color: #5BA3D0;
-  font-size: 12px;
-}
-
 .metric-value.positive {
   font-weight: 800;
   color: #26a69a;
@@ -236,14 +175,6 @@
   font-weight: 800;
   color: #ef5350;
   text-shadow: 0 1px 2px rgba(239, 83, 80, 0.3);
-}
-
-.metric-value.change-amount {
-  font-size: 11px;
-}
-
-.metric-value.change-percent {
-  font-size: 12px;
 }
 
 .change-indicator {
@@ -302,32 +233,4 @@
 .change-label.negative {
   color: #ef5350;
   text-shadow: 0 1px 1px rgba(239, 83, 80, 0.2);
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .metrics-container {
-    height: 15%;
-    gap: 4px;
-  }
-  
-  .metrics-card {
-    padding: 8px;
-  }
-  
-  .card-title {
-    font-size: 11px;
-  }
-  
-  .card-content {
-    font-size: 9px;
-  }
-  
-  .metric-value.yesterday-close {
-    font-size: 11px;
-  }
-  
-  .metric-value.change-percent {
-    font-size: 11px;
-  }
 }
