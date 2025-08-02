@@ -1,25 +1,32 @@
-/* Header Component CSS - Degradado Más Sutil y Uniforme */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap');
+/* Header Component CSS - Modo Oscuro Mejorado */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding:  1.5rem;
-
-  /* DEGRADADO MÁS SUTIL - Variaciones más pequeñas del mismo azul */
-  /* background: linear-gradient(105deg, #6BB6E3 0%, #72BCE6 20%, #78C1E9 40%, #7EC7EC 60%, #84CCEF 80%, #8AD1F2 100%); */
-  background: linear-gradient(95deg, #6BB6E3 0%, #72BCE6 20%, #78C1E9 40%, #7EC7EC 60%, #84CCEF 80%, #8AD1F2 100%);
-  box-shadow: 
-    0 12px 40px rgba(91, 163, 208, 0.4),
-    0 4px 16px rgba(0, 0, 0, 0.08),
-    inset 0 2px 0 rgba(255, 255, 255, 0.3),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-
+  /* Gradiente anterior comentado */
+  /* background: linear-gradient(95deg, #6BB6E3 0%, #72BCE6 20%, #78C1E9 40%, #7EC7EC 60%, #84CCEF 80%, #8AD1F2 100%); */
+  /* Nuevo fondo modo oscuro */
+  /* background-color: #181818; */
+  background-color: #0D0D0D;
+  /* box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05); */
 
   height: 78px;
   position: relative;
   overflow: hidden;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border-bottom: 1px solid #333333; */
+}
+
+.header_container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
 }
 
 .header__logo {
@@ -30,53 +37,35 @@
   align-items: center;
   margin-left: 5px;
   transition: filter 0.3s ease;
-  
 }
 
 .header__name {
-  font-size: 0.78rem;
-  color: #ffffff;
-  text-shadow: 
-    0 2px 8px rgba(0, 0, 0, 0.4),
-    0 0 30px rgba(255, 255, 255, 0.6),
-    0 0 60px rgba(91, 163, 208, 0.4);
-  font-weight: 700;
-  letter-spacing: 1.2px;
-  font-family: 'Satoshi', sans-serif;
+  font-size: 0.7rem;
+  color: #FFFFFF;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   text-transform: uppercase;
-  /* Efecto de brillo mejorado */
-  background: linear-gradient(45deg, 
-    #ffffff 0%, 
-    #e3f2fd 25%, 
-    #ffffff 50%, 
-    #bbdefb 75%, 
-    #ffffff 100%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  background-size: 200% auto;
-  animation: textShimmer 4s linear infinite;
-}
-
-@keyframes textShimmer {
-  to { background-position: 200% center; }
 }
 
 .header__logo img {
   width: 100%;
   height: auto;
-  max-height: 48px;
+  max-height: 40px;
   object-fit: contain;
-  
 }
 
 .header__wrapper {
   width: 65%;
   height: 62%;
-  background: 
+  /* Fondo anterior comentado */
+  /* background: 
     linear-gradient(135deg, 
       rgba(255, 255, 255, 0.95) 0%, 
       rgba(227, 242, 253, 0.9) 50%,
-      rgba(187, 222, 251, 0.85) 100%);
+      rgba(187, 222, 251, 0.85) 100%); */
+  /* Nuevo fondo para tarjetas de información */
+ 
   backdrop-filter: blur(30px) saturate(180%);
   border-radius: 30px;
   display: flex;
@@ -85,42 +74,32 @@
   justify-content: space-around;
   padding: 0 12px;
   gap: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  box-shadow: 
-    inset 0 3px 6px rgba(255, 255, 255, 0.95),
-    inset 0 -2px 4px rgba(91, 163, 208, 0.15),
-    0 12px 32px rgba(91, 163, 208, 0.25),
-    0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #333333;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   position: relative;
   overflow: hidden;
 }
 
-
-/* Profile & Menu Styles - Azul vibrante del logo */
+/* Profile & Menu Styles - Actualizado para modo oscuro */
 .header__profile,
 .header__menu {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  /* Gradiente que coincide con el logo - más sutil */
-  background: linear-gradient(135deg, #6BB6E3 0%, #7EC7EC 100%);
+  /* Gradiente anterior comentado */
+  /* background: linear-gradient(135deg, #6BB6E3 0%, #7EC7EC 100%); */
+  /* background-color: #0088CC; */
+  /* Nuevo color azul #007ACC */
+  background-color: #181818;
+  border: 1px solid #333333;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   position: relative;
-
-  box-shadow: 
-    0 6px 20px rgba(91, 163, 208, 0.5),
-    0 3px 8px rgba(0, 0, 0, 0.12),
-    inset 0 2px 4px rgba(255, 255, 255, 0.35),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-  
   overflow: hidden;
 }
-
-
-
 
 .header__profile-avatar {
   width: 100%;
@@ -133,55 +112,66 @@
 }
 
 .header__profile-initials {
-  color: white;
-  font-weight: bold;
+  /* Color mantenido para títulos principales */
+  color: #FFFFFF;
+  font-weight: 700;
   font-size: 18px;
-  text-shadow: 
-    0 2px 6px rgba(0, 0, 0, 0.4),
-    0 0 20px rgba(255, 255, 255, 0.4);
-  font-family: 'Satoshi', sans-serif;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 1px;
 }
-
-
-
-
-
 
 /* Menu icon con animación mejorada */
 .header__menu-icon {
   display: flex;
   flex-direction: column;
   gap: 3px;
-
 }
 
 .header__menu-icon span {
   width: 22px;
   height: 2.5px;
-  background-color: white;
+  /* Color para títulos principales */
+  background-color: #FFFFFF;
   border-radius: 3px;
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
   position: relative;
 }
 
-
 /* Responsive improvements */
 @media (max-width: 768px) {
   .header {
     padding: 0.5rem 1.1rem;
-    height: 52px;
+    height: 58px;
+    
+  }
+  
+  .header_container {
+   margin-top: 0.5%;
+    width: 90%;
+    height: 90%;
+    /* Fondo anterior comentado */
+    /* background: white; */
+    /* Nuevo fondo para tarjetas */
+    background-color: #181818;
+    padding: 2% 5.5%;
+     box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    border: 1px solid #333333;
+    border-radius: 16px ;
   }
   
   .header__logo {
-    width: 40%;
+    width: 35%;
   }
-  
+
   .header__wrapper {
-    width: 28%;
-    height: 79%;
-    padding: 0 2px;
+    width: 32%;
+    height: 85%;
+    padding: 2px 1.5px;
+    gap: 2px;
   }
   
   .header__profile,
