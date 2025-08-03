@@ -7,7 +7,7 @@ export default function IbexChartHeader() {
     <div className="chart-header">
       <div className="chart-header-content">
         <h1 className="chart-header-title">
-          IBEX 35 España by Spyzer
+          IBEX 35 by Spyzer
         </h1>
         <p className="chart-header-subtitle">
           Real-time Spanish market data & analytics

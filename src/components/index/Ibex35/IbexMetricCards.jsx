@@ -1,22 +1,42 @@
-// IbexMetricsCards.jsx
+// IbexMetricsCards.jsx - IBEX 35 usando DataDistributor
 import React from 'react';
+import { useIbexData } from '../../SP500data/InternationalMarketsDistributor';
 import '../../../css/MetricsCards.css';
 
-export default function IbexMetricsCards({ historicalData, isLoading, hasError, error }) {
+export default function IbexMetricsCards() {
+  // Obtener datos del contexto centralizado para IBEX 35
+  const { 
+    historicalData, 
+    isLoading, 
+    hasError, 
+    error, 
+    currentPrice,
+    dailyChange,
+    percentChange,
+    volume,
+    marketCap,
+    currency,
+    symbol,
+    lastUpdated,
+    marketInfo
+  } = useIbexData();
+
+  // Si está cargando, mostrar loading
   if (isLoading) {
     return (
       <div className="loading-container">
         <div className="loading-icon">🇪🇸</div>
-        Loading IBEX data...
+        Loading {marketInfo?.name || 'IBEX 35'} data...
       </div>
     );
   }
 
+  // Si no hay datos, mostrar mensaje
   if (!historicalData || historicalData.length < 2) {
     return (
       <div className="error-container">
         <div className="error-icon">⚠️</div>
-        {hasError ? `Error: ${error}` : 'No IBEX data available'}
+        {hasError ? `Error: ${error}` : `No ${marketInfo?.name || 'IBEX 35'} data available`}
       </div>
     );
   }
@@ -24,12 +44,14 @@ export default function IbexMetricsCards({ historicalData, isLoading, hasError, 
   const today = historicalData[historicalData.length - 1];
   const yesterday = historicalData[historicalData.length - 2];
   
-  const priceChange = today.close - yesterday.close;
-  const percentageChange = (priceChange / yesterday.close) * 100;
+  // Usar datos calculados del contexto
+  const priceChange = dailyChange || (today.close - yesterday.close);
+  const percentageChange = percentChange || ((priceChange / yesterday.close) * 100);
   const isPositive = priceChange >= 0;
 
   return (
     <div className="metrics-container">
+      {/* Today's Metrics */}
       <div className="metrics-card">
         <div className="card-header">
           <div className="card-indicator today"></div>
@@ -38,11 +60,16 @@ export default function IbexMetricsCards({ historicalData, isLoading, hasError, 
         <div className="card-content">
           <div className="metric-row">
             <span className="metric-label">Current:</span>
-            <span className="metric-value">{today.close.toFixed(2)}</span>
+            <span className="metric-value">
+              {currency === 'EUR' ? '€' : ''}
+              {currentPrice?.toFixed(2) || today.close.toFixed(2)}
+              {currency === 'EUR'}
+            </span>
           </div>
         </div>
       </div>
 
+      {/* Yesterday's Metrics */}
       <div className="metrics-card">
         <div className="card-header">
           <div className="card-indicator yesterday"></div>
@@ -51,11 +78,16 @@ export default function IbexMetricsCards({ historicalData, isLoading, hasError, 
         <div className="card-content">
           <div className="metric-row yesterday-close">
             <span className="metric-label">Close:</span>
-            <span className="metric-value yesterday-close">{yesterday.close.toFixed(2)}</span>
+            <span className="metric-value yesterday-close">
+              {currency === 'EUR' ? '€' : ''}
+              {yesterday.close.toFixed(2)}
+              {currency === 'EUR'}
+            </span>
           </div>
         </div>
       </div>
 
+      {/* Daily Change */}
       <div className="metrics-card">
         <div className="card-header">
           <div className={`card-indicator ${isPositive ? 'positive' : 'negative'}`}></div>
@@ -66,9 +98,13 @@ export default function IbexMetricsCards({ historicalData, isLoading, hasError, 
           <div className="metric-row change-amount">
             <span className="metric-label">Amount:</span>
             <span className={`metric-value change-amount ${isPositive ? 'positive' : 'negative'}`}>
-              {isPositive ? '+' : ''}{priceChange.toFixed(2)}
+              {isPositive ? '+' : ''}
+              {currency === 'EUR' ? '€' : ''}
+              {Math.abs(priceChange).toFixed(2)}
+              {currency === 'EUR' ? '' : ' pts'}
             </span>
           </div>
+        
         </div>
       </div>
     </div>

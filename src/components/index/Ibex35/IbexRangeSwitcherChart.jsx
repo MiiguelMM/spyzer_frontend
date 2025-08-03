@@ -1,71 +1,68 @@
-// IbexRangeSwitcherChart.jsx - ARREGLADO con comunicación de datos
-import { ColorType, createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
+// IbexRangeSwitcherChart.jsx - IBEX 35 usando DataDistributor
+import { createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
+import { useIbexData } from '../../SP500data/InternationalMarketsDistributor';
 import '../../../css/RangeSwitcherChart.css';
 
-export default function IbexRangeSwitcherChart({ onDataUpdate }) {
+export default function IbexRangeSwitcherChart() {
   const chartContainerRef = useRef(null);
   const chartInstanceRef = useRef(null);
   const seriesRef = useRef(null);
   const [selectedRange, setSelectedRange] = useState('1año');
   const [selectedChartType, setSelectedChartType] = useState('area');
-  const [historicalData, setHistoricalData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+  // Obtener datos del contexto centralizado para IBEX 35
+  const {
+    historicalData,
+    isLoading,
+    hasError,
+    error,
+    marketInfo,
+    refreshData
+  } = useIbexData();
 
   // Chart types configuration
   const chartTypes = [
-    {
-      label: 'Area',
-      value: 'area',
-      description: 'Gráfico de área suave'
-    },
-    {
-      label: 'Line',
-      value: 'line',
-      description: 'Gráfico de línea simple'
-    },
-    {
-      label: 'Candles',
-      value: 'candlestick',
-      description: 'Gráfico de velas japonesas'
-    }
+    { label: 'Area', value: 'area', description: 'Gráfico de área suave' },
+    { label: 'Line', value: 'line', description: 'Gráfico de línea simple' },
+    { label: 'Candles', value: 'candlestick', description: 'Gráfico de velas japonesas' }
   ];
 
-  // 🎨 Color palettes for IBEX (Spanish market colors)
+  // 🎨 Color palettes usando configuración del mercado IBEX (naranja español)
   const intervalColors = {
     '1dia': {
-      lineColor: '#FF6B35',
-      topColor: 'rgba(255, 107, 53, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF6B35',
+      topColor: `rgba(255, 107, 53, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1semana': {
-      lineColor: '#FF6B35',
-      topColor: 'rgba(255, 107, 53, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF6B35',
+      topColor: `rgba(255, 107, 53, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1mes': {
-      lineColor: '#FF6B35',
-      topColor: 'rgba(255, 107, 53, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF6B35',
+      topColor: `rgba(255, 107, 53, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '3meses': {
-      lineColor: '#FF6B35',
-      topColor: 'rgba(255, 107, 53, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF6B35',
+      topColor: `rgba(255, 107, 53, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '6meses': {
-      lineColor: '#FF6B35',
-      topColor: 'rgba(255, 107, 53, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF6B35',
+      topColor: `rgba(255, 107, 53, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1año': {
-      lineColor: '#FF6B35',
-      topColor: 'rgba(255, 107, 53, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF6B35',
+      topColor: `rgba(255, 107, 53, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     'todos': {
-      lineColor: '#FF6B35',
-      topColor: 'rgba(255, 107, 53, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF6B35',
+      topColor: `rgba(255, 107, 53, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
   };
@@ -81,78 +78,7 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
     { label: 'ALL', value: 'todos', days: 730 },
   ];
 
-  // Enhanced data generation for IBEX 35 (European market patterns)
-  const generateSimulatedData = () => {
-    const data = [];
-    let price = 9000 + Math.random() * 3000; // IBEX base price range
-
-    for (let i = 799; i >= 0; i--) {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-
-      // IBEX patterns (European market characteristics)
-      const trend = Math.sin(i / 60) * 2; // Slower European cycles
-      const volatility = (Math.random() - 0.5) * 18; // Moderate volatility
-      const momentum = Math.sin(i / 20) * 6; // European momentum patterns
-
-      price = Math.max(6000, price + trend + volatility + momentum);
-
-      const timeString = date.toISOString().split('T')[0];
-
-      // Generate OHLC data for candlesticks
-      const open = price;
-      const close = price + (Math.random() - 0.5) * 10;
-      const high = Math.max(open, close) + Math.random() * 6;
-      const low = Math.min(open, close) - Math.random() * 6;
-
-      data.push({
-        time: timeString,
-        value: Number(close.toFixed(2)),
-        open: Number(open.toFixed(2)),
-        high: Number(high.toFixed(2)),
-        low: Number(low.toFixed(2)),
-        close: Number(close.toFixed(2))
-      });
-
-      price = close;
-    }
-
-    return data;
-  };
-
-  // Load data
-  useEffect(() => {
-    setIsLoading(true);
-    
-    // Notificar al padre que está cargando
-    if (onDataUpdate) {
-      onDataUpdate(null, true, null);
-    }
-
-    setTimeout(() => {
-      try {
-        const simulatedData = generateSimulatedData();
-        setHistoricalData(simulatedData);
-
-        // Notificar al padre con los datos
-        if (onDataUpdate) {
-          onDataUpdate(simulatedData, false, null);
-        }
-
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error generating data:', error);
-        setIsLoading(false);
-        
-        // Notificar al padre del error
-        if (onDataUpdate) {
-          onDataUpdate(null, false, error.message);
-        }
-      }
-    }, 800);
-  }, [onDataUpdate]);
-
-  // Enhanced data filtering for IBEX
+  // Enhanced data filtering para IBEX
   const getFilteredData = (range) => {
     if (!historicalData || historicalData.length === 0) {
       return [];
@@ -218,11 +144,11 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
 
       case 'candlestick':
         return chart.addSeries(CandlestickSeries, {
-          upColor: '#00FF85',
-          downColor: '#FF4D4F',
+          upColor: marketInfo?.colors.positive || '#00FF85',
+          downColor: marketInfo?.colors.negative || '#FF4D4F',
           borderVisible: false,
-          wickUpColor: '#00FF85',
-          wickDownColor: '#FF4D4F',
+          wickUpColor: marketInfo?.colors.positive || '#00FF85',
+          wickDownColor: marketInfo?.colors.negative || '#FF4D4F',
           priceLineVisible: false,
           lastValueVisible: true,
         });
@@ -244,7 +170,7 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
     }
   };
 
-  // Chart update with smooth color transitions
+  // Chart update
   const setChartInterval = (interval) => {
     if (!chartInstanceRef.current || !seriesRef.current) return;
 
@@ -259,7 +185,6 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
         return;
       }
 
-      // Prepare data based on chart type
       let chartData;
       if (selectedChartType === 'candlestick') {
         chartData = priceData.map(item => ({
@@ -278,7 +203,6 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
 
       seriesRef.current.setData(chartData);
 
-      // Update colors for area and line charts
       if (selectedChartType !== 'candlestick') {
         const colors = intervalColors[interval];
 
@@ -305,7 +229,6 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
   // Handle range change
   const handleRangeChange = (rangeValue) => {
     if (selectedRange === rangeValue || isLoading) return;
-
     setSelectedRange(rangeValue);
     setChartInterval(rangeValue);
   };
@@ -316,18 +239,14 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
 
     setSelectedChartType(chartType);
 
-    // Recreate the chart with new series type
     if (chartInstanceRef.current && historicalData) {
-      // Remove old series
       if (seriesRef.current) {
         chartInstanceRef.current.removeSeries(seriesRef.current);
       }
 
-      // Create new series
       const newSeries = createSeriesForType(chartInstanceRef.current, chartType);
       seriesRef.current = newSeries;
 
-      // Load data for current range
       const currentRange = timeRanges.find(r => r.value === selectedRange);
       const priceData = getFilteredData(currentRange);
 
@@ -367,26 +286,15 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
     const chartOptions = {
       layout: {
         textColor: '#B0B0B0',
-        background: {
-          type: 'solid',
-          color: '#181818'
-        },
+        background: { type: 'solid', color: '#181818' },
         fontSize: 11,
         fontFamily: 'Satoshi, Arial, sans-serif',
       },
       width: 0,
       height: 0,
       grid: {
-        vertLines: {
-          color: 'rgba(255, 255, 255, 0.05)',
-          style: 2,
-          visible: true,
-        },
-        horzLines: {
-          color: 'rgba(255, 255, 255, 0.05)',
-          style: 2,
-          visible: true,
-        },
+        vertLines: { color: 'rgba(255, 255, 255, 0.05)', style: 2, visible: true },
+        horzLines: { color: 'rgba(255, 255, 255, 0.05)', style: 2, visible: true },
       },
       timeScale: {
         timeVisible: true,
@@ -395,6 +303,20 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
         rightOffset: 15,
         leftOffset: 5,
         borderColor: 'rgba(255, 255, 255, 0.1)',
+      },
+      handleScroll: {
+        mouseWheel: true,
+        pressedMouseMove: true,
+        horzTouchDrag: true,   // ✅ Permite arrastrar horizontalmente
+        vertTouchDrag: false,  // ❌ DESHABILITA arrastrar verticalmente
+      },
+      handleScale: {
+        axisPressedMouseMove: {
+          time: true,    // ✅ Permite zoom en eje X (tiempo)
+          price: false,  // ❌ DESHABILITA zoom en eje Y (precio)
+        },
+        mouseWheel: true,
+        pinch: true,
       },
       rightPriceScale: {
         visible: true,
@@ -406,15 +328,15 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
         mode: 1,
         vertLine: {
           width: 1,
-          color: 'rgba(255, 107, 53, 0.8)', // IBEX Orange
+          color: `rgba(255, 107, 53, 0.8)`, // IBEX Orange
           style: 3,
-          labelBackgroundColor: '#FF6B35',
+          labelBackgroundColor: marketInfo?.colors.primary || '#FF6B35',
         },
         horzLine: {
           width: 1,
-          color: 'rgba(255, 107, 53, 0.8)', // IBEX Orange
+          color: `rgba(255, 107, 53, 0.8)`, // IBEX Orange
           style: 3,
-          labelBackgroundColor: '#FF6B35',
+          labelBackgroundColor: marketInfo?.colors.primary || '#FF6B35',
         },
       },
     };
@@ -422,11 +344,9 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
     const chart = createChart(chartContainerRef.current, chartOptions);
     chartInstanceRef.current = chart;
 
-    // Create initial series
     const initialSeries = createSeriesForType(chart, selectedChartType);
     seriesRef.current = initialSeries;
 
-    // Load initial data
     if (historicalData && historicalData.length > 0) {
       const initialRange = timeRanges.find(r => r.value === selectedRange);
       const priceData = getFilteredData(initialRange);
@@ -475,7 +395,13 @@ export default function IbexRangeSwitcherChart({ onDataUpdate }) {
         {isLoading && (
           <div className="loading-container">
             <div className="loading-spinner"></div>
-            <span className="loading-text">🇪🇸 Generating IBEX data...</span>
+            <span className="loading-text">🇪🇸 Loading {marketInfo?.name} data...</span>
+          </div>
+        )}
+        {hasError && (
+          <div className="error-container">
+            <span>⚠️ Error loading data: {error}</span>
+            <button onClick={refreshData}>Retry</button>
           </div>
         )}
       </div>

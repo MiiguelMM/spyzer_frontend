@@ -1,70 +1,68 @@
-import { ColorType, createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
+// RangeSwitcherChart.jsx - S&P 500 usando DataDistributor
+import { createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
+import { useSP500Data } from '../../SP500data/StockMarketsDistributor';
 import '../../../css/RangeSwitcherChart.css';
 
-export default function RangeSwitcherChart({ onDataUpdate }) {
+export default function RangeSwitcherChart() {
   const chartContainerRef = useRef(null);
   const chartInstanceRef = useRef(null);
   const seriesRef = useRef(null);
   const [selectedRange, setSelectedRange] = useState('1año');
   const [selectedChartType, setSelectedChartType] = useState('area');
-  const [historicalData, setHistoricalData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+  // Obtener datos del contexto centralizado
+  const {
+    historicalData,
+    isLoading,
+    hasError,
+    error,
+    marketInfo,
+    refreshData
+  } = useSP500Data();
 
   // Chart types configuration
   const chartTypes = [
-    {
-      label: 'Area',
-      value: 'area',
-      description: 'Gráfico de área suave'
-    },
-    {
-      label: 'Line',
-      value: 'line',
-      description: 'Gráfico de línea simple'
-    },
-    {
-      label: 'Candles',
-      value: 'candlestick',
-      description: 'Gráfico de velas japonesas'
-    }
+    { label: 'Area', value: 'area', description: 'Gráfico de área suave' },
+    { label: 'Line', value: 'line', description: 'Gráfico de línea simple' },
+    { label: 'Candles', value: 'candlestick', description: 'Gráfico de velas japonesas' }
   ];
 
-  // 🎨 Color palettes updated for dark mode
+  // 🎨 Color palettes usando configuración del mercado
   const intervalColors = {
     '1dia': {
-      lineColor: '#007ACC',
-      topColor: 'rgba(0, 122, 204, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#007ACC',
+      topColor: `rgba(0, 122, 204, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1semana': {
-     lineColor: '#007ACC',
-      topColor: 'rgba(0, 122, 204, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#007ACC',
+      topColor: `rgba(0, 122, 204, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1mes': {
-     lineColor: '#007ACC',
-      topColor: 'rgba(0, 122, 204, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#007ACC',
+      topColor: `rgba(0, 122, 204, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '3meses': {
-      lineColor: '#007ACC',
-      topColor: 'rgba(0, 122, 204, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#007ACC',
+      topColor: `rgba(0, 122, 204, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '6meses': {
-      lineColor: '#007ACC',
-      topColor: 'rgba(0, 122, 204, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#007ACC',
+      topColor: `rgba(0, 122, 204, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1año': {
-      lineColor: '#007ACC',
-      topColor: 'rgba(0, 122, 204, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#007ACC',
+      topColor: `rgba(0, 122, 204, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     'todos': {
-      lineColor: '#007ACC',
-      topColor: 'rgba(0, 122, 204, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#007ACC',
+      topColor: `rgba(0, 122, 204, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
   };
@@ -79,61 +77,6 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
     { label: '1Y', value: '1año', days: 365 },
     { label: 'ALL', value: 'todos', days: 730 },
   ];
-
-  // Enhanced data generation with realistic patterns
-  const generateSimulatedData = () => {
-    const data = [];
-    let price = 320 + Math.random() * 100; // Base price between 320-420
-
-    for (let i = 799; i >= 0; i--) {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-
-      // Add trend and volatility
-      const trend = Math.sin(i / 50) * 2; // Long-term trend
-      const volatility = (Math.random() - 0.5) * 15; // Daily volatility
-      const momentum = Math.sin(i / 10) * 5; // Medium-term momentum
-
-      price = Math.max(50, price + trend + volatility + momentum);
-
-      const timeString = date.toISOString().split('T')[0];
-
-      // Generate OHLC data for candlesticks
-      const open = price;
-      const close = price + (Math.random() - 0.5) * 8;
-      const high = Math.max(open, close) + Math.random() * 5;
-      const low = Math.min(open, close) - Math.random() * 5;
-
-      data.push({
-        time: timeString,
-        value: Number(close.toFixed(2)),
-        open: Number(open.toFixed(2)),
-        high: Number(high.toFixed(2)),
-        low: Number(low.toFixed(2)),
-        close: Number(close.toFixed(2))
-      });
-
-      price = close; // Update price for next iteration
-    }
-
-    return data;
-  };
-
-  // Load data
-  useEffect(() => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      const simulatedData = generateSimulatedData();
-      setHistoricalData(simulatedData);
-
-      if (onDataUpdate) {
-        onDataUpdate(simulatedData);
-      }
-
-      setIsLoading(false);
-    }, 800);
-  }, [onDataUpdate]);
 
   // Enhanced data filtering
   const getFilteredData = (range) => {
@@ -151,7 +94,7 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
 
         const variance = lastDayData.value * 0.003;
         const change = (Math.random() - 0.5) * variance;
-        const hourlyVolatility = Math.sin(h / 4) * 2; // Intraday pattern
+        const hourlyVolatility = Math.sin(h / 4) * 2;
         const value = lastDayData.value + change + hourlyVolatility;
 
         hourlyData.push({
@@ -201,12 +144,11 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
 
       case 'candlestick':
         return chart.addSeries(CandlestickSeries, {
-          // Colores actualizados para modo oscuro
-          upColor: '#00FF85', // Verde brillante para datos positivos
-          downColor: '#FF4D4F', // Rojo vibrante para datos negativos
+          upColor: marketInfo?.colors.positive || '#00FF85',
+          downColor: marketInfo?.colors.negative || '#FF4D4F',
           borderVisible: false,
-          wickUpColor: '#00FF85',
-          wickDownColor: '#FF4D4F',
+          wickUpColor: marketInfo?.colors.positive || '#00FF85',
+          wickDownColor: marketInfo?.colors.negative || '#FF4D4F',
           priceLineVisible: false,
           lastValueVisible: true,
         });
@@ -228,7 +170,7 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
     }
   };
 
-  // Chart update with smooth color transitions
+  // Chart update
   const setChartInterval = (interval) => {
     if (!chartInstanceRef.current || !seriesRef.current) return;
 
@@ -243,7 +185,6 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
         return;
       }
 
-      // Prepare data based on chart type
       let chartData;
       if (selectedChartType === 'candlestick') {
         chartData = priceData.map(item => ({
@@ -262,7 +203,6 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
 
       seriesRef.current.setData(chartData);
 
-      // Update colors for area and line charts
       if (selectedChartType !== 'candlestick') {
         const colors = intervalColors[interval];
 
@@ -289,7 +229,6 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
   // Handle range change
   const handleRangeChange = (rangeValue) => {
     if (selectedRange === rangeValue || isLoading) return;
-
     setSelectedRange(rangeValue);
     setChartInterval(rangeValue);
   };
@@ -300,18 +239,14 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
 
     setSelectedChartType(chartType);
 
-    // Recreate the chart with new series type
     if (chartInstanceRef.current && historicalData) {
-      // Remove old series
       if (seriesRef.current) {
         chartInstanceRef.current.removeSeries(seriesRef.current);
       }
 
-      // Create new series
       const newSeries = createSeriesForType(chartInstanceRef.current, chartType);
       seriesRef.current = newSeries;
 
-      // Load data for current range
       const currentRange = timeRanges.find(r => r.value === selectedRange);
       const priceData = getFilteredData(currentRange);
 
@@ -350,28 +285,16 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
 
     const chartOptions = {
       layout: {
-        // Colores actualizados para modo oscuro
-        textColor: '#B0B0B0', // Texto secundario
-        background: {
-          type: 'solid',
-          color: '#181818' // Fondo de tarjeta de información
-        },
+        textColor: '#B0B0B0',
+        background: { type: 'solid', color: '#181818' },
         fontSize: 11,
         fontFamily: 'Satoshi, Arial, sans-serif',
       },
       width: 0,
       height: 0,
       grid: {
-        vertLines: {
-          color: 'rgba(255, 255, 255, 0.05)', // Líneas de grid sutiles para modo oscuro
-          style: 2,
-          visible: true,
-        },
-        horzLines: {
-          color: 'rgba(255, 255, 255, 0.05)', // Líneas de grid sutiles para modo oscuro
-          style: 2,
-          visible: true,
-        },
+        vertLines: { color: 'rgba(255, 255, 255, 0.05)', style: 2, visible: true },
+        horzLines: { color: 'rgba(255, 255, 255, 0.05)', style: 2, visible: true },
       },
       timeScale: {
         timeVisible: true,
@@ -384,22 +307,36 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
       rightPriceScale: {
         visible: true,
         borderColor: 'rgba(255, 255, 255, 0.1)',
-        textColor: '#B0B0B0', // Texto secundario
+        textColor: '#B0B0B0',
         scaleMargins: { top: 0.08, bottom: 0.08 },
+      },
+      handleScroll: {
+        mouseWheel: true,
+        pressedMouseMove: true,
+        horzTouchDrag: true,   // ✅ Permite arrastrar horizontalmente
+        vertTouchDrag: false,  // ❌ DESHABILITA arrastrar verticalmente
+      },
+      handleScale: {
+        axisPressedMouseMove: {
+          time: true,    // ✅ Permite zoom en eje X (tiempo)
+          price: false,  // ❌ DESHABILITA zoom en eje Y (precio)
+        },
+        mouseWheel: true,
+        pinch: true,
       },
       crosshair: {
         mode: 1,
         vertLine: {
           width: 1,
-          color: 'rgba(0, 191, 255, 0.8)', // Azul eléctrico
+          color: `rgba(0, 122, 204, 0.8)`,
           style: 3,
-          labelBackgroundColor: '#00BFFF', // Botón activo
+          labelBackgroundColor: marketInfo?.colors.primary || '#007ACC',
         },
         horzLine: {
           width: 1,
-          color: 'rgba(0, 191, 255, 0.8)', // Azul eléctrico
+          color: `rgba(0, 122, 204, 0.8)`,
           style: 3,
-          labelBackgroundColor: '#00BFFF', // Botón activo
+          labelBackgroundColor: marketInfo?.colors.primary || '#007ACC',
         },
       },
     };
@@ -407,11 +344,9 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
     const chart = createChart(chartContainerRef.current, chartOptions);
     chartInstanceRef.current = chart;
 
-    // Create initial series
     const initialSeries = createSeriesForType(chart, selectedChartType);
     seriesRef.current = initialSeries;
 
-    // Load initial data
     if (historicalData && historicalData.length > 0) {
       const initialRange = timeRanges.find(r => r.value === selectedRange);
       const priceData = getFilteredData(initialRange);
@@ -456,17 +391,17 @@ export default function RangeSwitcherChart({ onDataUpdate }) {
 
   return (
     <div className="range-switcher-chart">
-
-      {/* Range Switcher */}
-
-
-
-      {/* Chart Container */}
       <div ref={chartContainerRef} className="chart-container">
         {isLoading && (
           <div className="loading-container">
             <div className="loading-spinner"></div>
-            <span className="loading-text">🎲 Generating data...</span>
+            <span className="loading-text">📊 Loading {marketInfo?.name} data...</span>
+          </div>
+        )}
+        {hasError && (
+          <div className="error-container">
+            <span>⚠️ Error loading data: {error}</span>
+            <button onClick={refreshData}>Retry</button>
           </div>
         )}
       </div>

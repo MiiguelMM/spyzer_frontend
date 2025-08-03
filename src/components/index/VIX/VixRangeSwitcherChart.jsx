@@ -1,71 +1,68 @@
-// VixRangeSwitcherChart.jsx - COMPLETO
-import { ColorType, createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
+// VixRangeSwitcherChart.jsx - VIX usando DataDistributor - FIXED VERSION
+import { createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
+import { useVixData } from '../../SP500data/InternationalMarketsDistributor';
 import '../../../css/RangeSwitcherChart.css';
 
-export default function VixRangeSwitcherChart({ onDataUpdate }) {
+export default function VixRangeSwitcherChart() {
   const chartContainerRef = useRef(null);
   const chartInstanceRef = useRef(null);
   const seriesRef = useRef(null);
   const [selectedRange, setSelectedRange] = useState('1año');
   const [selectedChartType, setSelectedChartType] = useState('area');
-  const [historicalData, setHistoricalData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+
+  // Obtener datos del contexto centralizado para VIX
+  const { 
+    historicalData, 
+    isLoading, 
+    hasError, 
+    error,
+    marketInfo,
+    refreshData 
+  } = useVixData();
 
   // Chart types configuration
   const chartTypes = [
-    {
-      label: 'Area',
-      value: 'area',
-      description: 'Gráfico de área suave'
-    },
-    {
-      label: 'Line',
-      value: 'line',
-      description: 'Gráfico de línea simple'
-    },
-    {
-      label: 'Candles',
-      value: 'candlestick',
-      description: 'Gráfico de velas japonesas'
-    }
+    { label: 'Area', value: 'area', description: 'Gráfico de área suave' },
+    { label: 'Line', value: 'line', description: 'Gráfico de línea simple' },
+    { label: 'Candles', value: 'candlestick', description: 'Gráfico de velas japonesas' }
   ];
 
-  // 🎨 Color palettes for VIX (fear/volatility colors)
+  // 🎨 Color palettes usando configuración del mercado VIX (rojo fear)
   const intervalColors = {
     '1dia': {
-      lineColor: '#FF4757',
-      topColor: 'rgba(255, 71, 87, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF4757',
+      topColor: `rgba(255, 71, 87, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1semana': {
-      lineColor: '#FF4757',
-      topColor: 'rgba(255, 71, 87, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF4757',
+      topColor: `rgba(255, 71, 87, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1mes': {
-      lineColor: '#FF4757',
-      topColor: 'rgba(255, 71, 87, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF4757',
+      topColor: `rgba(255, 71, 87, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '3meses': {
-      lineColor: '#FF4757',
-      topColor: 'rgba(255, 71, 87, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF4757',
+      topColor: `rgba(255, 71, 87, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '6meses': {
-      lineColor: '#FF4757',
-      topColor: 'rgba(255, 71, 87, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF4757',
+      topColor: `rgba(255, 71, 87, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1año': {
-      lineColor: '#FF4757',
-      topColor: 'rgba(255, 71, 87, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF4757',
+      topColor: `rgba(255, 71, 87, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     'todos': {
-      lineColor: '#FF4757',
-      topColor: 'rgba(255, 71, 87, 0.7)',
+      lineColor: marketInfo?.colors.primary || '#FF4757',
+      topColor: `rgba(255, 71, 87, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
   };
@@ -81,63 +78,7 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
     { label: 'ALL', value: 'todos', days: 730 },
   ];
 
-  // Enhanced data generation for VIX (volatility patterns)
-  const generateSimulatedData = () => {
-    const data = [];
-    let vix = 15 + Math.random() * 10; // VIX base range 15-25
-
-    for (let i = 799; i >= 0; i--) {
-      const date = new Date();
-      date.setDate(date.getDate() - i);
-
-      // VIX patterns (spikes during stress, low during calm)
-      const stressEvents = Math.random() < 0.05 ? Math.random() * 30 : 0; // 5% chance of stress spike
-      const meanReversion = (20 - vix) * 0.1; // Tendency to revert to ~20
-      const volatility = (Math.random() - 0.5) * 3; // Daily volatility
-      const momentum = Math.sin(i / 30) * 2; // Cyclical patterns
-
-      vix = Math.max(8, Math.min(80, vix + stressEvents + meanReversion + volatility + momentum));
-
-      const timeString = date.toISOString().split('T')[0];
-
-      // Generate OHLC data for candlesticks
-      const open = vix;
-      const close = vix + (Math.random() - 0.5) * 2;
-      const high = Math.max(open, close) + Math.random() * 2;
-      const low = Math.min(open, close) - Math.random() * 1;
-
-      data.push({
-        time: timeString,
-        value: Number(close.toFixed(2)),
-        open: Number(open.toFixed(2)),
-        high: Number(high.toFixed(2)),
-        low: Number(Math.max(0, low).toFixed(2)),
-        close: Number(close.toFixed(2))
-      });
-
-      vix = close;
-    }
-
-    return data;
-  };
-
-  // Load data
-  useEffect(() => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      const simulatedData = generateSimulatedData();
-      setHistoricalData(simulatedData);
-
-      if (onDataUpdate) {
-        onDataUpdate(simulatedData);
-      }
-
-      setIsLoading(false);
-    }, 800);
-  }, [onDataUpdate]);
-
-  // Enhanced data filtering for VIX
+  // Enhanced data filtering para VIX
   const getFilteredData = (range) => {
     if (!historicalData || historicalData.length === 0) {
       return [];
@@ -151,7 +92,7 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
         const hourDate = new Date();
         hourDate.setHours(h, 0, 0, 0);
 
-        const variance = lastDayData.value * 0.05; // Higher intraday variance for VIX
+        const variance = lastDayData.value * 0.05; // Higher intraday variance para VIX
         const change = (Math.random() - 0.5) * variance;
         const hourlyVolatility = Math.sin(h / 6) * 0.5;
         const value = Math.max(0, lastDayData.value + change + hourlyVolatility);
@@ -203,11 +144,12 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
 
       case 'candlestick':
         return chart.addSeries(CandlestickSeries, {
-          upColor: '#FF4757',
-          downColor: '#2ED573',
+          // Para VIX: rojo cuando sube (más miedo), verde cuando baja (menos miedo)
+          upColor: marketInfo?.colors.negative || '#FF4757',
+          downColor: marketInfo?.colors.positive || '#2ED573',
           borderVisible: false,
-          wickUpColor: '#FF4757',
-          wickDownColor: '#2ED573',
+          wickUpColor: marketInfo?.colors.negative || '#FF4757',
+          wickDownColor: marketInfo?.colors.positive || '#2ED573',
           priceLineVisible: false,
           lastValueVisible: true,
         });
@@ -229,7 +171,7 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
     }
   };
 
-  // Chart update with smooth color transitions
+  // Chart update
   const setChartInterval = (interval) => {
     if (!chartInstanceRef.current || !seriesRef.current) return;
 
@@ -244,7 +186,6 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
         return;
       }
 
-      // Prepare data based on chart type
       let chartData;
       if (selectedChartType === 'candlestick') {
         chartData = priceData.map(item => ({
@@ -263,7 +204,6 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
 
       seriesRef.current.setData(chartData);
 
-      // Update colors for area and line charts
       if (selectedChartType !== 'candlestick') {
         const colors = intervalColors[interval];
 
@@ -290,7 +230,6 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
   // Handle range change
   const handleRangeChange = (rangeValue) => {
     if (selectedRange === rangeValue || isLoading) return;
-
     setSelectedRange(rangeValue);
     setChartInterval(rangeValue);
   };
@@ -301,18 +240,14 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
 
     setSelectedChartType(chartType);
 
-    // Recreate the chart with new series type
     if (chartInstanceRef.current && historicalData) {
-      // Remove old series
       if (seriesRef.current) {
         chartInstanceRef.current.removeSeries(seriesRef.current);
       }
 
-      // Create new series
       const newSeries = createSeriesForType(chartInstanceRef.current, chartType);
       seriesRef.current = newSeries;
 
-      // Load data for current range
       const currentRange = timeRanges.find(r => r.value === selectedRange);
       const priceData = getFilteredData(currentRange);
 
@@ -339,7 +274,7 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
     }
   };
 
-  // Chart initialization
+  // Chart initialization - FIXED: Igual que S&P 500
   useEffect(() => {
     if (!chartContainerRef.current) return;
 
@@ -352,26 +287,15 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
     const chartOptions = {
       layout: {
         textColor: '#B0B0B0',
-        background: {
-          type: 'solid',
-          color: '#181818'
-        },
+        background: { type: 'solid', color: '#181818' },
         fontSize: 11,
         fontFamily: 'Satoshi, Arial, sans-serif',
       },
       width: 0,
       height: 0,
       grid: {
-        vertLines: {
-          color: 'rgba(255, 255, 255, 0.05)',
-          style: 2,
-          visible: true,
-        },
-        horzLines: {
-          color: 'rgba(255, 255, 255, 0.05)',
-          style: 2,
-          visible: true,
-        },
+        vertLines: { color: 'rgba(255, 255, 255, 0.05)', style: 2, visible: true },
+        horzLines: { color: 'rgba(255, 255, 255, 0.05)', style: 2, visible: true },
       },
       timeScale: {
         timeVisible: true,
@@ -387,19 +311,33 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
         textColor: '#B0B0B0',
         scaleMargins: { top: 0.08, bottom: 0.08 },
       },
+      handleScroll: {
+        mouseWheel: true,
+        pressedMouseMove: true,
+        horzTouchDrag: true,   // ✅ Permite arrastrar horizontalmente
+        vertTouchDrag: false,  // ❌ DESHABILITA arrastrar verticalmente
+      },
+      handleScale: {
+        axisPressedMouseMove: {
+          time: true,    // ✅ Permite zoom en eje X (tiempo)
+          price: false,  // ❌ DESHABILITA zoom en eje Y (precio)
+        },
+        mouseWheel: true,
+        pinch: true,
+      },
       crosshair: {
         mode: 1,
         vertLine: {
           width: 1,
-          color: 'rgba(255, 71, 87, 0.8)', // VIX Red
+          color: `rgba(255, 71, 87, 0.8)`, // VIX Red
           style: 3,
-          labelBackgroundColor: '#FF4757',
+          labelBackgroundColor: marketInfo?.colors.primary || '#FF4757',
         },
         horzLine: {
           width: 1,
-          color: 'rgba(255, 71, 87, 0.8)', // VIX Red
+          color: `rgba(255, 71, 87, 0.8)`, // VIX Red
           style: 3,
-          labelBackgroundColor: '#FF4757',
+          labelBackgroundColor: marketInfo?.colors.primary || '#FF4757',
         },
       },
     };
@@ -407,11 +345,9 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
     const chart = createChart(chartContainerRef.current, chartOptions);
     chartInstanceRef.current = chart;
 
-    // Create initial series
     const initialSeries = createSeriesForType(chart, selectedChartType);
     seriesRef.current = initialSeries;
 
-    // Load initial data
     if (historicalData && historicalData.length > 0) {
       const initialRange = timeRanges.find(r => r.value === selectedRange);
       const priceData = getFilteredData(initialRange);
@@ -445,7 +381,7 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
         seriesRef.current = null;
       }
     };
-  }, [historicalData]);
+  }, [historicalData]); // ✅ FIXED: Solo historicalData como dependencia
 
   // Update when range changes
   useEffect(() => {
@@ -460,7 +396,13 @@ export default function VixRangeSwitcherChart({ onDataUpdate }) {
         {isLoading && (
           <div className="loading-container">
             <div className="loading-spinner"></div>
-            <span className="loading-text">😱 Generating VIX data...</span>
+            <span className="loading-text">😱 Loading {marketInfo?.name} data...</span>
+          </div>
+        )}
+        {hasError && (
+          <div className="error-container">
+            <span>⚠️ Error loading data: {error}</span>
+            <button onClick={refreshData}>Retry</button>
           </div>
         )}
       </div>

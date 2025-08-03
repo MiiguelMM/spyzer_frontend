@@ -1,22 +1,40 @@
-// VixMetricsCards.jsx
+// VixMetricsCards.jsx - VIX usando DataDistributor
 import React from 'react';
+import { useVixData } from '../../SP500data/InternationalMarketsDistributor';
 import '../../../css/MetricsCards.css';
 
-export default function VixMetricsCards({ historicalData, isLoading, hasError, error }) {
+export default function VixMetricsCards() {
+  // Obtener datos del contexto centralizado para VIX
+  const { 
+    historicalData, 
+    isLoading, 
+    hasError, 
+    error, 
+    currentPrice,
+    dailyChange,
+    percentChange,
+    volume,
+    symbol,
+    lastUpdated,
+    marketInfo
+  } = useVixData();
+
+  // Si está cargando, mostrar loading
   if (isLoading) {
     return (
       <div className="loading-container">
         <div className="loading-icon">😱</div>
-        Loading VIX data...
+        Loading {marketInfo?.name || 'VIX'} data...
       </div>
     );
   }
 
+  // Si no hay datos, mostrar mensaje
   if (!historicalData || historicalData.length < 2) {
     return (
       <div className="error-container">
         <div className="error-icon">⚠️</div>
-        {hasError ? `Error: ${error}` : 'No VIX data available'}
+        {hasError ? `Error: ${error}` : `No ${marketInfo?.name || 'VIX'} data available`}
       </div>
     );
   }
@@ -24,9 +42,10 @@ export default function VixMetricsCards({ historicalData, isLoading, hasError, e
   const today = historicalData[historicalData.length - 1];
   const yesterday = historicalData[historicalData.length - 2];
   
-  const vixChange = today.close - yesterday.close;
-  const percentageChange = (vixChange / yesterday.close) * 100;
-  const isHigh = vixChange >= 0; // For VIX, higher = more fear
+  // Usar datos calculados del contexto
+  const vixChange = dailyChange || (today.close - yesterday.close);
+  const percentageChange = percentChange || ((vixChange / yesterday.close) * 100);
+  const isHigh = vixChange >= 0; // Para VIX, más alto = más miedo
 
   // VIX interpretation
   const getVixLevel = (value) => {
@@ -36,8 +55,17 @@ export default function VixMetricsCards({ historicalData, isLoading, hasError, e
     return 'Extreme Fear';
   };
 
+  // VIX color based on level
+  const getVixLevelColor = (value) => {
+    if (value < 12) return '#00FF85'; // Verde - poco miedo
+    if (value < 20) return '#FFA500'; // Naranja - normal
+    if (value < 30) return '#FF6B35'; // Rojo claro - miedo alto
+    return '#FF4757'; // Rojo intenso - miedo extremo
+  };
+
   return (
     <div className="metrics-container">
+      {/* Today's Metrics */}
       <div className="metrics-card">
         <div className="card-header">
           <div className="card-indicator today"></div>
@@ -46,15 +74,15 @@ export default function VixMetricsCards({ historicalData, isLoading, hasError, e
         <div className="card-content">
           <div className="metric-row">
             <span className="metric-label">VIX:</span>
-            <span className="metric-value">{today.close.toFixed(2)}</span>
+            <span className="metric-value">
+              {(currentPrice || today.close).toFixed(2)}
+            </span>
           </div>
-          <div className="metric-row">
-            <span className="metric-label">Level:</span>
-            <span className="metric-value" style={{fontSize: '12px'}}>{getVixLevel(today.close)}</span>
-          </div>
+          
         </div>
       </div>
 
+      {/* Yesterday's Metrics */}
       <div className="metrics-card">
         <div className="card-header">
           <div className="card-indicator yesterday"></div>
@@ -63,11 +91,14 @@ export default function VixMetricsCards({ historicalData, isLoading, hasError, e
         <div className="card-content">
           <div className="metric-row yesterday-close">
             <span className="metric-label">Close:</span>
-            <span className="metric-value yesterday-close">{yesterday.close.toFixed(2)}</span>
+            <span className="metric-value yesterday-close">
+              {yesterday.close.toFixed(2)}
+            </span>
           </div>
         </div>
       </div>
 
+      {/* Daily Change */}
       <div className="metrics-card">
         <div className="card-header">
           <div className={`card-indicator ${isHigh ? 'negative' : 'positive'}`}></div>
@@ -81,6 +112,7 @@ export default function VixMetricsCards({ historicalData, isLoading, hasError, e
               {isHigh ? '+' : ''}{vixChange.toFixed(2)}
             </span>
           </div>
+          
         </div>
       </div>
     </div>

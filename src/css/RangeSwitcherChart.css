@@ -1,4 +1,4 @@
-/* RangeSwitcherChart.css - Modo Oscuro Mejorado */
+/* RangeSwitcherChart.css - Modo Oscuro Mejorado CON COLORES DINÁMICOS */
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@700,900&display=swap');
 
 .range-switcher-chart {
@@ -8,9 +8,6 @@
   flex-direction: column;
   overflow: hidden;
   position: relative; 
-  /* Fondo anterior comentado */
-  /* background: #f3f8fc !important; */
-  /* Nuevo fondo para tarjetas de información */
   background-color: #181818 !important;
   border: 1px solid #333333;
   border-radius: 0 0 16px 16px;
@@ -22,9 +19,6 @@
   justify-content: center;
   align-items: center;
   gap: 12px;
-  /* Fondo anterior comentado */
-  /* background: #f3f8fc; */
-  /* Nuevo fondo para tarjetas de información */
   background-color: #181818;
   width: 100%;
   height: 60px;
@@ -32,7 +26,6 @@
   position: relative;
   overflow: visible;
   z-index: 1000;
-
 }
 
 .chart-type-button {
@@ -46,18 +39,14 @@
   font-family: 'Satoshi', Arial, sans-serif;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  
-  /* Nuevo estilo para botones inactivos */
   background-color: #1E1E1E;
   color: #CCCCCC;
-  
   height: 40px;
   width: 29%; 
   gap: 4px;
   position: relative;
   overflow: hidden;
   z-index: 1001;
-  
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   pointer-events: auto;
 }
@@ -67,24 +56,69 @@
   opacity: 0.6;
 }
 
-.chart-type-button.active {
-  /* Fondo anterior comentado */
-  /* background: linear-gradient(135deg, #6BB6E3 0%, #7EC7EC 100%); */
-  /* background-color: #00BFFF; */
-  /* Nuevo color azul #007ACC */
+/* BOTONES ACTIVOS - COLORES DINÁMICOS POR MERCADO */
+/* S&P 500 - Azul */
+.section1 .chart-type-button.active,
+.section1 .range-button.active {
   background-color: #007ACC;
   color: #FFFFFF;
   box-shadow: 0 0 8px rgba(0, 122, 204, 0.6);
   transform: translateY(-2px);
 }
 
-.chart-type-button:not(.active):not(:disabled):hover {
-  /* Fondo anterior comentado */
-  /* background: rgba(66, 147, 212, 0.15); */
-  /* background-color: rgba(0, 191, 255, 0.1); */
+.section1 .chart-type-button:not(.active):not(:disabled):hover,
+.section1 .range-button:not(.active):not(:disabled):hover {
   background-color: rgba(0, 122, 204, 0.1);
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
+}
+
+/* IBEX 35 - Naranja */
+.section2 .chart-type-button.active,
+.section2 .range-button.active {
+  background-color: #FF6B35;
+  color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 107, 53, 0.6);
+  transform: translateY(-2px);
+}
+
+.section2 .chart-type-button:not(.active):not(:disabled):hover,
+.section2 .range-button:not(.active):not(:disabled):hover {
+  background-color: rgba(255, 107, 53, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* NASDAQ - Verde */
+.section3 .chart-type-button.active,
+.section3 .range-button.active {
+  background-color: #00D4AA;
+  color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(0, 212, 170, 0.6);
+  transform: translateY(-2px);
+}
+
+.section3 .chart-type-button:not(.active):not(:disabled):hover,
+.section3 .range-button:not(.active):not(:disabled):hover {
+  background-color: rgba(0, 212, 170, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 212, 170, 0.3);
+}
+
+/* VIX - Rojo */
+.section4 .chart-type-button.active,
+.section4 .range-button.active {
+  background-color: #FF4757;
+  color: #FFFFFF;
+  box-shadow: 0 0 8px rgba(255, 71, 87, 0.6);
+  transform: translateY(-2px);
+}
+
+.section4 .chart-type-button:not(.active):not(:disabled):hover,
+.section4 .range-button:not(.active):not(:disabled):hover {
+  background-color: rgba(255, 71, 87, 0.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 71, 87, 0.3);
 }
 
 .chart-type-label {
@@ -124,9 +158,6 @@
   justify-content: center;
   align-items: center;
   gap: 10px;
-  /* Fondo anterior comentado */
-  /* background: #f3f8fc; */
-  /* Nuevo fondo para tarjetas de información */
   background-color: #181818;
   border-radius: 16px 16px 0 0;
   min-height: 60px;
@@ -135,15 +166,15 @@
 
 .range-button {
   padding: 8px 16px;
-  border-radius: 8px; /* Esquinas redondeadas */
-  border: 1px solid #333333; /* Borde para botones inactivos */
+  border-radius: 8px;
+  border: 1px solid #333333;
   font-size: 12px;
   font-weight: 700;
   font-family: 'Satoshi', Arial, sans-serif;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: #1E1E1E; /* Fondo para botones inactivos */
-  color: #CCCCCC; /* Color para botones inactivos */
+  background-color: #1E1E1E;
+  color: #CCCCCC;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   position: relative;
@@ -157,27 +188,6 @@
 .range-button:disabled {
   cursor: not-allowed;
   opacity: 0.6;
-}
-
-.range-button.active {
-  /* Fondo anterior comentado */
-  /* background: linear-gradient(135deg, #6BB6E3 0%, #7EC7EC 100%); */
-  /* background-color: #00BFFF; */
-  /* Nuevo color azul #007ACC */
-  background-color: #007ACC;
-  color: #FFFFFF;
-  box-shadow: 0 0 8px rgba(0, 122, 204, 0.6);
-  transform: translateY(-2px);
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.range-button:not(.active):not(:disabled):hover {
-  /* Fondo anterior comentado */
-  /* background: rgba(107, 182, 227, 0.15); */
-  /* background-color: rgba(0, 191, 255, 0.1); */
-  background-color: rgba(0, 122, 204, 0.1);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.3);
 }
 
 /* Ripple effect para range buttons */
@@ -204,9 +214,6 @@
   flex: 1;
   width: 100%;
   position: relative;
-  /* Fondo anterior comentado */
-  /* background: #f3f8fc; */
-  /* Nuevo fondo para tarjetas de información */
   background-color: #181818;
   overflow: hidden;
 }
@@ -217,25 +224,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 14px;
-  /* Color anterior comentado */
-  /* color: #6BB6E3; */
-  /* color: #00BFFF; */
-  /* Nuevo color azul #007ACC */
   color: #007ACC;
   font-family: 'Satoshi', Arial, sans-serif;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 12px;
-  /* Fondo anterior comentado */
-  /* background: rgba(255, 255, 255, 0.9); */
-  /* Nuevo fondo para tooltip */
   background-color: #202020;
   padding: 16px 24px;
-  border-radius: 6px; /* Esquinas para tooltip */
+  border-radius: 6px;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  border: 1px solid #444444; /* Borde para tooltip */
+  border: 1px solid #444444;
 }
 
 .loading-spinner {
@@ -263,24 +263,18 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 14px;
-  /* Color anterior comentado */
-  /* color: #ef5350; */
-  /* Color para datos negativos */
   color: #FF4D4F;
   font-family: 'Satoshi', Arial, sans-serif;
   font-weight: 600;
   display: flex;
   align-items: center;
   gap: 12px;
-  /* Fondo anterior comentado */
-  /* background: rgba(255, 255, 255, 0.9); */
-  /* Nuevo fondo para tooltip */
   background-color: #202020;
   padding: 16px 24px;
-  border-radius: 6px; /* Esquinas para tooltip */
+  border-radius: 6px;
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  border: 1px solid #444444; /* Borde para tooltip */
+  border: 1px solid #444444;
 }
 
 /* ===== RESPONSIVE DESIGN ===== */
@@ -288,7 +282,6 @@
   .chart-type-switcher {
     height: 55px;
     gap: 8px;
-    
   }
   .chart-container {
     touch-action: pan-x !important;
@@ -331,26 +324,22 @@
   opacity: 0 !important;
 }
 
-/* Ocultar elementos con texto que contengan "TradingView" */
 .tv-lightweight-charts div[data-name*="tradingview"],
 .tv-lightweight-charts span[data-name*="tradingview"],
 .tv-lightweight-charts a[href*="tradingview"] {
   display: none !important;
 }
 
-/* Ocultar elementos posicionados absolutamente que podrían ser marcas de agua */
 .tv-lightweight-charts div[style*="position: absolute"][style*="bottom"],
 .tv-lightweight-charts div[style*="position: absolute"][style*="right"] {
   display: none !important;
 }
 
-/* Ocultar cualquier texto o enlace que mencione TradingView */
 .tv-lightweight-charts *:contains("TradingView"),
 .tv-lightweight-charts *:contains("tradingview.com") {
   display: none !important;
 }
 
-/* Alternativa más agresiva - ocultar todos los elementos de texto pequeño */
 .tv-lightweight-charts div {
   font-size: inherit !important;
 }
@@ -361,13 +350,11 @@
   display: none !important;
 }
 
-/* Ocultar elementos con z-index muy alto (típicos de overlays/watermarks) */
 .tv-lightweight-charts div[style*="z-index: 999"],
 .tv-lightweight-charts div[style*="z-index: 9999"] {
   display: none !important;
 }
 
-/* Si hay algún canvas overlay con marca de agua */
 .tv-lightweight-charts canvas + div,
 .tv-lightweight-charts canvas + span {
   display: none !important;
