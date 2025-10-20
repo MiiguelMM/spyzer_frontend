@@ -70,7 +70,7 @@ export default function VixMetricsCards() {
         </div>
         <div className="card-content">
           <div className="metric-row">
-            <span className="metric-label">VIX:</span>
+            <span className="metric-label">CURRENT:</span>
             <span className="metric-value">
               {(currentPrice || today.close).toFixed(2)}
             </span>
@@ -98,14 +98,14 @@ export default function VixMetricsCards() {
       {/* Daily Change */}
       <div className="metrics-card">
         <div className="card-header">
-          <div className={`card-indicator ${isHigh ? 'negative' : 'positive'}`}></div>
+          <div className={`card-indicator ${isHigh ? 'positive' : 'negative'}`}></div>
           <h3 className="card-title">Change</h3>
         </div>
 
         <div className="card-content">
           <div className="metric-row change-amount">
             <span className="metric-label">Amount:</span>
-            <span className={`metric-value change-amount ${isHigh ? 'negative' : 'positive'}`}>
+            <span className={`metric-value change-amount ${isHigh ? 'positive' : 'negative'}`}>
               {isHigh ? '+' : ''}{vixChange.toFixed(2)}
             </span>
           </div>

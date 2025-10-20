@@ -17,9 +17,9 @@ const {
   isLoading,
   hasError,
   error,
-  marketInfo
-} = useIBEX();
-
+      marketInfo,
+      currentPrice
+    } = useIBEX();
 const { refresh } = useIndices();
 
   // Chart types configuration
@@ -85,34 +85,25 @@ const { refresh } = useIndices();
     }
 
     if (range.value === '1dia') {
-      const lastDayData = historicalData[historicalData.length - 1];
-      if (!lastDayData) return [];
-      const hourlyData = [];
-      const currentHour = new Date().getHours();
+      const data = [];
+      const lastHistoricalPoint = historicalData[historicalData.length - 1];
 
-      for (let h = 0; h <= currentHour; h++) {
-        const hourDate = new Date();
-        hourDate.setHours(h, 0, 0, 0);
-
-        const variance = lastDayData.value * 0.002;
-        const change = (Math.random() - 0.5) * variance;
-        const hourlyVolatility = Math.sin(h / 4) * (lastDayData.value * 0.003);
-        const value = lastDayData.value + change + hourlyVolatility;
-
-        const high = value + (Math.random() * (lastDayData.value * 0.0005));
-        const low = value - (Math.random() * (lastDayData.value * 0.0005));
-
-        hourlyData.push({
-          time: Math.floor(hourDate.getTime() / 1000),
-          value: Number(value.toFixed(2)),
-          open: Number(value.toFixed(2)),
-          high: Number(high.toFixed(2)),
-          low: Number(low.toFixed(2)),
-          close: Number(value.toFixed(2))
-        });
+      if (lastHistoricalPoint) {
+        data.push(lastHistoricalPoint);
       }
 
-      return hourlyData;
+      if (currentPrice !== undefined && currentPrice !== null) {
+        const now = Math.floor(Date.now() / 1000);
+        data.push({
+          time: now,
+          value: currentPrice,
+          open: lastHistoricalPoint ? lastHistoricalPoint.close : currentPrice,
+          high: currentPrice,
+          low: currentPrice,
+          close: currentPrice
+        });
+      }
+      return data;
     } else {
       let numDays;
       switch (range.value) {
@@ -126,7 +117,23 @@ const { refresh } = useIndices();
       }
 
       const startIndex = Math.max(0, historicalData.length - numDays);
-      return historicalData.slice(startIndex);
+      const slicedData = historicalData.slice(startIndex);
+
+      if (currentPrice !== undefined && currentPrice !== null) {
+        const now = Math.floor(Date.now() / 1000);
+        const lastPointInSlicedData = slicedData[slicedData.length - 1];
+        if (!lastPointInSlicedData || lastPointInSlicedData.close !== currentPrice) {
+            slicedData.push({
+                time: now,
+                value: currentPrice,
+                open: lastPointInSlicedData ? lastPointInSlicedData.close : currentPrice,
+                high: currentPrice,
+                low: currentPrice,
+                close: currentPrice
+            });
+        }
+      }
+      return slicedData;
     }
   };
 
