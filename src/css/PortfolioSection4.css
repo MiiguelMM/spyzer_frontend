@@ -1,0 +1,675 @@
+/* PortfolioSection4.css */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@600,700&display=swap');
+
+/* Container principal */
+.portfolio-section4 {
+  width: 90%;
+  min-height: 500px;
+  margin: 1.5rem auto;
+  background: linear-gradient(145deg, #1a1a1a 0%, #151515 100%);
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.portfolio-section4::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 191, 255, 0.3) 50%, 
+    transparent 100%);
+}
+
+/* Header */
+.section4-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.section4-title {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFFFFF 0%, #CCCCCC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.section4-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #808080;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* Loading State */
+.section4-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem 0;
+}
+
+.loading-spinner-large {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(0, 191, 255, 0.3);
+  border-top: 3px solid #00BFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007ACC;
+  letter-spacing: 0.3px;
+}
+
+/* Error State */
+.section4-error {
+  text-align: center;
+  padding: 4rem 1rem;
+}
+
+.section4-error p {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  color: #FF6B6B;
+  margin: 0;
+}
+
+/* Main Performance Card */
+.performance-main {
+  background: linear-gradient(135deg, #1E1E1E 0%, #1a1a1a 100%);
+  border: 2px solid;
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.performance-main::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.02) 0%, transparent 70%);
+  animation: rotate 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.performance-main.gain {
+  border-color: #00D4AA;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(0, 212, 170, 0.15),
+    inset 0 1px 0 rgba(0, 212, 170, 0.1);
+}
+
+.performance-main.loss {
+  border-color: #FF6B6B;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.8),
+    0 0 30px rgba(255, 107, 107, 0.15),
+    inset 0 1px 0 rgba(255, 107, 107, 0.1);
+}
+
+.performance-main:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.9);
+}
+
+.performance-main.gain:hover {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(0, 212, 170, 0.25);
+}
+
+.performance-main.loss:hover {
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 0 40px rgba(255, 107, 107, 0.25);
+}
+
+.performance-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: #808080;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.performance-amount {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+  letter-spacing: -2px;
+  position: relative;
+  z-index: 1;
+}
+
+.performance-main.gain .performance-amount {
+  background: linear-gradient(135deg, #00F5C4 0%, #00D4AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(0, 212, 170, 0.3));
+}
+
+.performance-main.loss .performance-amount {
+  background: linear-gradient(135deg, #FF8B9A 0%, #FF6B6B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 8px rgba(255, 107, 107, 0.3));
+}
+
+.performance-percentage {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  padding: 0.6rem 1.8rem;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Statistics Grid */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Stat Card */
+.stat-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.stat-card:hover::before {
+  opacity: 1;
+}
+
+.stat-card:hover {
+  background: linear-gradient(135deg, #1e1e1e 0%, #1a1a1a 100%);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 191, 255, 0.15);
+  border-color: #3a3a3a;
+}
+
+.stat-card.highlight-green {
+  border-color: rgba(0, 212, 170, 0.4);
+  background: linear-gradient(135deg, 
+    rgba(0, 212, 170, 0.03) 0%, 
+    rgba(0, 212, 170, 0.01) 100%);
+}
+
+.stat-card.highlight-green:hover {
+  border-color: rgba(0, 212, 170, 0.7);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(0, 212, 170, 0.2);
+}
+
+.stat-card.highlight-red {
+  border-color: rgba(255, 107, 107, 0.4);
+  background: linear-gradient(135deg, 
+    rgba(255, 107, 107, 0.03) 0%, 
+    rgba(255, 107, 107, 0.01) 100%);
+}
+
+.stat-card.highlight-red:hover {
+  border-color: rgba(255, 107, 107, 0.7);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 0 25px rgba(255, 107, 107, 0.2);
+}
+
+.stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  min-width: 48px;
+  background: linear-gradient(135deg, rgba(0, 122, 204, 0.12) 0%, rgba(0, 122, 204, 0.08) 100%);
+  border: 1px solid rgba(0, 122, 204, 0.2);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 4px 12px rgba(0, 122, 204, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.stat-card.highlight-green .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.12) 0%, rgba(0, 212, 170, 0.08) 100%);
+  border-color: rgba(0, 212, 170, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(0, 212, 170, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.stat-card.highlight-red .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.12) 0%, rgba(255, 107, 107, 0.08) 100%);
+  border-color: rgba(255, 107, 107, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(255, 107, 107, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.stat-icon {
+  width: 24px;
+  height: 24px;
+  color: #007ACC;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 2px 4px rgba(0, 122, 204, 0.3));
+}
+
+.stat-card.highlight-green .stat-icon {
+  color: #00D4AA;
+  filter: drop-shadow(0 2px 4px rgba(0, 212, 170, 0.3));
+}
+
+.stat-card.highlight-red .stat-icon {
+  color: #FF6B6B;
+  filter: drop-shadow(0 2px 4px rgba(255, 107, 107, 0.3));
+}
+
+/* Icono especial para Total Invested - Dorado/Amarillo (representa dinero/oro) */
+.stat-card:nth-child(4) .stat-icon {
+  color: #FFD700;
+  filter: drop-shadow(0 2px 4px rgba(255, 215, 0, 0.3));
+}
+
+.stat-card:nth-child(4) .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.08) 100%);
+  border-color: rgba(255, 215, 0, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(255, 215, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.stat-card:nth-child(4):hover .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.18) 0%, rgba(255, 215, 0, 0.12) 100%);
+  box-shadow: 
+    0 6px 16px rgba(255, 215, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Icono especial para Portfolio Diversity - Púrpura (representa variedad/diversidad) */
+.stat-card:nth-child(5) .stat-icon {
+  color: #A855F7;
+  filter: drop-shadow(0 2px 4px rgba(168, 85, 247, 0.3));
+}
+
+.stat-card:nth-child(5) .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.12) 0%, rgba(168, 85, 247, 0.08) 100%);
+  border-color: rgba(168, 85, 247, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(168, 85, 247, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.stat-card:nth-child(5):hover .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.18) 0%, rgba(168, 85, 247, 0.12) 100%);
+  box-shadow: 
+    0 6px 16px rgba(168, 85, 247, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+/* Icono especial para Profit Factor - Naranja eléctrico (representa energía/potencia) */
+.stat-card:nth-child(6) .stat-icon {
+  color: #FB923C;
+  filter: drop-shadow(0 2px 4px rgba(251, 146, 60, 0.3));
+}
+
+.stat-card:nth-child(6) .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.12) 0%, rgba(251, 146, 60, 0.08) 100%);
+  border-color: rgba(251, 146, 60, 0.2);
+  box-shadow: 
+    0 4px 12px rgba(251, 146, 60, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.stat-card:nth-child(6):hover .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(251, 146, 60, 0.18) 0%, rgba(251, 146, 60, 0.12) 100%);
+  box-shadow: 
+    0 6px 16px rgba(251, 146, 60, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.stat-card:hover .stat-icon-wrapper {
+  transform: scale(1.08) translateY(-2px);
+  background: linear-gradient(135deg, rgba(0, 122, 204, 0.18) 0%, rgba(0, 122, 204, 0.12) 100%);
+  box-shadow: 
+    0 6px 16px rgba(0, 122, 204, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.stat-card.highlight-green:hover .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(0, 212, 170, 0.18) 0%, rgba(0, 212, 170, 0.12) 100%);
+  box-shadow: 
+    0 6px 16px rgba(0, 212, 170, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.stat-card.highlight-red:hover .stat-icon-wrapper {
+  background: linear-gradient(135deg, rgba(255, 107, 107, 0.18) 0%, rgba(255, 107, 107, 0.12) 100%);
+  box-shadow: 
+    0 6px 16px rgba(255, 107, 107, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.stat-card:hover .stat-icon {
+  transform: rotate(5deg) scale(1.05);
+}
+
+.stat-content {
+  flex: 1;
+}
+
+.stat-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #A0A0A0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.stat-value {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 0.3rem;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.stat-detail {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #808080;
+  line-height: 1.4;
+}
+
+.stat-percentage {
+  color: #A0A0A0;
+  font-weight: 500;
+}
+
+/* RESPONSIVE - MOBILE FIRST */
+@media (max-width: 767px) {
+  .portfolio-section4 {
+    width: 90%;
+    margin: 0.75rem auto;
+    padding: 1rem 0.8rem;
+    min-height: auto;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  .section4-header {
+    margin-bottom: 1rem;
+  }
+
+  .section4-title {
+    font-size: 1rem;
+  }
+
+  .section4-subtitle {
+    font-size: 11px;
+  }
+
+  .performance-main {
+    padding: 1rem 0.6rem;
+    margin-bottom: 1rem;
+    border-radius: 12px;
+  }
+
+  .performance-label {
+    font-size: 9px;
+    margin-bottom: 0.4rem;
+  }
+
+  .performance-amount {
+    font-size: 1.6rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .performance-percentage {
+    font-size: 12px;
+    padding: 0.4rem 1rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .stat-card {
+    padding: 1rem 0.8rem;
+    gap: 10px;
+    border-radius: 12px;
+  }
+
+  .stat-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 8px;
+  }
+
+  .stat-icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .stat-label {
+    font-size: 9px;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-value {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .stat-detail {
+    font-size: 11px;
+  }
+}
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .portfolio-section4 {
+    width: 90%;
+    min-height: 500px;
+    margin: 1.5rem auto;
+    padding: 2rem;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+
+  .section4-header {
+    margin-bottom: 2rem;
+  }
+
+  .section4-title {
+    font-size: 1.5rem;
+  }
+
+  .section4-subtitle {
+    font-size: 14px;
+  }
+
+  .performance-main {
+    padding: 2.5rem 2rem;
+    margin-bottom: 2.5rem;
+    border-radius: 16px;
+  }
+
+  .performance-label {
+    font-size: 11px;
+    margin-bottom: 1rem;
+  }
+
+  .performance-amount {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .performance-percentage {
+    font-size: 1.1rem;
+    padding: 0.6rem 1.8rem;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    padding: 1.5rem;
+    gap: 1.2rem;
+    border-radius: 16px;
+  }
+
+  .stat-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 12px;
+  }
+
+  .stat-icon {
+    width: 24px;
+    height: 24px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+    margin-bottom: 0.5rem;
+  }
+
+  .stat-value {
+    font-size: 1.4rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .stat-detail {
+    font-size: 14px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Desktop Large (1200px+) */
+@media (min-width: 1200px) {
+  .portfolio-section4 {
+    width: 85%;
+    padding: 2.5rem;
+  }
+
+  .section4-title {
+    font-size: 1.6rem;
+  }
+
+  .section4-subtitle {
+    font-size: 15px;
+  }
+
+  .performance-amount {
+    font-size: 3.5rem;
+  }
+
+  .performance-percentage {
+    font-size: 1.2rem;
+    padding: 0.7rem 2rem;
+  }
+
+  .stats-grid {
+    gap: 2rem;
+  }
+}

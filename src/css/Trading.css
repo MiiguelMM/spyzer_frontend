@@ -1,0 +1,20 @@
+.trading-page {
+   background-color: #0D0D0D;
+  margin-top: -1px;
+  
+  /* Sombras actualizadas para modo oscuro */
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.6),
+    0 2px 8px rgba(0, 0, 0, 0.4),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+  
+  /* Layout properties mantenidas */
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  flex-direction: column;
+  
+  position: relative;
+}

@@ -25,7 +25,7 @@
   border-radius: 0 0 16px 16px;
   position: relative;
   overflow: visible;
-  z-index: 1000;
+  z-index: 20;
 }
 
 .chart-type-button {
@@ -46,7 +46,7 @@
   gap: 4px;
   position: relative;
   overflow: hidden;
-  z-index: 1001;
+  z-index: 21;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
   pointer-events: auto;
 }
@@ -108,9 +108,9 @@
 /* VIX - Rojo */
 .section4 .chart-type-button.active,
 .section4 .range-button.active {
-  background-color: #FF4757;
+  background-color: #00CED1;
   color: #FFFFFF;
-  box-shadow: 0 0 8px rgba(255, 71, 87, 0.6);
+  box-shadow: 0 0 8px rgba(0, 206, 209, 0.6);
   transform: translateY(-2px);
 }
 

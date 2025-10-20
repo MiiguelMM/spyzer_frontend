@@ -1,10 +1,10 @@
-// IbexMetricsCards.jsx - IBEX 35 usando DataDistributor
+// IbexMetricsCards.jsx - IBEX 35 usando IndicesProvider
 import React from 'react';
-import { useIbexData } from '../../SP500data/InternationalMarketsDistributor';
+import { useIBEX } from '../../context/IndicesProvider';
 import '../../../css/MetricsCards.css';
 
 export default function IbexMetricsCards() {
-  // Obtener datos del contexto centralizado para IBEX 35
+  // Obtener datos del hook único
   const { 
     historicalData, 
     isLoading, 
@@ -13,13 +13,8 @@ export default function IbexMetricsCards() {
     currentPrice,
     dailyChange,
     percentChange,
-    volume,
-    marketCap,
-    currency,
-    symbol,
-    lastUpdated,
     marketInfo
-  } = useIbexData();
+  } = useIBEX();
 
   // Si está cargando, mostrar loading
   if (isLoading) {
@@ -61,9 +56,7 @@ export default function IbexMetricsCards() {
           <div className="metric-row">
             <span className="metric-label">Current:</span>
             <span className="metric-value">
-              {currency === 'EUR' ? '€' : ''}
-              {currentPrice?.toFixed(2) || today.close.toFixed(2)}
-              {currency === 'EUR'}
+              €{currentPrice?.toFixed(2) || today.close.toFixed(2)}
             </span>
           </div>
         </div>
@@ -79,9 +72,7 @@ export default function IbexMetricsCards() {
           <div className="metric-row yesterday-close">
             <span className="metric-label">Close:</span>
             <span className="metric-value yesterday-close">
-              {currency === 'EUR' ? '€' : ''}
-              {yesterday.close.toFixed(2)}
-              {currency === 'EUR'}
+              €{yesterday.close.toFixed(2)}
             </span>
           </div>
         </div>
@@ -98,13 +89,9 @@ export default function IbexMetricsCards() {
           <div className="metric-row change-amount">
             <span className="metric-label">Amount:</span>
             <span className={`metric-value change-amount ${isPositive ? 'positive' : 'negative'}`}>
-              {isPositive ? '+' : ''}
-              {currency === 'EUR' ? '€' : ''}
-              {Math.abs(priceChange).toFixed(2)}
-              {currency === 'EUR' ? '' : ' pts'}
+              {isPositive ? '+' : ''}€{Math.abs(priceChange).toFixed(2)}
             </span>
           </div>
-        
         </div>
       </div>
     </div>

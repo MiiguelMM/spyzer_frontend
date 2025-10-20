@@ -1,7 +1,7 @@
 // NasdaqRangeSwitcherChart.jsx - SIMPLIFICADO IGUAL QUE IBEX
 import { createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
-import { useNasdaqData } from '../../SP500data/StockMarketsDistributor';
+import { useNASDAQ, useIndices } from '../../context/IndicesProvider';
 import '../../../css/RangeSwitcherChart.css';
 
 export default function NasdaqRangeSwitcherChart() {
@@ -17,9 +17,10 @@ export default function NasdaqRangeSwitcherChart() {
     isLoading,
     hasError,
     error,
-    marketInfo,
-    refreshData
-  } = useNasdaqData();
+    marketInfo
+  } = useNASDAQ();
+
+  const { refresh } = useIndices();
 
   // Chart types configuration
   const chartTypes = [
@@ -78,7 +79,6 @@ export default function NasdaqRangeSwitcherChart() {
     { label: 'ALL', value: 'todos', days: 730 },
   ];
 
-  // Enhanced data filtering para NASDAQ
   const getFilteredData = (range) => {
     if (!historicalData || historicalData.length === 0) {
       return [];
@@ -86,23 +86,28 @@ export default function NasdaqRangeSwitcherChart() {
 
     if (range.value === '1dia') {
       const lastDayData = historicalData[historicalData.length - 1];
+      if (!lastDayData) return [];
       const hourlyData = [];
+      const currentHour = new Date().getHours();
 
-      for (let h = 0; h < 24; h++) {
+      for (let h = 0; h <= currentHour; h++) {
         const hourDate = new Date();
         hourDate.setHours(h, 0, 0, 0);
 
-        const variance = lastDayData.value * 0.004; // Higher variance for NASDAQ
+        const variance = lastDayData.value * 0.002;
         const change = (Math.random() - 0.5) * variance;
-        const hourlyVolatility = Math.sin(h / 4) * 3;
+        const hourlyVolatility = Math.sin(h / 4) * (lastDayData.value * 0.003);
         const value = lastDayData.value + change + hourlyVolatility;
+
+        const high = value + (Math.random() * (lastDayData.value * 0.0005));
+        const low = value - (Math.random() * (lastDayData.value * 0.0005));
 
         hourlyData.push({
           time: Math.floor(hourDate.getTime() / 1000),
           value: Number(value.toFixed(2)),
           open: Number(value.toFixed(2)),
-          high: Number((value + Math.random() * 3).toFixed(2)),
-          low: Number((value - Math.random() * 3).toFixed(2)),
+          high: Number(high.toFixed(2)),
+          low: Number(low.toFixed(2)),
           close: Number(value.toFixed(2))
         });
       }
@@ -402,7 +407,7 @@ export default function NasdaqRangeSwitcherChart() {
         {hasError && (
           <div className="error-container">
             <span>⚠️ Error loading data: {error}</span>
-            <button onClick={refreshData}>Retry</button>
+            <button onClick={refresh}>Retry</button>
           </div>
         )}
       </div>

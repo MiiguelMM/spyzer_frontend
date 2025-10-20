@@ -1,23 +1,20 @@
 // VixMetricsCards.jsx - VIX usando DataDistributor
 import React from 'react';
-import { useVixData } from '../../SP500data/InternationalMarketsDistributor';
+import { useDAX } from '../../context/IndicesProvider';
 import '../../../css/MetricsCards.css';
 
 export default function VixMetricsCards() {
   // Obtener datos del contexto centralizado para VIX
-  const { 
-    historicalData, 
-    isLoading, 
-    hasError, 
-    error, 
+  const {
+    historicalData,
+    isLoading,
+    hasError,
+    error,
     currentPrice,
     dailyChange,
     percentChange,
-    volume,
-    symbol,
-    lastUpdated,
     marketInfo
-  } = useVixData();
+  } = useDAX();
 
   // Si está cargando, mostrar loading
   if (isLoading) {
@@ -41,7 +38,7 @@ export default function VixMetricsCards() {
 
   const today = historicalData[historicalData.length - 1];
   const yesterday = historicalData[historicalData.length - 2];
-  
+
   // Usar datos calculados del contexto
   const vixChange = dailyChange || (today.close - yesterday.close);
   const percentageChange = percentChange || ((vixChange / yesterday.close) * 100);
@@ -78,7 +75,7 @@ export default function VixMetricsCards() {
               {(currentPrice || today.close).toFixed(2)}
             </span>
           </div>
-          
+
         </div>
       </div>
 
@@ -104,7 +101,7 @@ export default function VixMetricsCards() {
           <div className={`card-indicator ${isHigh ? 'negative' : 'positive'}`}></div>
           <h3 className="card-title">Change</h3>
         </div>
-        
+
         <div className="card-content">
           <div className="metric-row change-amount">
             <span className="metric-label">Amount:</span>
@@ -112,7 +109,7 @@ export default function VixMetricsCards() {
               {isHigh ? '+' : ''}{vixChange.toFixed(2)}
             </span>
           </div>
-          
+
         </div>
       </div>
     </div>

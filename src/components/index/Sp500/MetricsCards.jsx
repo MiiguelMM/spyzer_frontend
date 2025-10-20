@@ -1,25 +1,20 @@
 // MetricsCards.jsx - S&P 500 usando DataDistributor (CORREGIDO)
 import React from 'react';
-import { useSP500Data } from '../../SP500data/StockMarketsDistributor';
+import { useSP500 } from '../../context/IndicesProvider';
 import '../../../css/MetricsCards.css';
 
 export default function MetricsCards() {
   // Obtener datos del contexto centralizado
-  const { 
-    historicalData, 
-    isLoading, 
-    hasError, 
-    error, 
+  const {
+    historicalData,
+    isLoading,
+    hasError,
+    error,
     currentPrice,
     dailyChange,
     percentChange,
-    volume,
-    marketCap,
-    currency,
-    symbol,
-    lastUpdated,
     marketInfo
-  } = useSP500Data();
+  } = useSP500();;
 
   // Si está cargando, mostrar loading
   if (isLoading) {
@@ -43,7 +38,7 @@ export default function MetricsCards() {
 
   const today = historicalData[historicalData.length - 1];
   const yesterday = historicalData[historicalData.length - 2];
-  
+
   // Usar datos calculados del contexto
   const priceChange = dailyChange || (today.close - yesterday.close);
   const percentageChange = percentChange || ((priceChange / yesterday.close) * 100);
@@ -89,7 +84,7 @@ export default function MetricsCards() {
           <div className={`card-indicator ${isPositive ? 'positive' : 'negative'}`}></div>
           <h3 className="card-title">Change</h3>
         </div>
-        
+
         <div className="card-content">
           <div className="metric-row change-amount">
             <span className="metric-label">Amount:</span>

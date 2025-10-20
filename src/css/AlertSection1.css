@@ -1,0 +1,1009 @@
+/* AlertSection1.css - Siguiendo el estilo Portfolio */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@600,700&display=swap');
+
+/* Container principal */
+.alert-section1 {
+  width: 90%;
+  min-height: 500px;
+  margin: 1.5rem auto;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Header */
+.alert-section1-header {
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.alert-section1-title {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0 0 0.3rem 0;
+  letter-spacing: -0.3px;
+}
+
+.alert-section1-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* Controls Row - Search + Create Button */
+.controls-row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+
+/* Search Bar */
+.search-container {
+  flex: 1;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.9rem 1.2rem;
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007ACC;
+  box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.2);
+}
+
+.search-input::placeholder {
+  color: #666666;
+}
+
+/* Create Alert Button Main */
+.create-alert-btn-main {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  background-color: #007ACC;
+  border: none;
+  border-radius: 10px;
+  color: #FFFFFF;
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 122, 204, 0.4);
+  white-space: nowrap;
+}
+
+.create-alert-btn-main:hover {
+  background-color: #0090FF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 122, 204, 0.6);
+}
+
+.create-alert-btn-main .btn-icon {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.create-alert-btn-main .btn-text {
+  display: inline;
+}
+
+/* Category Filters */
+.category-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid #333333;
+}
+
+.alert-category-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.3rem;
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 10px;
+  color: #A0A0A0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.alert-category-btn:hover {
+  background-color: #252525;
+  color: #CCCCCC;
+  border-color: #444444;
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.alert-category-btn.active {
+  background-color: #2D2D2D;
+  color: #FFFFFF;
+  border-color: #555555;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+.count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 20px;
+  padding: 0 6px;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  color: #A0A0A0;
+}
+
+.alert-category-btn.active .count-badge {
+  background-color: #444444;
+  color: #FFFFFF;
+}
+
+/* Alerts Grid */
+.alerts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+  max-height: 500px;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+
+.alerts-grid::-webkit-scrollbar {
+  width: 8px;
+}
+
+.alerts-grid::-webkit-scrollbar-track {
+  background: #1E1E1E;
+  border-radius: 4px;
+}
+
+.alerts-grid::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+.alerts-grid::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* Alert Card */
+.alert-card {
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  padding: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.alert-card:hover {
+  background-color: #252525;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  border-color: #007ACC;
+}
+
+.alert-card.triggered {
+  border-left: 3px solid #FF4757;
+}
+
+.alert-card.active {
+  border-left: 3px solid #00D4AA;
+}
+
+.alert-card.inactive {
+  opacity: 0.6;
+}
+
+/* Alert Card Main Section */
+.alert-card-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.alert-symbol-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.alert-icon {
+  font-size: 1.2rem;
+}
+
+.alert-symbol {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+.triggered-badge {
+  padding: 2px 8px;
+  background-color: #FF4757;
+  color: #FFFFFF;
+  border-radius: 12px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.alert-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.2rem;
+}
+
+.alert-tipo {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: #A0A0A0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.alert-price {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #00BFFF;
+  text-shadow: 0 0 6px rgba(0, 191, 255, 0.3);
+}
+
+.alert-actions {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.action-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #252525;
+  border: 1px solid #333333;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.action-icon-btn:hover {
+  background-color: #007ACC;
+  border-color: #007ACC;
+  transform: scale(1.1);
+  box-shadow: 0 0 8px rgba(0, 122, 204, 0.6);
+}
+
+.action-icon-btn.delete:hover {
+  background-color: #FF4757;
+  border-color: #FF4757;
+  box-shadow: 0 0 8px rgba(255, 71, 87, 0.6);
+}
+
+/* Alert Message */
+.alert-message {
+  padding: 0.8rem;
+  background-color: rgba(255, 251, 235, 0.05);
+  border: 1px solid rgba(252, 211, 77, 0.2);
+  border-radius: 6px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.8rem;
+  color: #E0E0E0;
+  line-height: 1.4;
+}
+
+/* Loading State */
+.alert-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 1rem;
+}
+
+.loading-spinner-small {
+  width: 24px;
+  height: 24px;
+  border: 2px solid rgba(0, 191, 255, 0.3);
+  border-top: 2px solid #00BFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.alert-loading span {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.85rem;
+  color: #00BFFF;
+}
+
+/* No Results */
+.no-results {
+  text-align: center;
+  padding: 3rem 1rem;
+  grid-column: 1 / -1;
+}
+
+.no-results p {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  color: #A0A0A0;
+  margin: 0;
+}
+
+/* Modal Overlay */
+.alert-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  z-index: 1000000;
+  animation: fadeIn 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Content Centered */
+.alert-modal-content {
+  width: 90%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 40px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  animation: modalSlideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+  position: relative;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.alert-modal-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.alert-modal-content::-webkit-scrollbar-track {
+  background: #1E1E1E;
+  border-radius: 3px;
+}
+
+.alert-modal-content::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+}
+
+/* Modal Close Button */
+.alert-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 50%;
+  color: #CCCCCC;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.alert-modal-close:hover {
+  background-color: #FF4757;
+  color: #FFFFFF;
+  border-color: #FF4757;
+  transform: rotate(90deg);
+  box-shadow: 0 0 12px rgba(255, 71, 87, 0.6);
+}
+
+/* Modal Header */
+.alert-modal-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #333333;
+}
+
+.alert-modal-title {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00BFFF;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
+}
+
+.alert-modal-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin: 0;
+}
+
+/* Modal Form */
+.alert-modal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.alert-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.alert-form-group label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #A0A0A0;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.alert-form-group input,
+.alert-form-group select,
+.alert-form-group textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.alert-form-group input:focus,
+.alert-form-group select:focus,
+.alert-form-group textarea:focus {
+  outline: none;
+  border-color: #007ACC;
+  box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+}
+
+.alert-form-group textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Symbol Input Autocomplete */
+.alert-symbol-input-wrapper {
+  position: relative;
+}
+
+.alert-symbol-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+}
+
+.alert-symbol-input:focus {
+  outline: none;
+  border-color: #007ACC;
+  box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+}
+
+.alert-symbol-suggestions {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.alert-symbol-suggestions::-webkit-scrollbar {
+  width: 6px;
+}
+
+.alert-symbol-suggestions::-webkit-scrollbar-track {
+  background: #252525;
+  border-radius: 3px;
+}
+
+.alert-symbol-suggestions::-webkit-scrollbar-thumb {
+  background: #444444;
+  border-radius: 3px;
+}
+
+.alert-symbol-suggestion-item {
+  padding: 0.8rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid #252525;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.alert-symbol-suggestion-item:last-child {
+  border-bottom: none;
+}
+
+.alert-symbol-suggestion-item:hover {
+  background-color: #252525;
+  border-left: 3px solid #007ACC;
+}
+
+.alert-suggestion-symbol {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+}
+
+.alert-no-symbol-found {
+  padding: 1rem;
+  text-align: center;
+  color: #A0A0A0;
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Current Price Display */
+.current-price-display {
+  margin-top: 0.8rem;
+  padding: 0.8rem 1rem;
+  background-color: rgba(0, 212, 170, 0.1);
+  border: 1px solid rgba(0, 212, 170, 0.3);
+  border-radius: 8px;
+  animation: slideDown 0.3s ease;
+}
+
+.price-loading-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #00BFFF;
+  font-size: 0.85rem;
+}
+
+.loading-spinner-tiny {
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(0, 191, 255, 0.3);
+  border-top: 2px solid #00BFFF;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.price-info-inline {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.price-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #A0A0A0;
+}
+
+.price-value-inline {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #00D4AA;
+  text-shadow: 0 0 6px rgba(0, 212, 170, 0.3);
+}
+
+/* Modal Create Button */
+.alert-create-btn {
+  width: 100%;
+  padding: 1.2rem 2rem;
+  background: linear-gradient(135deg, #00D4AA 0%, #007ACC 100%);
+  border: none;
+  border-radius: 12px;
+  color: #FFFFFF;
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 6px 20px rgba(0, 212, 170, 0.4);
+}
+
+.alert-create-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0, 212, 170, 0.6);
+}
+
+.alert-create-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* RESPONSIVE - MOBILE FIRST */
+@media (max-width: 767px) {
+  .alert-section1 {
+    width: 90%;
+    padding: 1rem 0.8rem;
+  }
+
+  .alert-section1-title {
+    font-size: 1.45rem;
+  }
+
+  .alert-section1-subtitle {
+    font-size: 0.75rem;
+  }
+
+  /* Controls Row Mobile */
+  .controls-row {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  .create-alert-btn-main {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.5rem;
+    font-size: 0.85rem;
+  }
+
+  .create-alert-btn-main .btn-text {
+    display: inline;
+  }
+
+  /* Category Filters Mobile */
+  .alert-category-btn {
+    flex: 1 1 auto;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.75rem;
+    justify-content: center;
+  }
+
+  .count-badge {
+    min-width: 20px;
+    height: 18px;
+    font-size: 0.7rem;
+  }
+
+  .alerts-grid {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    max-height: 400px;
+  }
+
+  .alert-card {
+    padding: 0.9rem;
+  }
+
+  .alert-card-main {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+  }
+
+  .alert-symbol-section {
+    flex: 1 1 100%;
+  }
+
+  .alert-info {
+    flex: 1;
+    align-items: flex-start;
+  }
+
+  .alert-symbol {
+    font-size: 1rem;
+  }
+
+  .alert-price {
+    font-size: 1rem;
+  }
+
+  .action-icon-btn {
+    width: 36px;
+    height: 36px;
+    font-size: 0.9rem;
+  }
+
+  .alert-modal-content {
+    width: 95%;
+    padding: 1.5rem;
+    max-height: 90vh;
+  }
+
+  .alert-modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+  }
+
+  .alert-modal-title {
+    font-size: 1.4rem;
+  }
+
+  .alert-modal-subtitle {
+    font-size: 0.8rem;
+  }
+
+  .alert-create-btn {
+    padding: 1rem 1.5rem;
+    font-size: 0.95rem;
+  }
+}
+
+/* Mobile Large (480px+) */
+@media (min-width: 480px) {
+  .controls-row {
+    flex-direction: row;
+  }
+
+  .create-alert-btn-main {
+    width: auto;
+  }
+
+  .alert-category-btn {
+    flex: 0 1 auto;
+  }
+}
+
+/* Tablet+ (768px+) */
+@media (min-width: 768px) {
+  .alert-section1 {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .alert-section1-title {
+    font-size: 1.3rem;
+  }
+
+  .alert-section1-subtitle {
+    font-size: 0.85rem;
+  }
+
+  .controls-row {
+    gap: 1rem;
+  }
+
+  .create-alert-btn-main {
+    padding: 0.9rem 1.8rem;
+    font-size: 0.9rem;
+  }
+
+  .alert-category-btn {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.85rem;
+  }
+
+  .count-badge {
+    min-width: 24px;
+    height: 20px;
+    font-size: 0.75rem;
+  }
+
+  .alerts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    max-height: 500px;
+  }
+
+  .alert-card {
+    padding: 1rem;
+  }
+
+  .alert-card-main {
+    flex-wrap: nowrap;
+  }
+
+  .alert-symbol-section {
+    flex: 0 0 auto;
+  }
+
+  .alert-info {
+    align-items: flex-end;
+  }
+
+  .alert-symbol {
+    font-size: 1.1rem;
+  }
+
+  .alert-price {
+    font-size: 1.2rem;
+  }
+
+  .action-icon-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9rem;
+  }
+
+  .alert-modal-content {
+    width: 85%;
+    max-width: 500px;
+    padding: 2rem;
+    max-height: 85vh;
+  }
+
+  .alert-modal-close {
+    width: 36px;
+    height: 36px;
+    font-size: 1.3rem;
+  }
+
+  .alert-modal-title {
+    font-size: 1.8rem;
+  }
+
+  .alert-modal-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .alert-create-btn {
+    padding: 1.2rem 2rem;
+    font-size: 1.1rem;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .alerts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+
+  .create-alert-btn-main {
+    padding: 0.9rem 2rem;
+  }
+}
+
+/* Desktop Large (1200px+) */
+@media (min-width: 1200px) {
+  .alert-section1 {
+    width: 85%;
+    padding: 1.8rem 1.5rem;
+  }
+
+  .alert-section1-title {
+    font-size: 1.4rem;
+  }
+
+  .alert-section1-subtitle {
+    font-size: 0.9rem;
+  }
+
+  .alerts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  }
+
+  .create-alert-btn-main {
+    padding: 1rem 2.2rem;
+    font-size: 0.95rem;
+  }
+
+  .alert-category-btn {
+    padding: 0.75rem 1.4rem;
+  }
+}
+
+/* Desktop Extra Large (1920px+) */
+@media (min-width: 1920px) {
+  .alert-section1 {
+    width: 80%;
+  }
+
+  .alerts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  }
+}

@@ -1,9 +1,9 @@
 // Section4.jsx - VIX usando DataDistributor
 import React from 'react';
 import '../../../css/Section4.css';
-import VixChartHeader from '../VIX/VixChartHeader';
-import VixRangeSwitcherChart from '../VIX/VixRangeSwitcherChart';
-import VixMetricCards from '../VIX/VixMetricCards';
+import VixChartHeader from '../Dax/DaxChartHeader';
+import VixRangeSwitcherChart from '../Dax/DaxRangeSwitcherChart';
+import VixMetricCards from '../Dax/DaxMetricCards';
 
 
 export default function Section4() {

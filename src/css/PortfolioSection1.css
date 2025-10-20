@@ -1,0 +1,200 @@
+/* PortfolioHeader.css */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@600,700&display=swap');
+
+/* Wrapper principal */
+.portfolio-header-wrapper {
+  width: 90%;
+  margin: 1rem auto 0 auto;
+  display: flex;
+  gap: 12px;
+}
+
+/* Card individual */
+.portfolio-card {
+  flex: 1;
+  min-height: 45px;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 1.2rem 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.portfolio-card:hover {
+  background-color: #1E1E1E;
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.8),
+    0 0 8px rgba(0, 191, 255, 0.2);
+}
+
+/* Label del card */
+.portfolio-card-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* Valor */
+.portfolio-value {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.2rem;
+}
+
+.portfolio-currency {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #00BFFF;
+  text-shadow: 0 0 6px rgba(0, 191, 255, 0.3);
+}
+
+.portfolio-amount {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  letter-spacing: -0.5px;
+}
+
+/* Loading state */
+.portfolio-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 191, 255, 0.3);
+  border-top: 2px solid #00BFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #00BFFF;
+  letter-spacing: 0.3px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* RESPONSIVE - MOBILE FIRST */
+
+/* Mobile Large (480px+) */
+@media (min-width: 480px) {
+  .portfolio-header-wrapper {
+    width: 92%;
+    gap: 15px;
+    min-height: 200px;
+  }
+  
+  .portfolio-card {
+    min-height: 110px;
+    padding: 1.3rem 1rem;
+    gap: 0.9rem;
+  }
+  
+  .portfolio-card-label {
+    font-size: 0.85rem;
+  }
+  
+  .portfolio-currency {
+    font-size: 1.1rem;
+  }
+  
+  .portfolio-amount {
+    font-size: 1.6rem;
+  }
+  
+  .loading-spinner {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+/* Tablet+ (768px+) */
+@media (min-width: 768px) {
+  .portfolio-header-wrapper {
+    width: 90%;
+    margin: 1.5rem auto 0 auto;
+    gap: 20px;
+  }
+  
+  .portfolio-card {
+    min-height: 120px;
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .portfolio-card-label {
+    font-size: 0.9rem;
+  }
+  
+  .portfolio-currency {
+    font-size: 1.2rem;
+  }
+  
+  .portfolio-amount {
+    font-size: 1.8rem;
+  }
+  
+  .loading-spinner {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .loading-text {
+    font-size: 13px;
+  }
+  
+  .portfolio-loading {
+    gap: 0.8rem;
+  }
+}
+
+/* Desktop Large (1200px+) */
+@media (min-width: 1200px) {
+  .portfolio-header-wrapper {
+    width: 85%;
+  }
+  
+  .portfolio-card {
+    min-height: 130px;
+    padding: 1.8rem 1.5rem;
+  }
+  
+  .portfolio-card-label {
+    font-size: 0.95rem;
+  }
+  
+  .portfolio-currency {
+    font-size: 1.3rem;
+  }
+  
+  .portfolio-amount {
+    font-size: 2rem;
+  }
+}

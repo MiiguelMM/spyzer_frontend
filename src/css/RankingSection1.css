@@ -1,0 +1,523 @@
+/* RankingSection1.css - Premium Minimal Design */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@600,700&display=swap');
+
+.ranking-section1-container {
+  width: 90%;
+  min-height: 500px;
+  margin: 1.5rem auto;
+  background: linear-gradient(145deg, #1a1a1a 0%, #151515 100%);
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.ranking-section1-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(0, 191, 255, 0.3) 50%, 
+    transparent 100%);
+}
+
+/* Header Section */
+.section1-header {
+  margin-bottom: 2rem;
+  text-align: center;
+  position: relative;
+}
+
+.section1-title {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #FFFFFF 0%, #CCCCCC 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: -0.5px;
+}
+
+.section1-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #808080;
+  margin: 0;
+  letter-spacing: 0.3px;
+}
+
+/* Ranking List */
+.ranking-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+/* Ranking Card */
+.ranking-card {
+  background: linear-gradient(135deg, #1a1a1a 0%, #151515 100%);
+  border: 1px solid #2a2a2a;
+  border-radius: 16px;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+  position: relative;
+  overflow: hidden;
+  animation: slideIn 0.4s ease-out forwards;
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.ranking-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.ranking-card:hover::before {
+  opacity: 1;
+}
+
+.ranking-card:hover {
+  background: linear-gradient(135deg, #1e1e1e 0%, #1a1a1a 100%);
+  transform: translateY(-4px);
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 191, 255, 0.15);
+  border-color: #3a3a3a;
+}
+
+/* Top 3 Styling */
+.ranking-card.top-three {
+  border-color: #2a2a2a;
+}
+
+.ranking-card.top-three:hover {
+  border-color: #3a3a3a;
+}
+
+/* Current User Styling */
+.ranking-card.current-user {
+  border-color: rgba(0, 122, 204, 0.3);
+}
+
+.ranking-card.current-user:hover {
+  border-color: rgba(0, 122, 204, 0.45);
+}
+
+/* Position */
+.ranking-position {
+  width: 60px;
+  min-width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.ranking-card.top-three .ranking-position {
+  font-size: 28px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.08) 100%);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.2);
+}
+
+.ranking-card:hover .ranking-position {
+  transform: scale(1.05);
+}
+
+/* User Info */
+.ranking-user-info {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  flex: 1;
+  min-width: 0;
+}
+
+.user-details {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.user-name {
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.you-badge {
+  background: linear-gradient(135deg, #007ACC 0%, #00BFFF 100%);
+  color: #FFFFFF;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 2px 6px rgba(0, 122, 204, 0.4);
+}
+
+/* Stats */
+.ranking-stats {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.stat-label {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #808080;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.stat-value {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #FFFFFF;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.stat-value.positive {
+  background: linear-gradient(135deg, #00F5C4 0%, #00D4AA 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 6px rgba(0, 212, 170, 0.3));
+}
+
+.stat-value.negative {
+  background: linear-gradient(135deg, #FF8B9A 0%, #FF6B6B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 6px rgba(255, 107, 107, 0.3));
+}
+
+/* Footer */
+.ranking-footer {
+  display: none;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(0, 191, 255, 0.3);
+  border-top: 3px solid #00BFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 3rem auto;
+}
+
+/* Empty & Error States */
+.empty-state,
+.error-state {
+  text-align: center;
+  color: #808080;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  padding: 3rem 2rem;
+}
+
+.error-state p {
+  color: #FF6B6B;
+  margin-bottom: 1rem;
+}
+
+/* Animations */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ==================== RESPONSIVE - MOBILE FIRST ==================== */
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .ranking-section1-container {
+    width: 90%;
+    margin: 1.5rem auto;
+    padding: 1rem 0.8rem;
+    min-height: auto;
+    border-radius: 12px;
+    box-sizing: border-box;
+  }
+
+  .section1-header {
+    margin-bottom: 1rem;
+  }
+
+  .section1-title {
+    font-size: 1.45rem;
+  }
+
+  .section1-subtitle {
+    font-size: 11px;
+  }
+
+  .ranking-list {
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+
+  .ranking-card {
+    padding: 1rem 0.8rem;
+    gap: 10px;
+    flex-wrap: wrap;
+    border-radius: 12px;
+  }
+
+  .ranking-position {
+    width: 45px;
+    min-width: 45px;
+    height: 45px;
+    font-size: 18px;
+    border-radius: 8px;
+  }
+
+  .ranking-card.top-three .ranking-position {
+    font-size: 24px;
+  }
+
+  .user-avatar {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+  }
+
+  .avatar-initials {
+    font-size: 16px;
+  }
+
+  .balance-total {
+    font-size: 15px;
+  }
+
+  .balance-detail {
+    font-size: 11px;
+  }
+
+  .ranking-stats {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .stat-item:first-child {
+    align-items: flex-start;
+  }
+
+  .stat-value {
+    font-size: 15px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .refresh-button,
+  .retry-button {
+    padding: 0.7rem 1.4rem;
+    font-size: 13px;
+  }
+}
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .ranking-section1-container {
+    width: 90%;
+    min-height: 500px;
+    margin: 1.5rem auto;
+    padding: 2rem;
+    border-radius: 16px;
+    box-sizing: border-box;
+  }
+
+  .section1-header {
+    margin-bottom: 2rem;
+  }
+
+  .section1-title {
+    font-size: 1.5rem;
+  }
+
+  .section1-subtitle {
+    font-size: 14px;
+  }
+
+  .ranking-list {
+    gap: 12px;
+    margin-bottom: 2rem;
+  }
+
+  .ranking-card {
+    padding: 1.5rem;
+    gap: 1.2rem;
+    flex-wrap: nowrap;
+    border-radius: 16px;
+  }
+
+  .ranking-position {
+    width: 60px;
+    min-width: 60px;
+    height: 60px;
+    font-size: 24px;
+    border-radius: 12px;
+  }
+
+  .ranking-card.top-three .ranking-position {
+    font-size: 28px;
+  }
+
+  .user-avatar {
+    width: 52px;
+    height: 52px;
+    min-width: 52px;
+  }
+
+  .avatar-initials {
+    font-size: 20px;
+  }
+
+  .balance-total {
+    font-size: 18px;
+  }
+
+  .balance-detail {
+    font-size: 12px;
+  }
+
+  .ranking-stats {
+    width: auto;
+    flex-direction: row;
+    gap: 3rem;
+  }
+
+  .stat-item {
+    align-items: flex-end;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
+
+  .refresh-button,
+  .retry-button {
+    padding: 0.8rem 1.8rem;
+    font-size: 14px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .ranking-card {
+    padding: 1.8rem;
+  }
+
+  .user-avatar {
+    width: 56px;
+    height: 56px;
+    min-width: 56px;
+  }
+}
+
+/* Desktop Large (1200px+) */
+@media (min-width: 1200px) {
+  .ranking-section1-container {
+    width: 85%;
+    padding: 2.5rem;
+    box-sizing: border-box;
+  }
+
+  .section1-title {
+    font-size: 1.6rem;
+  }
+
+  .section1-subtitle {
+    font-size: 15px;
+  }
+
+  .ranking-list {
+    gap: 16px;
+  }
+}
+
+/* Extra Large Desktop (1920px+) */
+@media (min-width: 1920px) {
+  .ranking-card {
+    padding: 2rem;
+  }
+}

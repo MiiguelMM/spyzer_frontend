@@ -1,10 +1,9 @@
-// NasdaqMetricsCards.jsx - NASDAQ usando DataDistributor
+// NasdaqMetricsCards.jsx - NASDAQ usando IndicesProvider
 import React from 'react';
-import { useNasdaqData } from '../../SP500data/StockMarketsDistributor';
+import { useNASDAQ } from '../../context/IndicesProvider';
 import '../../../css/MetricsCards.css';
 
 export default function NasdaqMetricsCards() {
-  // Obtener datos del contexto centralizado para NASDAQ
   const { 
     historicalData, 
     isLoading, 
@@ -13,15 +12,9 @@ export default function NasdaqMetricsCards() {
     currentPrice,
     dailyChange,
     percentChange,
-    volume,
-    marketCap,
-    currency,
-    symbol,
-    lastUpdated,
     marketInfo
-  } = useNasdaqData();
+  } = useNASDAQ();
 
-  // Si está cargando, mostrar loading
   if (isLoading) {
     return (
       <div className="loading-container">
@@ -31,7 +24,6 @@ export default function NasdaqMetricsCards() {
     );
   }
 
-  // Si no hay datos, mostrar mensaje
   if (!historicalData || historicalData.length < 2) {
     return (
       <div className="error-container">
@@ -44,7 +36,6 @@ export default function NasdaqMetricsCards() {
   const today = historicalData[historicalData.length - 1];
   const yesterday = historicalData[historicalData.length - 2];
   
-  // Usar datos calculados del contexto
   const priceChange = dailyChange || (today.close - yesterday.close);
   const percentageChange = percentChange || ((priceChange / yesterday.close) * 100);
   const isPositive = priceChange >= 0;

@@ -6,15 +6,14 @@ import Section2 from '../components/index/Section2/Section2'
 import Section3 from '../components/index/Section3/Section3'
 import Section4 from '../components/index/Section4/Section4'
 
-export default function Index() {
+export default function Index({ onLogout, currentUser }) {
   return (
     <div>
-      <Header></Header>
-      <Section1></Section1>
-      <Section2></Section2>
-      <Section3></Section3>
-      <Section4></Section4>
-      
+      <Header onLogout={onLogout} />
+      <Section1 />
+      <Section2 />
+      <Section3 />
+      <Section4 />
     </div>
   )
 }

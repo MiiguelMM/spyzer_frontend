@@ -8,10 +8,10 @@ export default function VixChartHeader() {
     <div className="chart-header">
       <div className="chart-header-content">
         <h1 className="chart-header-title">
-          VIX Fear Index by Spyzer
+          DAX ETF 
         </h1>
         <p className="chart-header-subtitle">
-          Real-time market volatility & fear gauge
+          Real-time market data & analytics 
         </p>
       </div>
     </div>

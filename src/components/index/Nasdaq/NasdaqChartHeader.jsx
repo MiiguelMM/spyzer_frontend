@@ -7,7 +7,7 @@ export default function NasdaqChartHeader() {
     <div className="chart-header">
       <div className="chart-header-content">
         <h1 className="chart-header-title">
-          NASDAQ Tech by Spyzer
+          NASDAQ Tech
         </h1>
         <p className="chart-header-subtitle">
           Real-time technology market data & analytics

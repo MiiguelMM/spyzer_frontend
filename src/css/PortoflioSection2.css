@@ -1,0 +1,416 @@
+/* PortfolioSection2.css - Spyzer Design System */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@600,700&display=swap');
+
+/* Container principal */
+.portfolio-section2 {
+  width: 90%;
+  min-height: auto;
+  margin: 1.5rem auto;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+  padding: 1.5rem 1rem 2rem 1rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Header */
+.section2-header {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section2-title {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0 0 0.3rem 0;
+  letter-spacing: -0.3px;
+}
+
+.section2-subtitle {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin: 0;
+  letter-spacing: 0.2px;
+}
+
+/* Chart Container */
+.chart-container {
+  width: 100%;
+  height: auto;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Custom Tooltip */
+.custom-tooltip {
+  background-color: rgba(24, 24, 24, 0.95);
+  border: 1px solid #333333;
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+}
+
+.tooltip-symbol {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin: 0 0 0.3rem 0;
+  letter-spacing: 0.5px;
+}
+
+.tooltip-value {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #00BFFF;
+  margin: 0 0 0.2rem 0;
+}
+
+.tooltip-percentage {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin: 0;
+}
+
+/* Legend Wrapper */
+.legend-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* Legend */
+.chart-legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  padding: 0 0.5rem;
+  max-height: 400px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: max-height 0.3s ease;
+}
+
+/* Scrollbar para la leyenda */
+.chart-legend::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chart-legend::-webkit-scrollbar-track {
+  background: #1E1E1E;
+  border-radius: 3px;
+}
+
+.chart-legend::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.chart-legend::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background-color: rgba(45, 45, 45, 0.3);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.legend-item:hover {
+  background-color: #252525;
+  border-color: #333333;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(0, 191, 255, 0.3);
+}
+
+.legend-label {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #E0E0E0;
+  letter-spacing: 0.3px;
+  flex: 1;
+}
+
+.legend-percentage {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  color: #A0A0A0;
+}
+
+/* Show More Button - Siguiendo Spyzer Design System */
+.show-more-button {
+  width: 100%;
+  background: linear-gradient(135deg, #007ACC 0%, #005A9E 100%);
+  color: #FFFFFF;
+  border: 1px solid #333333;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  margin: 0 0.5rem;
+}
+
+.show-more-button:hover {
+  background: linear-gradient(135deg, #00BFFF 0%, #007ACC 100%);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.8),
+    0 0 8px rgba(0, 191, 255, 0.3);
+  border-color: #444444;
+}
+
+.show-more-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Loading State */
+.section2-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 3rem 1rem;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(0, 191, 255, 0.3);
+  border-top: 3px solid #00BFFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #007ACC;
+  letter-spacing: 0.3px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Error State */
+.section2-error {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.error-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FF6B6B;
+  margin: 0;
+}
+
+/* Empty State */
+.section2-empty {
+  padding: 3rem 1rem;
+  text-align: center;
+}
+
+.empty-text {
+  font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #E0E0E0;
+  margin: 0 0 0.5rem 0;
+}
+
+.empty-subtext {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin: 0;
+}
+
+/* ==================== RESPONSIVE - MOBILE FIRST ==================== */
+
+/* Mobile Base (Por defecto - sin media query) */
+.section2-title {
+  font-size: 1.2rem;
+}
+
+.section2-subtitle {
+  font-size: 12px;
+}
+
+.chart-legend {
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.legend-item {
+  padding: 8px 12px;
+}
+
+.show-more-button {
+  padding: 10px 14px;
+  font-size: 11px;
+}
+
+/* Mobile Large (480px+) */
+@media (min-width: 480px) {
+  .portfolio-section2 {
+    padding: 1.5rem;
+  }
+
+  .section2-title {
+    font-size: 1.25rem;
+  }
+
+  .section2-subtitle {
+    font-size: 13px;
+  }
+
+  .chart-legend {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .show-more-button {
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+}
+
+/* Tablet (768px+) */
+@media (min-width: 768px) {
+  .portfolio-section2 {
+    width: 90%;
+    margin: 1.5rem auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .section2-title {
+    font-size: 1.3rem;
+  }
+
+  .section2-subtitle {
+    font-size: 14px;
+  }
+
+  .chart-legend {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .legend-item {
+    padding: 10px 14px;
+  }
+
+  .show-more-button {
+    padding: 12px 16px;
+    font-size: 12px;
+  }
+
+  .tooltip-symbol,
+  .tooltip-value {
+    font-size: 15px;
+  }
+
+  .tooltip-percentage {
+    font-size: 13px;
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  .portfolio-section2 {
+    padding: 2rem;
+  }
+
+  .chart-legend {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  }
+
+  .legend-label {
+    font-size: 13px;
+  }
+
+  .legend-percentage {
+    font-size: 12px;
+  }
+}
+
+/* Desktop Large (1200px+) */
+@media (min-width: 1200px) {
+  .portfolio-section2 {
+    width: 85%;
+    padding: 2rem 1.5rem;
+  }
+
+  .section2-title {
+    font-size: 1.4rem;
+  }
+
+  .section2-subtitle {
+    font-size: 15px;
+  }
+
+  .chart-legend {
+    gap: 12px;
+  }
+}
+
+/* Desktop XL (1920px+) */
+@media (min-width: 1920px) {
+  .portfolio-section2 {
+    padding: 2.5rem 2rem;
+  }
+
+  .chart-legend {
+    gap: 16px;
+  }
+
+  .legend-item {
+    padding: 12px 16px;
+  }
+}
