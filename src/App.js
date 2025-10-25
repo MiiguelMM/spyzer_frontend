@@ -9,11 +9,17 @@ import LandingPage from './pages/LandingPage.jsx'
 import Trading from './pages/Trading.jsx'
 import Rankings from './pages/Rankings.jsx'
 import Alert from './pages/Alert.jsx'
-import SpyzerLoadingAnimation from '../src/components/loading/SpyzerLoadingAnimation.jsx' 
-import Logo from '../src/assets/Logo5.png' 
 
-// Context provider único para índices
+// Context providers
 import { IndicesProvider } from './components/context/IndicesProvider.jsx'
+import { PageTransitionProvider } from './components/loading/PageTransitionContext.jsx'
+
+// Components
+import SpyzerLoadingAnimation from './components/loading/SpyzerLoadingAnimation.jsx'
+import PageTransitionLoader from './components/loading/PageTransitionLoader.jsx'
+
+// Assets
+import Logo from './assets/Logo5.png'
 
 // Services
 import authService from '../src/service/authService.js'
@@ -134,7 +140,7 @@ function AppContent() {
   }
 
   if (isLoading) {
-     return <SpyzerLoadingAnimation logoSrc={Logo} />
+    return <SpyzerLoadingAnimation logoSrc={Logo} />
   }
 
   return (
@@ -189,14 +195,10 @@ function AppContent() {
           path="/trading" 
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              
-                <Trading
-                
+              <Trading
                 onLogout={handleLogout}
                 currentUser={currentUser}
-                
-                 />
-              
+              />
             </ProtectedRoute>
           } 
         />
@@ -206,10 +208,8 @@ function AppContent() {
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Rankings
-
-               onLogout={handleLogout}
-              currentUser={currentUser}
-
+                onLogout={handleLogout}
+                currentUser={currentUser}
               />
             </ProtectedRoute>
           } 
@@ -220,8 +220,8 @@ function AppContent() {
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Alert
-               onLogout={handleLogout}
-              currentUser={currentUser}
+                onLogout={handleLogout}
+                currentUser={currentUser}
               />
             </ProtectedRoute>
           } 
@@ -240,11 +240,14 @@ function AppContent() {
 
 function App() {
   return (
-    <IndicesProvider>
-      <Router>
-        <AppContent />
-      </Router>
-    </IndicesProvider>
+    <PageTransitionProvider>
+      <IndicesProvider>
+        <Router>
+          <AppContent />
+          <PageTransitionLoader />
+        </Router>
+      </IndicesProvider>
+    </PageTransitionProvider>
   )
 }
 

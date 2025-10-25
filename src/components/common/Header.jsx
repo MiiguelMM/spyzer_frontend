@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import authService from '../../service/authService' // Importar authService
+import { usePageTransition } from '../loading/PageTransitionContext.jsx' 
+import authService from '../../service/authService'
 import '../../css/Header.css'
 import logo from '../../assets/Logo5.png'
 import LinkedIn from '../../assets/linkedin.png'
@@ -18,6 +19,7 @@ export default function Header({ onLogout }) {
     const profileMenuRef = useRef(null)
     const navigate = useNavigate()
     const location = useLocation()
+    const { startTransition } = usePageTransition() 
 
     // Obtener datos del usuario al cargar
     useEffect(() => {
@@ -79,6 +81,7 @@ export default function Header({ onLogout }) {
         switch (action) {
             case 'navigate':
                 if (route) {
+                    startTransition() // AÑADIR ESTA LÍNEA - Activar el loader
                     navigate(route)
                 }
                 break
@@ -160,7 +163,10 @@ export default function Header({ onLogout }) {
     return (
         <div className='header'>
             <div className='header_container'>
-                <div className='header__logo' onClick={() => navigate('/')}>
+                <div className='header__logo' onClick={() => {
+                    startTransition() // AÑADIR - Activar loader al hacer click en logo
+                    navigate('/')
+                }}>
                     <img src={logo} alt="Logo" />
                     <span className='header__name'>
                         <h1>Spyzer</h1>

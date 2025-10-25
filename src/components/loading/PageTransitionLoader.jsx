@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { usePageTransition } from '../context/PageTransitionContext';
+import { usePageTransition } from '../loading/PageTransitionContext.jsx';
 
 export default function PageTransitionLoader() {
   const { isTransitioning } = usePageTransition();
@@ -9,7 +9,6 @@ export default function PageTransitionLoader() {
     if (isTransitioning) {
       setIsVisible(true);
     } else {
-      // Esperar a que termine el fade out antes de ocultar
       const timer = setTimeout(() => {
         setIsVisible(false);
       }, 300);
@@ -25,10 +24,10 @@ export default function PageTransitionLoader() {
       opacity: isTransitioning ? 1 : 0,
       transition: 'opacity 0.3s ease-in-out',
     }}>
-      {/* Spinner circular minimalista */}
-      <div style={styles.spinnerContainer}>
+      {/* Spinner minimalista */}
+      <div style={styles.spinnerWrapper}>
         <div style={styles.spinner}></div>
-        <div style={styles.innerCircle}></div>
+        <div style={styles.spinnerInner}></div>
       </div>
       
       <style>{`
@@ -43,11 +42,11 @@ export default function PageTransitionLoader() {
 
         @keyframes pulse {
           0%, 100% {
-            opacity: 0.6;
-            transform: scale(0.95);
+            opacity: 0.4;
+            transform: scale(0.92);
           }
           50% {
-            opacity: 1;
+            opacity: 0.8;
             transform: scale(1);
           }
         }
@@ -63,8 +62,8 @@ const styles = {
     left: 0,
     width: '100vw',
     height: '100vh',
-    backgroundColor: 'rgba(13, 13, 13, 0.8)',
-    backdropFilter: 'blur(8px)',
+    background: 'linear-gradient(145deg, rgba(26, 26, 26, 0.95) 0%, rgba(21, 21, 21, 0.97) 100%)',
+    backdropFilter: 'blur(12px) saturate(180%)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -72,10 +71,10 @@ const styles = {
     fontFamily: "'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
   },
   
-  spinnerContainer: {
+  spinnerWrapper: {
     position: 'relative',
-    width: '60px',
-    height: '60px',
+    width: '56px',
+    height: '56px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -83,26 +82,30 @@ const styles = {
   
   spinner: {
     position: 'absolute',
-    width: '60px',
-    height: '60px',
-    border: '3px solid transparent',
-    borderTop: '3px solid #007ACC',
-    borderRight: '3px solid #007ACC',
+    width: '56px',
+    height: '56px',
+    border: '2px solid transparent',
+    borderTopColor: '#007ACC',
+    borderRightColor: '#00BFFF',
     borderRadius: '50%',
-    animation: 'spin 1s cubic-bezier(0.4, 0, 0.2, 1) infinite',
-    boxShadow: '0 0 15px rgba(0, 122, 204, 0.3)',
+    animation: 'spin 0.9s cubic-bezier(0.4, 0, 0.2, 1) infinite',
+    boxShadow: `
+      0 0 20px rgba(0, 122, 204, 0.2),
+      0 0 40px rgba(0, 191, 255, 0.1),
+      inset 0 0 10px rgba(0, 191, 255, 0.05)
+    `,
   },
   
-  innerCircle: {
-    width: '40px',
-    height: '40px',
-    backgroundColor: '#181818',
-    border: '1px solid rgba(0, 122, 204, 0.2)',
+  spinnerInner: {
+    width: '36px',
+    height: '36px',
+    background: 'linear-gradient(135deg, rgba(26, 26, 26, 0.8) 0%, rgba(21, 21, 21, 0.9) 100%)',
+    border: '1px solid rgba(0, 122, 204, 0.15)',
     borderRadius: '50%',
     animation: 'pulse 2s ease-in-out infinite',
     boxShadow: `
-      inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 0 20px rgba(0, 122, 204, 0.1)
+      inset 0 1px 0 rgba(255, 255, 255, 0.03),
+      0 0 15px rgba(0, 122, 204, 0.08)
     `,
   },
 };
