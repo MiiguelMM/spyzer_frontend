@@ -30,7 +30,7 @@ export default function PortfolioSection3() {
       { symbol: 'SPY', name: 'S&P 500 ETF' },
       { symbol: 'QQQ', name: 'Nasdaq 100 ETF' },
       { symbol: 'DAX', name: 'DAX Index' },
-      { symbol: 'IBEX', name: 'IBEX 35' },
+      { symbol: 'FXI', name: 'iShares China Large-Cap ETF' },
       { symbol: 'IWM', name: 'Russell 2000 ETF' },
       { symbol: 'DIA', name: 'Dow Jones ETF' },
       { symbol: 'VTI', name: 'Total Stock Market ETF' },

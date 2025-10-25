@@ -10,7 +10,7 @@ export default function ChartHeader() {
           S&P 500 ETF (SPY)
         </h1>
         <p className="chart-header-subtitle">
-          Real-time market data & analytics
+         Real-time US market data & analytics
         </p>
       </div>
     </div>

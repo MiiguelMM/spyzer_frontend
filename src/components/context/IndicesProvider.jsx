@@ -212,27 +212,27 @@ export function useDAX() {
   };
 }
 
-export function useIBEX() {
+export function useFXI() {
   const { indices, loading, error } = useIndices();
 
-  const ibex = indices?.find(i => i.symbol === 'IBEX');
+  const fxi = indices?.find(i => i.symbol === 'FXI');
 
   return {
-    data: ibex,
-    historicalData: ibex?.historicalData || [],
+    data: fxi,
+    historicalData: fxi?.historicalData || [],
     isLoading: loading,
     hasError: !!error,
     error,
-    currentPrice: ibex?.precio,
-    dailyChange: ibex?.variacionAbsoluta,
-    percentChange: ibex?.variacionPorcentual,
-    volume: ibex?.volumen,
-    lastUpdated: ibex?.timestamp,
+    currentPrice: fxi?.precio,
+    dailyChange: fxi?.variacionAbsoluta,
+    percentChange: fxi?.variacionPorcentual,
+    volume: fxi?.volumen,
+    lastUpdated: fxi?.timestamp,
     marketInfo: {
-      name: 'IBEX 35',
-      symbol: 'IBEX',
-      country: 'España',
-      currency: 'EUR',
+      name: 'FXI China Large-Cap',
+      symbol: 'FXI',
+      country: 'China',
+      currency: 'USD',
       colors: {
         primary: '#FF6B35',
         positive: '#00FF85',

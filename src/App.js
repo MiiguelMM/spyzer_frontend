@@ -9,6 +9,8 @@ import LandingPage from './pages/LandingPage.jsx'
 import Trading from './pages/Trading.jsx'
 import Rankings from './pages/Rankings.jsx'
 import Alert from './pages/Alert.jsx'
+import SpyzerLoadingAnimation from '../src/components/loading/SpyzerLoadingAnimation.jsx' 
+import Logo from '../src/assets/Logo5.png' 
 
 // Context provider único para índices
 import { IndicesProvider } from './components/context/IndicesProvider.jsx'
@@ -132,26 +134,7 @@ function AppContent() {
   }
 
   if (isLoading) {
-    return (
-      <div className="loading-screen" style={{
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        gap: '20px'
-      }}>
-        <div className="spinner" style={{
-          width: '50px',
-          height: '50px',
-          border: '5px solid #f3f3f3',
-          borderTop: '5px solid #3498db',
-          borderRadius: '50%',
-          animation: 'spin 1s linear infinite'
-        }}></div>
-        <p style={{ fontSize: '18px', color: '#666' }}>Loading...</p>
-      </div>
-    )
+     return <SpyzerLoadingAnimation logoSrc={Logo} />
   }
 
   return (

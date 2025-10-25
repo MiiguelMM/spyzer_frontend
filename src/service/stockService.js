@@ -3,7 +3,7 @@ import marketDataService from './marketDataService.js';
 
 // Lista COMPLETA de los 51 símbolos gestionados por el backend (Armonizada)
 const POPULAR_STOCKS = [
-  'SPY', 'QQQ', 'DAX', 'IBEX', // Índices/ETFs Principales
+  'SPY', 'QQQ', 'DAX', 'FXI', // Índices/ETFs Principales
   'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'NVDA', 'NFLX', // Mega Tech
   'JPM', 'V', 'MA', 'WFC', 'GS', // Financieros
   'JNJ', 'PFE', 'UNH', 'ABT', 'TMO', // Salud

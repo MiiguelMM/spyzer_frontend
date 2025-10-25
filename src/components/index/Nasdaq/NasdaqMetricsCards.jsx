@@ -83,9 +83,12 @@ export default function NasdaqMetricsCards() {
         
         <div className="card-content">
           <div className="metric-row change-amount">
-            <span className="metric-label">Amount:</span>
+            <span className="metric-label">Change:</span>
             <span className={`metric-value change-amount ${isPositive ? 'positive' : 'negative'}`}>
-              {isPositive ? '+' : ''}${Math.abs(priceChange).toFixed(2)}
+              {isPositive ? '+' : ''}{percentageChange.toFixed(2)}%
+              <span className="price-change-detail">
+                ({isPositive ? '+' : ''}${Math.abs(priceChange).toFixed(2)})
+              </span>
             </span>
           </div>
         </div>

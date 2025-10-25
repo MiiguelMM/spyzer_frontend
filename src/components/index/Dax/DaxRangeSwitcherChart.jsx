@@ -8,7 +8,7 @@ export default function DaxRangeSwitcherChart() {
   const chartContainerRef = useRef(null);
   const chartInstanceRef = useRef(null);
   const seriesRef = useRef(null);
-  const [selectedRange, setSelectedRange] = useState('1año');
+  const [selectedRange, setSelectedRange] = useState('1year');
   const [selectedChartType, setSelectedChartType] = useState('area');
 
   const {
@@ -27,7 +27,7 @@ export default function DaxRangeSwitcherChart() {
   ];
 
   const intervalColors = {
-    '1dia': {
+    '3dias': {
       lineColor: marketInfo?.colors.primary || '#00B8D4',
       topColor: `rgba(0, 184, 212, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
@@ -52,7 +52,7 @@ export default function DaxRangeSwitcherChart() {
       topColor: `rgba(0, 184, 212, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
-    '1año': {
+    '1year': {
       lineColor: marketInfo?.colors.primary || '#00B8D4',
       topColor: `rgba(0, 184, 212, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
@@ -65,13 +65,13 @@ export default function DaxRangeSwitcherChart() {
   };
 
   const timeRanges = [
-    { label: '1D', value: '1dia', days: 1 },
+    { label: '3D', value: '3dias', days: 3 },
     { label: '1W', value: '1semana', days: 7 },
     { label: '1M', value: '1mes', days: 30 },
     { label: '3M', value: '3meses', days: 90 },
     { label: '6M', value: '6meses', days: 180 },
-    { label: '1Y', value: '1año', days: 365 },
-    { label: 'ALL', value: 'todos', days: 730 },
+    { label: '1Y', value: '1year', days: 365 },
+    { label: 'MAX', value: 'todos', days: 730 },
   ];
 
   const getFilteredData = (range) => {
@@ -79,57 +79,63 @@ export default function DaxRangeSwitcherChart() {
       return [];
     }
 
-    if (range.value === '1dia') {
-      const data = [];
-      const lastHistoricalPoint = historicalData[historicalData.length - 1];
+    // Fecha actual en segundos
+    const nowTimestamp = Math.floor(Date.now() / 1000);
+    
+    let filteredData;
 
-      if (lastHistoricalPoint) {
-        data.push(lastHistoricalPoint);
+    if (range.value === 'todos') {
+      filteredData = [...historicalData];
+    } else {
+      // Calcular la fecha de inicio basada en días reales
+      let daysToSubtract;
+      switch (range.value) {
+        case '3dias': daysToSubtract = 3; break;
+        case '1semana': daysToSubtract = 7; break;
+        case '1mes': daysToSubtract = 30; break;
+        case '3meses': daysToSubtract = 90; break;
+        case '6meses': daysToSubtract = 180; break;
+        case '1year': daysToSubtract = 365; break;
+        default: daysToSubtract = 365;
       }
 
-      if (currentPrice !== undefined && currentPrice !== null) {
-        const now = Math.floor(Date.now() / 1000);
-        data.push({
-          time: now,
+      // Timestamp de inicio (fecha actual - días)
+      const startTimestamp = nowTimestamp - (daysToSubtract * 24 * 60 * 60);
+      
+      // Filtrar por fecha real
+      filteredData = historicalData.filter(item => item.time >= startTimestamp);
+    }
+
+    // Agregar precio actual si existe
+    if (currentPrice !== undefined && currentPrice !== null) {
+      const lastPoint = filteredData[filteredData.length - 1];
+      
+      if (!lastPoint || lastPoint.close !== currentPrice) {
+        filteredData.push({
+          time: nowTimestamp,
           value: currentPrice,
-          open: lastHistoricalPoint ? lastHistoricalPoint.close : currentPrice,
+          open: lastPoint ? lastPoint.close : currentPrice,
           high: currentPrice,
           low: currentPrice,
           close: currentPrice
         });
       }
-      return data;
-    } else {
-      let numDays;
-      switch (range.value) {
-        case '1semana': numDays = 7; break;
-        case '1mes': numDays = 30; break;
-        case '3meses': numDays = 90; break;
-        case '6meses': numDays = 180; break;
-        case '1año': numDays = 365; break;
-        case 'todos':
-        default: numDays = historicalData.length; break;
-      }
-
-      const startIndex = Math.max(0, historicalData.length - numDays);
-      const slicedData = historicalData.slice(startIndex);
-
-      if (currentPrice !== undefined && currentPrice !== null) {
-        const now = Math.floor(Date.now() / 1000);
-        const lastPointInSlicedData = slicedData[slicedData.length - 1];
-        if (!lastPointInSlicedData || lastPointInSlicedData.close !== currentPrice) {
-            slicedData.push({
-                time: now,
-                value: currentPrice,
-                open: lastPointInSlicedData ? lastPointInSlicedData.close : currentPrice,
-                high: currentPrice,
-                low: currentPrice,
-                close: currentPrice
-            });
-        }
-      }
-      return slicedData;
     }
+    
+    // =========================================================
+    // 🔑 LA SOLUCIÓN: ORDENAR Y FILTRAR DUPLICADOS
+    // Esto previene el error 'data must be asc ordered by time'
+    // =========================================================
+    
+    // 1. Asegurar orden ascendente por tiempo (del más antiguo al más reciente)
+    filteredData.sort((a, b) => a.time - b.time); 
+    
+    // 2. Filtrar entradas con el mismo timestamp consecutivo
+    const uniqueData = filteredData.filter((item, index, self) => 
+      index === 0 || item.time !== self[index - 1].time
+    );
+
+    return uniqueData; // Devolvemos el array ordenado y sin duplicados por tiempo
   };
 
   const createSeriesForType = (chart, type) => {
@@ -200,9 +206,10 @@ export default function DaxRangeSwitcherChart() {
           close: item.close
         }));
       } else {
+        // Usamos item.value o item.close como fallback para gráficos de línea/área
         chartData = priceData.map(item => ({
           time: item.time,
-          value: item.value
+          value: item.value || item.close
         }));
       }
 
@@ -266,7 +273,7 @@ export default function DaxRangeSwitcherChart() {
         } else {
           chartData = priceData.map(item => ({
             time: item.time,
-            value: item.value
+            value: item.value || item.close
           }));
         }
 
@@ -330,15 +337,15 @@ export default function DaxRangeSwitcherChart() {
         mode: 1,
         vertLine: {
           width: 1,
-          color: `rgba(0, 184, 212, 0.8)`,
+          color: intervalColors[selectedRange].lineColor, // Usa el color funcional del mercado
           style: 3,
-          labelBackgroundColor: marketInfo?.colors.primary || '#00B8D4',
+          labelBackgroundColor: intervalColors[selectedRange].lineColor,
         },
         horzLine: {
           width: 1,
-          color: `rgba(0, 184, 212, 0.8)`,
+          color: intervalColors[selectedRange].lineColor,
           style: 3,
-          labelBackgroundColor: marketInfo?.colors.primary || '#00B8D4',
+          labelBackgroundColor: intervalColors[selectedRange].lineColor,
         },
       },
     };
@@ -366,7 +373,7 @@ export default function DaxRangeSwitcherChart() {
         } else {
           chartData = priceData.map(item => ({
             time: item.time,
-            value: item.value
+            value: item.value || item.close
           }));
         }
 

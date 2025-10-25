@@ -1,7 +1,7 @@
 // src/service/indicesService.js
 import marketDataService from './marketDataService';
 
-const INDICES_SYMBOLS = ['SPY', 'QQQ', 'DAX', 'IBEX'];
+const INDICES_SYMBOLS = ['SPY', 'QQQ', 'DAX', 'FXI'];
 
 const obtenerTodosLosIndices = async () => {
   try {

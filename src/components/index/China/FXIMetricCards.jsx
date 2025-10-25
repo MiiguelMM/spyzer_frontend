@@ -1,9 +1,9 @@
-// IbexMetricsCards.jsx - IBEX 35 usando IndicesProvider
+// FxiMetricsCards.jsx - FXI China usando IndicesProvider
 import React from 'react';
-import { useIBEX } from '../../context/IndicesProvider';
+import { useFXI } from '../../context/IndicesProvider';
 import '../../../css/MetricsCards.css';
 
-export default function IbexMetricsCards() {
+export default function FxiMetricsCards() {
   // Obtener datos del hook único
   const { 
     historicalData, 
@@ -14,14 +14,14 @@ export default function IbexMetricsCards() {
     dailyChange,
     percentChange,
     marketInfo
-  } = useIBEX();
+  } = useFXI();
 
   // Si está cargando, mostrar loading
   if (isLoading) {
     return (
       <div className="loading-container">
-        <div className="loading-icon">🇪🇸</div>
-        Loading {marketInfo?.name || 'IBEX 35'} data...
+        <div className="loading-icon">🇨🇳</div>
+        Loading {marketInfo?.name || 'FXI China'} data...
       </div>
     );
   }
@@ -31,7 +31,7 @@ export default function IbexMetricsCards() {
     return (
       <div className="error-container">
         <div className="error-icon">⚠️</div>
-        {hasError ? `Error: ${error}` : `No ${marketInfo?.name || 'IBEX 35'} data available`}
+        {hasError ? `Error: ${error}` : `No ${marketInfo?.name || 'FXI China'} data available`}
       </div>
     );
   }
@@ -56,7 +56,7 @@ export default function IbexMetricsCards() {
           <div className="metric-row">
             <span className="metric-label">Current:</span>
             <span className="metric-value">
-              €{currentPrice?.toFixed(2) || today.close.toFixed(2)}
+              ${currentPrice?.toFixed(2) || today.close.toFixed(2)}
             </span>
           </div>
         </div>
@@ -72,7 +72,7 @@ export default function IbexMetricsCards() {
           <div className="metric-row yesterday-close">
             <span className="metric-label">Close:</span>
             <span className="metric-value yesterday-close">
-              €{yesterday.close.toFixed(2)}
+              ${yesterday.close.toFixed(2)}
             </span>
           </div>
         </div>
@@ -87,9 +87,12 @@ export default function IbexMetricsCards() {
         
         <div className="card-content">
           <div className="metric-row change-amount">
-            <span className="metric-label">Amount:</span>
+            <span className="metric-label">Change:</span>
             <span className={`metric-value change-amount ${isPositive ? 'positive' : 'negative'}`}>
-              {isPositive ? '+' : ''}€{Math.abs(priceChange).toFixed(2)}
+              {isPositive ? '+' : ''}{percentageChange.toFixed(2)}%
+              <span className="price-change-detail">
+                ({isPositive ? '+' : ''}${Math.abs(priceChange).toFixed(2)})
+              </span>
             </span>
           </div>
         </div>

@@ -1,10 +1,10 @@
-// VixMetricsCards.jsx - VIX usando DataDistributor
+// DaxMetricCards.jsx - DAX usando DataDistributor
 import React from 'react';
 import { useDAX } from '../../context/IndicesProvider';
 import '../../../css/MetricsCards.css';
 
-export default function VixMetricsCards() {
-  // Obtener datos del contexto centralizado para VIX
+export default function DaxMetricsCards() {
+  // Obtener datos del contexto centralizado para DAX
   const {
     historicalData,
     isLoading,
@@ -20,8 +20,8 @@ export default function VixMetricsCards() {
   if (isLoading) {
     return (
       <div className="loading-container">
-        <div className="loading-icon">😱</div>
-        Loading {marketInfo?.name || 'VIX'} data...
+        <div className="loading-icon">📊</div>
+        Loading {marketInfo?.name || 'DAX'} data...
       </div>
     );
   }
@@ -31,7 +31,7 @@ export default function VixMetricsCards() {
     return (
       <div className="error-container">
         <div className="error-icon">⚠️</div>
-        {hasError ? `Error: ${error}` : `No ${marketInfo?.name || 'VIX'} data available`}
+        {hasError ? `Error: ${error}` : `No ${marketInfo?.name || 'DAX'} data available`}
       </div>
     );
   }
@@ -40,25 +40,9 @@ export default function VixMetricsCards() {
   const yesterday = historicalData[historicalData.length - 2];
 
   // Usar datos calculados del contexto
-  const vixChange = dailyChange || (today.close - yesterday.close);
-  const percentageChange = percentChange || ((vixChange / yesterday.close) * 100);
-  const isHigh = vixChange >= 0; // Para VIX, más alto = más miedo
-
-  // VIX interpretation
-  const getVixLevel = (value) => {
-    if (value < 12) return 'Low Fear';
-    if (value < 20) return 'Normal';
-    if (value < 30) return 'High Fear';
-    return 'Extreme Fear';
-  };
-
-  // VIX color based on level
-  const getVixLevelColor = (value) => {
-    if (value < 12) return '#00FF85'; // Verde - poco miedo
-    if (value < 20) return '#FFA500'; // Naranja - normal
-    if (value < 30) return '#FF6B35'; // Rojo claro - miedo alto
-    return '#FF4757'; // Rojo intenso - miedo extremo
-  };
+  const priceChange = dailyChange || (today.close - yesterday.close);
+  const percentageChange = percentChange || ((priceChange / yesterday.close) * 100);
+  const isPositive = priceChange >= 0;
 
   return (
     <div className="metrics-container">
@@ -70,12 +54,11 @@ export default function VixMetricsCards() {
         </div>
         <div className="card-content">
           <div className="metric-row">
-            <span className="metric-label">CURRENT:</span>
+            <span className="metric-label">Current:</span>
             <span className="metric-value">
-              {(currentPrice || today.close).toFixed(2)}
+              €{(currentPrice || today.close).toFixed(2)}
             </span>
           </div>
-
         </div>
       </div>
 
@@ -89,7 +72,7 @@ export default function VixMetricsCards() {
           <div className="metric-row yesterday-close">
             <span className="metric-label">Close:</span>
             <span className="metric-value yesterday-close">
-              {yesterday.close.toFixed(2)}
+              €{yesterday.close.toFixed(2)}
             </span>
           </div>
         </div>
@@ -98,18 +81,20 @@ export default function VixMetricsCards() {
       {/* Daily Change */}
       <div className="metrics-card">
         <div className="card-header">
-          <div className={`card-indicator ${isHigh ? 'positive' : 'negative'}`}></div>
+          <div className={`card-indicator ${isPositive ? 'positive' : 'negative'}`}></div>
           <h3 className="card-title">Change</h3>
         </div>
 
         <div className="card-content">
           <div className="metric-row change-amount">
-            <span className="metric-label">Amount:</span>
-            <span className={`metric-value change-amount ${isHigh ? 'positive' : 'negative'}`}>
-              {isHigh ? '+' : ''}{vixChange.toFixed(2)}
+            <span className="metric-label">Change:</span>
+            <span className={`metric-value change-amount ${isPositive ? 'positive' : 'negative'}`}>
+              {isPositive ? '+' : ''}{percentageChange.toFixed(2)}%
+              <span className="price-change-detail">
+                ({isPositive ? '+' : ''}€{Math.abs(priceChange).toFixed(2)})
+              </span>
             </span>
           </div>
-
         </div>
       </div>
     </div>

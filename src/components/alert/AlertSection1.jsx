@@ -1,8 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { 
+  TrendingUp, 
+  TrendingDown, 
+  Target, 
+  BarChart3, 
+  Bell, 
+  BellOff, 
+  RotateCcw, 
+  Trash2, 
+  Plus,
+  X,
+  MessageSquare,
+  Layers,
+  CheckCircle2,
+  AlertCircle,
+  BellRing
+} from 'lucide-react';
 import alertService from '../../service/alertService';
 import userService from '../../service/userService';
 import stockService from '../../service/stockService';
-import marketDataService from '../../service/marketDataService'; // ← AGREGADO
+import marketDataService from '../../service/marketDataService';
 import '../../css/AlertSection1.css';
 
 const AlertSection1 = () => {
@@ -41,11 +58,11 @@ const AlertSection1 = () => {
           setUserId(usuario.id);
           await loadAlerts(usuario.id);
         } else {
-          console.error('No hay usuario en sesión');
+          console.error('No user in session');
           setLoading(false);
         }
       } catch (error) {
-        console.error('Error cargando usuario y alertas:', error);
+        console.error('Error loading user and alerts:', error);
         setLoading(false);
       }
     };
@@ -56,18 +73,18 @@ const AlertSection1 = () => {
 
   const loadPopularStocks = async () => {
     try {
-      console.log('📦 Cargando acciones populares...');
+      console.log('📦 Loading popular stocks...');
       const stocks = await stockService.obtenerAccionesPopulares();
-      console.log('✅ Acciones cargadas:', stocks);
+      console.log('✅ Stocks loaded:', stocks);
       
       const stocksMap = {};
       stocks.forEach(stock => {
         stocksMap[stock.symbol] = stock;
       });
       setStocksData(stocksMap);
-      console.log('💾 Stocks guardados en state:', stocksMap);
+      console.log('💾 Stocks saved in state:', stocksMap);
     } catch (error) {
-      console.error('Error cargando acciones populares:', error);
+      console.error('Error loading popular stocks:', error);
     }
   };
 
@@ -77,39 +94,36 @@ const AlertSection1 = () => {
       const data = await alertService.obtenerAlertas(uid);
       setAlerts(data);
     } catch (error) {
-      console.error('Error cargando alertas:', error);
+      console.error('Error loading alerts:', error);
     } finally {
       setLoading(false);
     }
   };
 
   const fetchCurrentPrice = async (symbol) => {
-    console.log('🔍 Buscando precio para:', symbol);
+    console.log('🔍 Searching price for:', symbol);
     
-    // Primero intentar obtener del caché que ya cargamos
     if (stocksData[symbol]) {
-      console.log('✅ Precio encontrado en caché:', stocksData[symbol].precio);
+      console.log('✅ Price found in cache:', stocksData[symbol].precio);
       setCurrentPrice(stocksData[symbol].precio);
       return;
     }
     
-    // Si no está en caché, hacer petición individual SIN históricos
     try {
       setLoadingPrice(true);
       setCurrentPrice(null);
       
-      // ✅ CORREGIDO: Solo obtener precio actual, NO históricos
       const data = await marketDataService.obtenerDatos(symbol);
-      console.log('📊 Datos recibidos de API:', data);
+      console.log('📊 Data received from API:', data);
       
       if (data && data.precio) {
-        console.log('✅ Precio encontrado:', data.precio);
+        console.log('✅ Price found:', data.precio);
         setCurrentPrice(data.precio);
       } else {
-        console.log('❌ No hay precio en los datos');
+        console.log('❌ No price in data');
       }
     } catch (error) {
-      console.error('Error obteniendo precio actual:', error);
+      console.error('Error getting current price:', error);
       setCurrentPrice(null);
     } finally {
       setLoadingPrice(false);
@@ -118,12 +132,12 @@ const AlertSection1 = () => {
 
   const handleCreateAlert = async () => {
     if (!userId) {
-      alert('No hay usuario en sesión');
+      alert('No user in session');
       return;
     }
 
     if (!SIMBOLOS_DISPONIBLES.includes(formData.symbol.toUpperCase())) {
-      alert('El símbolo ingresado no es válido. Por favor selecciona uno de la lista.');
+      alert('The entered symbol is not valid. Please select one from the list.');
       return;
     }
 
@@ -139,8 +153,8 @@ const AlertSection1 = () => {
       resetForm();
       loadAlerts(userId);
     } catch (error) {
-      console.error('Error creando alerta:', error);
-      alert('Error al crear la alerta');
+      console.error('Error creating alert:', error);
+      alert('Error creating alert');
     }
   };
 
@@ -150,6 +164,18 @@ const AlertSection1 = () => {
     setShowSuggestions(false);
     await fetchCurrentPrice(symbol);
   };
+
+  useEffect(() => {
+    if (formData.symbol && formData.valorTrigger && formData.tipo) {
+      const tipoTexts = {
+        'PRICE_UP': 'rises to',
+        'PRICE_DOWN': 'drops to',
+        'PRICE_EQUAL': 'reaches'
+      };
+      const autoMessage = `Alert for when ${formData.symbol} ${tipoTexts[formData.tipo]} $${formData.valorTrigger}`;
+      setFormData(prev => ({...prev, mensajePersonalizado: autoMessage}));
+    }
+  }, [formData.symbol, formData.tipo, formData.valorTrigger]);
 
   const handleSymbolInputChange = (value) => {
     setSymbolSearch(value);
@@ -164,19 +190,19 @@ const AlertSection1 = () => {
       await alertService.toggleAlerta(userId, alertaId);
       loadAlerts(userId);
     } catch (error) {
-      console.error('Error toggling alerta:', error);
+      console.error('Error toggling alert:', error);
     }
   };
 
   const handleDeleteAlert = async (alertaId) => {
     if (!userId) return;
-    if (!window.confirm('¿Eliminar esta alerta?')) return;
+    if (!window.confirm('Delete this alert?')) return;
     
     try {
       await alertService.eliminarAlerta(userId, alertaId);
       loadAlerts(userId);
     } catch (error) {
-      console.error('Error eliminando alerta:', error);
+      console.error('Error deleting alert:', error);
     }
   };
 
@@ -187,7 +213,7 @@ const AlertSection1 = () => {
       await alertService.reactivarAlerta(userId, alertaId);
       loadAlerts(userId);
     } catch (error) {
-      console.error('Error reactivando alerta:', error);
+      console.error('Error reactivating alert:', error);
     }
   };
 
@@ -234,20 +260,20 @@ const AlertSection1 = () => {
 
   const getAlertIcon = (tipo) => {
     switch(tipo) {
-      case 'PRICE_UP': return '📈';
-      case 'PRICE_DOWN': return '📉';
-      case 'PRICE_EQUAL': return '🎯';
-      case 'VOLUME_HIGH': return '📊';
-      default: return '🔔';
+      case 'PRICE_UP': return <TrendingUp size={18} />;
+      case 'PRICE_DOWN': return <TrendingDown size={18} />;
+      case 'PRICE_EQUAL': return <Target size={18} />;
+
+      default: return <Bell size={18} />;
     }
   };
 
   const getTipoText = (tipo) => {
     switch(tipo) {
-      case 'PRICE_UP': return 'Sube a';
-      case 'PRICE_DOWN': return 'Baja a';
-      case 'PRICE_EQUAL': return 'Llega a';
-      case 'VOLUME_HIGH': return 'Volumen';
+      case 'PRICE_UP': return 'Rises to';
+      case 'PRICE_DOWN': return 'Drops to';
+      case 'PRICE_EQUAL': return 'Reaches';
+  
       default: return tipo;
     }
   };
@@ -264,7 +290,7 @@ const AlertSection1 = () => {
       <div className="alert-section1">
         <div className="alert-loading">
           <div className="loading-spinner-small"></div>
-          <span>Cargando sesión...</span>
+          <span>Loading session...</span>
         </div>
       </div>
     );
@@ -273,8 +299,8 @@ const AlertSection1 = () => {
   return (
     <div className="alert-section1">
       <div className="alert-section1-header">
-        <h2 className="alert-section1-title">Mis Alertas</h2>
-        <p className="alert-section1-subtitle">Gestiona tus notificaciones de precio</p>
+        <h2 className="alert-section1-title">My Alerts</h2>
+        <p className="alert-section1-subtitle">Manage your price notifications</p>
       </div>
 
       <div className="controls-row">
@@ -282,7 +308,7 @@ const AlertSection1 = () => {
           <input
             type="text"
             className="search-input"
-            placeholder="Buscar por símbolo..."
+            placeholder="Search by symbol..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -292,8 +318,8 @@ const AlertSection1 = () => {
           className="create-alert-btn-main"
           onClick={() => setShowCreateModal(true)}
         >
-          <span className="btn-icon">+</span>
-          <span className="btn-text">Nueva Alerta</span>
+          <span className="btn-icon"><Plus size={18} /></span>
+          <span className="btn-text">New Alert</span>
         </button>
       </div>
 
@@ -302,28 +328,32 @@ const AlertSection1 = () => {
           className={`alert-category-btn ${selectedCategory === 'all' ? 'active' : ''}`}
           onClick={() => setSelectedCategory('all')}
         >
-          Todas
+          <span className="category-icon"><Layers size={16} /></span>
+          All
           <span className="count-badge">{stats.total}</span>
         </button>
         <button 
           className={`alert-category-btn ${selectedCategory === 'active' ? 'active' : ''}`}
           onClick={() => setSelectedCategory('active')}
         >
-          Activas
+          <span className="category-icon"><CheckCircle2 size={16} /></span>
+          Active
           <span className="count-badge">{stats.activas}</span>
         </button>
         <button 
           className={`alert-category-btn ${selectedCategory === 'triggered' ? 'active' : ''}`}
           onClick={() => setSelectedCategory('triggered')}
         >
-          Disparadas
+          <span className="category-icon"><BellRing size={16} /></span>
+          Triggered
           <span className="count-badge">{stats.disparadas}</span>
         </button>
         <button 
           className={`alert-category-btn ${selectedCategory === 'inactive' ? 'active' : ''}`}
           onClick={() => setSelectedCategory('inactive')}
         >
-          Inactivas
+          <span className="category-icon"><AlertCircle size={16} /></span>
+          Inactive
           <span className="count-badge">{stats.inactivas}</span>
         </button>
       </div>
@@ -331,13 +361,13 @@ const AlertSection1 = () => {
       {loading ? (
         <div className="alert-loading">
           <div className="loading-spinner-small"></div>
-          <span>Cargando alertas...</span>
+          <span>Loading alerts...</span>
         </div>
       ) : (
         <div className="alerts-grid">
           {getFilteredAlerts().length === 0 ? (
             <div className="no-results">
-              <p>No hay alertas para mostrar</p>
+              <p>No alerts to display</p>
             </div>
           ) : (
             getFilteredAlerts().map((alert) => (
@@ -349,7 +379,7 @@ const AlertSection1 = () => {
                   <div className="alert-symbol-section">
                     <span className="alert-icon">{getAlertIcon(alert.tipoAlerta)}</span>
                     <span className="alert-symbol">{alert.symbol}</span>
-                    {alert.disparada && <span className="triggered-badge">Disparada</span>}
+                    {alert.disparada && <span className="triggered-badge">Triggered</span>}
                   </div>
                   
                   <div className="alert-info">
@@ -361,32 +391,33 @@ const AlertSection1 = () => {
                     <button
                       className="action-icon-btn"
                       onClick={() => handleToggleAlert(alert.id)}
-                      title={alert.activa ? 'Desactivar' : 'Activar'}
+                      title={alert.activa ? 'Deactivate' : 'Activate'}
                     >
-                      {alert.activa ? '🔔' : '🔕'}
+                      {alert.activa ? <Bell size={16} /> : <BellOff size={16} />}
                     </button>
                     {alert.disparada && (
                       <button
                         className="action-icon-btn"
                         onClick={() => handleReactivateAlert(alert.id)}
-                        title="Reactivar"
+                        title="Reactivate"
                       >
-                        🔄
+                        <RotateCcw size={16} />
                       </button>
                     )}
                     <button
                       className="action-icon-btn delete"
                       onClick={() => handleDeleteAlert(alert.id)}
-                      title="Eliminar"
+                      title="Delete"
                     >
-                      🗑️
+                      <Trash2 size={16} />
                     </button>
                   </div>
                 </div>
 
                 {alert.mensajePersonalizado && (
                   <div className="alert-message">
-                    💬 {alert.mensajePersonalizado}
+                    <MessageSquare size={14} style={{ display: 'inline', marginRight: '6px' }} />
+                    {alert.mensajePersonalizado}
                   </div>
                 )}
               </div>
@@ -399,22 +430,22 @@ const AlertSection1 = () => {
         <div className="alert-modal-overlay" onClick={() => setShowCreateModal(false)}>
           <div className="alert-modal-content" onClick={(e) => e.stopPropagation()}>
             <button className="alert-modal-close" onClick={() => setShowCreateModal(false)}>
-              ✕
+              <X size={20} />
             </button>
 
             <div className="alert-modal-header">
-              <h3 className="alert-modal-title">Nueva Alerta</h3>
-              <p className="alert-modal-subtitle">Configura tu notificación de precio</p>
+              <h3 className="alert-modal-title">New Alert</h3>
+              <p className="alert-modal-subtitle">Set up your price notification</p>
             </div>
 
             <div className="alert-modal-form">
               <div className="alert-form-group">
-                <label>Símbolo</label>
+                <label>Symbol</label>
                 <div className="alert-symbol-input-wrapper">
                   <input
                     type="text"
                     className="alert-symbol-input"
-                    placeholder="Busca: AAPL, TSLA, MSFT..."
+                    placeholder="Search: AAPL, TSLA, MSFT..."
                     value={symbolSearch}
                     onChange={(e) => handleSymbolInputChange(e.target.value)}
                     onFocus={() => setShowSuggestions(symbolSearch.length > 0)}
@@ -435,7 +466,7 @@ const AlertSection1 = () => {
                   {symbolSearch.length > 0 && filteredSymbols.length === 0 && (
                     <div className="alert-symbol-suggestions">
                       <div className="alert-no-symbol-found">
-                        No se encontró el símbolo
+                        Symbol not found
                       </div>
                     </div>
                   )}
@@ -446,11 +477,11 @@ const AlertSection1 = () => {
                     {loadingPrice ? (
                       <div className="price-loading-inline">
                         <div className="loading-spinner-tiny"></div>
-                        <span>Cargando precio...</span>
+                        <span>Loading price...</span>
                       </div>
                     ) : currentPrice ? (
                       <div className="price-info-inline">
-                        <span className="price-label">Precio actual:</span>
+                        <span className="price-label">Current price:</span>
                         <span className="price-value-inline">${currentPrice.toFixed(2)}</span>
                       </div>
                     ) : null}
@@ -459,20 +490,20 @@ const AlertSection1 = () => {
               </div>
 
               <div className="alert-form-group">
-                <label>Tipo de Alerta</label>
+                <label>Alert Type</label>
                 <select
                   value={formData.tipo}
                   onChange={(e) => setFormData({...formData, tipo: e.target.value})}
                 >
-                  <option value="PRICE_UP">📈 Precio sube a</option>
-                  <option value="PRICE_DOWN">📉 Precio baja a</option>
-                  <option value="PRICE_EQUAL">🎯 Precio llega a</option>
-                  <option value="VOLUME_HIGH">📊 Volumen supera</option>
+                  <option value="PRICE_UP">↗ Price rises to</option>
+                  <option value="PRICE_DOWN">↘ Price drops to</option>
+                  <option value="PRICE_EQUAL">→ Price reaches</option>
+                
                 </select>
               </div>
 
               <div className="alert-form-group">
-                <label>Valor Objetivo ($)</label>
+                <label>Target Value ($)</label>
                 <input
                   type="number"
                   step="0.01"
@@ -484,9 +515,9 @@ const AlertSection1 = () => {
               </div>
 
               <div className="alert-form-group">
-                <label>Mensaje Personalizado (Opcional)</label>
+                <label>Alert Message (auto-generated, editable)</label>
                 <textarea
-                  placeholder="Añade una nota..."
+                  placeholder="Auto-generated message will appear here..."
                   value={formData.mensajePersonalizado}
                   onChange={(e) => setFormData({...formData, mensajePersonalizado: e.target.value})}
                   rows="3"
@@ -497,7 +528,7 @@ const AlertSection1 = () => {
                 className="alert-create-btn"
                 onClick={handleCreateAlert}
               >
-                Crear Alerta
+                Create Alert
               </button>
             </div>
           </div>

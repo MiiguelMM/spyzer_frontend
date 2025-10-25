@@ -1,26 +1,26 @@
-// IbexRangeSwitcherChart.jsx - IBEX 35 usando DataDistributor
+// FxiRangeSwitcherChart.jsx - FXI China usando DataDistributor
 import { createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
-import { useIBEX, useIndices } from '../../context/IndicesProvider';
+import { useFXI, useIndices } from '../../context/IndicesProvider';
 import '../../../css/RangeSwitcherChart.css';
 
-export default function IbexRangeSwitcherChart() {
+export default function FxiRangeSwitcherChart() {
   const chartContainerRef = useRef(null);
   const chartInstanceRef = useRef(null);
   const seriesRef = useRef(null);
-  const [selectedRange, setSelectedRange] = useState('1año');
+  const [selectedRange, setSelectedRange] = useState('1year');
   const [selectedChartType, setSelectedChartType] = useState('area');
 
-  // Obtener datos del contexto centralizado para IBEX 35
-const {
-  historicalData,
-  isLoading,
-  hasError,
-  error,
-      marketInfo,
-      currentPrice
-    } = useIBEX();
-const { refresh } = useIndices();
+  // Obtener datos del contexto centralizado para FXI China
+  const {
+    historicalData,
+    isLoading,
+    hasError,
+    error,
+    marketInfo,
+    currentPrice
+  } = useFXI();
+  const { refresh } = useIndices();
 
   // Chart types configuration
   const chartTypes = [
@@ -29,54 +29,54 @@ const { refresh } = useIndices();
     { label: 'Candles', value: 'candlestick', description: 'Gráfico de velas japonesas' }
   ];
 
-  // 🎨 Color palettes usando configuración del mercado IBEX (naranja español)
+  // 🎨 Color palettes usando configuración del mercado FXI (rojo chino)
   const intervalColors = {
-    '1dia': {
-      lineColor: marketInfo?.colors.primary || '#FF6B35',
-      topColor: `rgba(255, 107, 53, 0.7)`,
+    '3dias': {
+      lineColor: marketInfo?.colors.primary || '#FF4D4F', // Rojo
+      topColor: `rgba(255, 77, 79, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1semana': {
-      lineColor: marketInfo?.colors.primary || '#FF6B35',
-      topColor: `rgba(255, 107, 53, 0.7)`,
+      lineColor: marketInfo?.colors.primary || '#FF4D4F',
+      topColor: `rgba(255, 77, 79, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '1mes': {
-      lineColor: marketInfo?.colors.primary || '#FF6B35',
-      topColor: `rgba(255, 107, 53, 0.7)`,
+      lineColor: marketInfo?.colors.primary || '#FF4D4F',
+      topColor: `rgba(255, 77, 79, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '3meses': {
-      lineColor: marketInfo?.colors.primary || '#FF6B35',
-      topColor: `rgba(255, 107, 53, 0.7)`,
+      lineColor: marketInfo?.colors.primary || '#FF4D4F',
+      topColor: `rgba(255, 77, 79, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     '6meses': {
-      lineColor: marketInfo?.colors.primary || '#FF6B35',
-      topColor: `rgba(255, 107, 53, 0.7)`,
+      lineColor: marketInfo?.colors.primary || '#FF4D4F',
+      topColor: `rgba(255, 77, 79, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
-    '1año': {
-      lineColor: marketInfo?.colors.primary || '#FF6B35',
-      topColor: `rgba(255, 107, 53, 0.7)`,
+    '1year': {
+      lineColor: marketInfo?.colors.primary || '#FF4D4F',
+      topColor: `rgba(255, 77, 79, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
     'todos': {
-      lineColor: marketInfo?.colors.primary || '#FF6B35',
-      topColor: `rgba(255, 107, 53, 0.7)`,
+      lineColor: marketInfo?.colors.primary || '#FF4D4F',
+      topColor: `rgba(255, 77, 79, 0.7)`,
       bottomColor: 'rgba(0, 0, 0, 0.05)'
     },
   };
 
-  // Time ranges configuration
+  // Time ranges configuration - ACTUALIZADOS
   const timeRanges = [
-    { label: '1D', value: '1dia', days: 1 },
+    { label: '3D', value: '3dias', days: 3 },
     { label: '1W', value: '1semana', days: 7 },
     { label: '1M', value: '1mes', days: 30 },
     { label: '3M', value: '3meses', days: 90 },
     { label: '6M', value: '6meses', days: 180 },
-    { label: '1Y', value: '1año', days: 365 },
-    { label: 'ALL', value: 'todos', days: 730 },
+    { label: '1Y', value: '1year', days: 365 },
+    { label: 'MAX', value: 'todos', days: 730 },
   ];
 
   const getFilteredData = (range) => {
@@ -84,57 +84,63 @@ const { refresh } = useIndices();
       return [];
     }
 
-    if (range.value === '1dia') {
-      const data = [];
-      const lastHistoricalPoint = historicalData[historicalData.length - 1];
+    // Fecha actual en segundos
+    const nowTimestamp = Math.floor(Date.now() / 1000);
+    
+    let filteredData;
 
-      if (lastHistoricalPoint) {
-        data.push(lastHistoricalPoint);
+    if (range.value === 'todos') {
+      filteredData = [...historicalData];
+    } else {
+      // Calcular la fecha de inicio basada en días reales
+      let daysToSubtract;
+      switch (range.value) {
+        case '3dias': daysToSubtract = 3; break;
+        case '1semana': daysToSubtract = 7; break;
+        case '1mes': daysToSubtract = 30; break;
+        case '3meses': daysToSubtract = 90; break;
+        case '6meses': daysToSubtract = 180; break;
+        case '1year': daysToSubtract = 365; break;
+        default: daysToSubtract = 365;
       }
 
-      if (currentPrice !== undefined && currentPrice !== null) {
-        const now = Math.floor(Date.now() / 1000);
-        data.push({
-          time: now,
+      // Timestamp de inicio (fecha actual - días)
+      const startTimestamp = nowTimestamp - (daysToSubtract * 24 * 60 * 60);
+      
+      // Filtrar por fecha real
+      filteredData = historicalData.filter(item => item.time >= startTimestamp);
+    }
+
+    // Agregar precio actual si existe
+    if (currentPrice !== undefined && currentPrice !== null) {
+      const lastPoint = filteredData[filteredData.length - 1];
+      
+      if (!lastPoint || lastPoint.close !== currentPrice) {
+        filteredData.push({
+          time: nowTimestamp,
           value: currentPrice,
-          open: lastHistoricalPoint ? lastHistoricalPoint.close : currentPrice,
+          open: lastPoint ? lastPoint.close : currentPrice,
           high: currentPrice,
           low: currentPrice,
           close: currentPrice
         });
       }
-      return data;
-    } else {
-      let numDays;
-      switch (range.value) {
-        case '1semana': numDays = 7; break;
-        case '1mes': numDays = 30; break;
-        case '3meses': numDays = 90; break;
-        case '6meses': numDays = 180; break;
-        case '1año': numDays = 365; break;
-        case 'todos':
-        default: numDays = historicalData.length; break;
-      }
-
-      const startIndex = Math.max(0, historicalData.length - numDays);
-      const slicedData = historicalData.slice(startIndex);
-
-      if (currentPrice !== undefined && currentPrice !== null) {
-        const now = Math.floor(Date.now() / 1000);
-        const lastPointInSlicedData = slicedData[slicedData.length - 1];
-        if (!lastPointInSlicedData || lastPointInSlicedData.close !== currentPrice) {
-            slicedData.push({
-                time: now,
-                value: currentPrice,
-                open: lastPointInSlicedData ? lastPointInSlicedData.close : currentPrice,
-                high: currentPrice,
-                low: currentPrice,
-                close: currentPrice
-            });
-        }
-      }
-      return slicedData;
     }
+
+    // =========================================================
+    // 🔑 LA SOLUCIÓN: ORDENAR Y FILTRAR DUPLICADOS
+    // Esto previene el error 'data must be asc ordered by time'
+    // =========================================================
+    
+    // 1. Asegurar orden ascendente por tiempo (del más antiguo al más reciente)
+    filteredData.sort((a, b) => a.time - b.time); 
+    
+    // 2. Filtrar entradas con el mismo timestamp consecutivo
+    const uniqueData = filteredData.filter((item, index, self) => 
+      index === 0 || item.time !== self[index - 1].time
+    );
+
+    return uniqueData; // Devolvemos el array ordenado y sin duplicados por tiempo
   };
 
   // Create series based on chart type
@@ -156,8 +162,8 @@ const { refresh } = useIndices();
 
       case 'candlestick':
         return chart.addSeries(CandlestickSeries, {
-          upColor: marketInfo?.colors.positive || '#00FF85',
-          downColor: marketInfo?.colors.negative || '#FF4D4F',
+          upColor: marketInfo?.colors.positive || '#00FF85', // Usa el color positivo
+          downColor: marketInfo?.colors.negative || '#FF4D4F', // Usa el color negativo (rojo)
           borderVisible: false,
           wickUpColor: marketInfo?.colors.positive || '#00FF85',
           wickDownColor: marketInfo?.colors.negative || '#FF4D4F',
@@ -207,9 +213,10 @@ const { refresh } = useIndices();
           close: item.close
         }));
       } else {
+        // Usamos item.value o item.close como fallback para gráficos de línea/área
         chartData = priceData.map(item => ({
           time: item.time,
-          value: item.value
+          value: item.value || item.close
         }));
       }
 
@@ -275,7 +282,7 @@ const { refresh } = useIndices();
         } else {
           chartData = priceData.map(item => ({
             time: item.time,
-            value: item.value
+            value: item.value || item.close
           }));
         }
 
@@ -316,39 +323,39 @@ const { refresh } = useIndices();
         leftOffset: 5,
         borderColor: 'rgba(255, 255, 255, 0.1)',
       },
-      handleScroll: {
-        mouseWheel: true,
-        pressedMouseMove: true,
-        horzTouchDrag: true,   // ✅ Permite arrastrar horizontalmente
-        vertTouchDrag: false,  // ❌ DESHABILITA arrastrar verticalmente
-      },
-      handleScale: {
-        axisPressedMouseMove: {
-          time: true,    // ✅ Permite zoom en eje X (tiempo)
-          price: false,  // ❌ DESHABILITA zoom en eje Y (precio)
-        },
-        mouseWheel: true,
-        pinch: true,
-      },
       rightPriceScale: {
         visible: true,
         borderColor: 'rgba(255, 255, 255, 0.1)',
         textColor: '#B0B0B0',
         scaleMargins: { top: 0.08, bottom: 0.08 },
       },
+      handleScroll: {
+        mouseWheel: true,
+        pressedMouseMove: true,
+        horzTouchDrag: true,
+        vertTouchDrag: false,
+      },
+      handleScale: {
+        axisPressedMouseMove: {
+          time: true,
+          price: false,
+        },
+        mouseWheel: true,
+        pinch: true,
+      },
       crosshair: {
         mode: 1,
         vertLine: {
           width: 1,
-          color: `rgba(255, 107, 53, 0.8)`, // IBEX Orange
+          color: intervalColors[selectedRange].lineColor, // Usa el color funcional del mercado
           style: 3,
-          labelBackgroundColor: marketInfo?.colors.primary || '#FF6B35',
+          labelBackgroundColor: intervalColors[selectedRange].lineColor,
         },
         horzLine: {
           width: 1,
-          color: `rgba(255, 107, 53, 0.8)`, // IBEX Orange
+          color: intervalColors[selectedRange].lineColor,
           style: 3,
-          labelBackgroundColor: marketInfo?.colors.primary || '#FF6B35',
+          labelBackgroundColor: intervalColors[selectedRange].lineColor,
         },
       },
     };
@@ -376,7 +383,7 @@ const { refresh } = useIndices();
         } else {
           chartData = priceData.map(item => ({
             time: item.time,
-            value: item.value
+            value: item.value || item.close
           }));
         }
 
@@ -407,7 +414,7 @@ const { refresh } = useIndices();
         {isLoading && (
           <div className="loading-container">
             <div className="loading-spinner"></div>
-            <span className="loading-text">🇪🇸 Loading {marketInfo?.name} data...</span>
+            <span className="loading-text">🇨🇳 Loading {marketInfo?.name} data...</span>
           </div>
         )}
         {hasError && (

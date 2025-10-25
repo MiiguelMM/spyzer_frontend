@@ -261,23 +261,7 @@ export default function Header({ onLogout }) {
                                 <i className="fas fa-chevron-right menu-arrow"></i>
                             </div>
 
-                            <div
-                                className="menu-item"
-                                onClick={() => handleMenuItemClick('settings')}
-                            >
-                                <i className="fas fa-cog"></i>
-                                Settings
-                                <i className="fas fa-chevron-right menu-arrow"></i>
-                            </div>
-
-                            <div
-                                className="menu-item"
-                                onClick={() => handleMenuItemClick('help')}
-                            >
-                                <i className="fas fa-question-circle"></i>
-                                Help
-                                <i className="fas fa-chevron-right menu-arrow"></i>
-                            </div>
+        
                         </div>
 
                         <div className="hamburger-footer">

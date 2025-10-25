@@ -129,9 +129,9 @@
 }
 
 .position-nombre {
-  color: #CCCCCC;
-  font-size: 13px;
-  font-weight: 400;
+  color: #888888; 
+  font-size: 10px; 
+  font-weight: 500;
 }
 
 .position-cantidad {
@@ -650,7 +650,7 @@
   }
 
   .position-nombre {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .value-amount {

@@ -172,13 +172,18 @@ const RankingSection1 = () => {
             const medalla = obtenerMedalla(posicion);
             const esUsuarioActual = usuario.id === currentUserId;
             const rentabilidadTotal = usuario.rentabilidadTotal || 0;
+            
+            // Delay más pronunciado para Top 10
+            const animationDelay = posicion <= 10 
+              ? `${index * 0.12}s`  // 120ms entre cada uno del Top 10
+              : `${1.2 + (index - 10) * 0.03}s`; // El resto aparece más rápido después
 
             return (
               <div 
                 key={usuario.id} 
                 className={`ranking-card ${esUsuarioActual ? 'current-user' : ''} ${posicion <= 10 ? 'top-ten' : ''}`}
                 style={{
-                  animationDelay: `${index * 0.05}s`
+                  animationDelay: animationDelay
                 }}
               >
                 {/* Posición */}
