@@ -244,11 +244,11 @@
   /* Asegurar que el contenedor principal del valor sea un flexbox para alinear el porcentaje y los dólares */
   display: flex;
   align-items: baseline;
-  gap: 4px;
+  gap: 2px;
 }
 
 .price-change-detail {
-  font-size: 0.7em; /* Reducir el tamaño para hacerlo sutil */
+  font-size: 0.6em; /* Reducir el tamaño para hacerlo sutil */
   font-weight: 500;
   opacity: 0.85; /* Añadir un poco de opacidad */
 }

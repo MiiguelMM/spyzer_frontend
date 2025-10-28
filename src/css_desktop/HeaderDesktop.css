@@ -1,0 +1,625 @@
+/* HeaderDesktop Component CSS - Vertical Sidebar */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* Container Principal - Vertical Sidebar */
+.header-desktop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 90vh;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-top-left-radius: 65px;
+  border-bottom-left-radius: 65px;
+  box-shadow: 
+    2px 0 10px rgba(0, 0, 0, 0.6),
+    inset -1px 0 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px) saturate(180%);
+  z-index: 100;
+  overflow: hidden;
+  margin-left: 7%;
+  margin-top: 5.45vh;
+}
+
+.header-desktop__container {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  padding: 2rem 0;
+  gap: 20px;
+}
+
+/* Logo Section */
+.header-desktop__logo-section {
+  padding: 0 2rem 6.95rem 2rem;
+  border-bottom: 1px solid #333333;
+}
+
+.header-desktop__logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  top: 4rem;
+  left: 1.55rem;
+
+}
+
+.header-desktop__logo:hover {
+  transform: scale(1.05);
+}
+
+.header-desktop__logo img {
+  width: 51px;
+  height: 51px;
+  object-fit: contain;
+}
+
+.header-desktop__name {
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 650;
+  font-size: 1.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* Navigation Section */
+.header-desktop__nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+}
+
+/* Scrollbar personalizado */
+.header-desktop__nav::-webkit-scrollbar {
+  width: 6px;
+}
+
+.header-desktop__nav::-webkit-scrollbar-track {
+  background: #1E1E1E;
+  border-radius: 3px;
+}
+
+.header-desktop__nav::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 3px;
+  transition: background 0.3s ease;
+}
+
+.header-desktop__nav::-webkit-scrollbar-thumb:hover {
+  background: #444444;
+}
+
+/* Navigation Items */
+.header-desktop__nav-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 1rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  color: #E0E0E0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.header-desktop__nav-item i {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.header-desktop__nav-item span {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Hover Effect */
+.header-desktop__nav-item:hover {
+  background-color: #252525;
+  border-color: #333333;
+  color: #FFFFFF;
+  transform: translateX(3px);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.8),
+    0 0 8px rgba(0, 191, 255, 0.3);
+}
+
+.header-desktop__nav-item:hover i {
+  color: #00BFFF;
+  transform: scale(1.1);
+}
+
+/* Active State */
+.header-desktop__nav-item.active {
+  background-color: #007ACC;
+  border-color: #007ACC;
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    0 0 12px rgba(0, 122, 204, 0.6);
+}
+
+.header-desktop__nav-item.active i {
+  color: #FFFFFF;
+}
+
+.header-desktop__nav-item.active:hover {
+  background-color: #0099FF;
+  border-color: #0099FF;
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.8),
+    0 0 15px rgba(0, 191, 255, 0.5);
+}
+
+/* Profile Section */
+.header-desktop__profile-section {
+  padding: 3rem 2rem 0 2rem;
+  border-top: 1px solid #333333;
+  position: relative;
+}
+
+.header-desktop__profile {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.header-desktop__profile-avatar {
+  width: 57px;
+  height: 57px;
+  border-radius: 50%;
+  background-color: #2D2D2D;
+  border: 2px solid #444444;
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  top: 8px;
+  
+}
+
+.header-desktop__profile:hover .header-desktop__profile-avatar {
+  background-color: #252525;
+  border-color: #007ACC;
+  transform: scale(1.08);
+  box-shadow: 
+    0 4px 15px rgba(0, 0, 0, 0.8),
+    0 0 12px rgba(0, 191, 255, 0.4);
+}
+
+.header-desktop__profile-initials {
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Profile Dropdown */
+.header-desktop__profile-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 100%;
+  margin-left: 12px;
+  margin-bottom: -2rem;
+  width: 320px;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-radius: 16px;
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.8),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(30px) saturate(180%);
+  opacity: 0;
+  transform: scale(0.95) translateY(10px);
+  animation: slideUpDropdown 0.3s ease-out forwards;
+  z-index: 10000;
+  overflow: hidden;
+}
+
+@keyframes slideUpDropdown {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Profile Dropdown Header */
+.profile-dropdown__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 1.5rem;
+  background: linear-gradient(135deg,
+    rgba(13, 13, 13, 0.9) 0%,
+    rgba(45, 45, 45, 0.8) 50%,
+    rgba(24, 24, 24, 0.9) 100%
+  );
+}
+
+.profile-dropdown__avatar-large {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: #2D2D2D;
+  border: 2px solid #444444;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  letter-spacing: 1px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 
+    0 2px 10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  flex-shrink: 0;
+}
+
+.profile-dropdown__user-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-dropdown__user-info h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FFFFFF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profile-dropdown__user-info span {
+  font-size: 13px;
+  color: #A0A0A0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+/* Divider */
+.profile-dropdown__divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #333333, transparent);
+  opacity: 0.5;
+}
+
+/* Profile Dropdown Menu */
+.profile-dropdown__menu {
+  padding: 0.5rem 0;
+}
+
+.profile-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 1rem 1.5rem;
+  color: #E0E0E0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-dropdown__item i {
+  width: 20px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.profile-dropdown__item:hover {
+  background-color: #252525;
+  color: #FFFFFF;
+  box-shadow: 
+    inset 0 0 0 1px rgba(0, 191, 255, 0.2),
+    0 0 8px rgba(0, 191, 255, 0.15);
+}
+
+/* Logout Item */
+.logout-item {
+  color: #FF6B6B !important;
+}
+
+.logout-item:hover {
+  background-color: rgba(255, 107, 107, 0.1) !important;
+  color: #FF8A8A !important;
+  box-shadow: 
+    inset 0 0 0 1px rgba(255, 107, 107, 0.3),
+    0 0 8px rgba(255, 107, 107, 0.2) !important;
+}
+
+/* Profile Dropdown Footer */
+.profile-dropdown__footer {
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+.profile-dropdown__social {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 0.75rem;
+}
+
+.profile-dropdown__social a {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #2D2D2D;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  border: 1px solid #444444;
+  padding: 6px;
+}
+
+.profile-dropdown__social a img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0.8);
+  transition: all 0.3s ease;
+}
+
+.profile-dropdown__social a:hover {
+  background-color: #252525;
+  border-color: #007ACC;
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.8),
+    0 0 8px rgba(0, 191, 255, 0.3);
+}
+
+.profile-dropdown__social a:hover img {
+  filter: brightness(1.2);
+}
+
+.profile-dropdown__copyright {
+  margin: 0;
+  font-size: 11px;
+  color: #A0A0A0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Responsive Adjustments */
+/* Responsive Adjustments - Desktop Only */
+
+/* Extra Large Screens (1920px+) */
+@media (min-width: 1920px) {
+  .header-desktop {
+    width: 300px;
+    margin-left: 8%;
+  }
+  
+  .header-desktop__logo img {
+    width: 55px;
+    height: 55px;
+  }
+  
+  .header-desktop__name {
+    font-size: 1.85rem;
+  }
+  
+  .header-desktop__nav-item {
+    padding: 1.1rem 1.6rem;
+    font-size: 1rem;
+  }
+  
+  .header-desktop__profile-avatar {
+    width: 62px;
+    height: 62px;
+  }
+  
+  .header-desktop__profile-initials {
+    font-size: 24px;
+  }
+  
+  .header-desktop__profile-dropdown {
+    width: 340px;
+  }
+}
+
+/* Large Screens (1440px - 1919px) */
+@media (min-width: 1440px) and (max-width: 1919px) {
+  .header-desktop {
+    width: 280px;
+    margin-left: 7%;
+  }
+}
+
+/* Medium-Large Screens (1280px - 1439px) */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .header-desktop {
+    width: 260px;
+    margin-left: 6%;
+  }
+  
+  .header-desktop__logo {
+    left: 1.2rem;
+  }
+  
+  .header-desktop__logo img {
+    width: 48px;
+    height: 48px;
+    position: relative;
+    bottom:  1rem;
+    
+  }
+  
+  .header-desktop__name {
+    font-size: 1.6rem;
+    position: relative;
+    bottom:  1rem;
+  }
+  
+  .header-desktop__logo-section {
+    padding: 0 1.5rem 5.5rem 1.5rem;
+  }
+  
+  .header-desktop__nav {
+    padding: 1.5rem 1.2rem;
+    gap: 6px;
+  }
+  
+  .header-desktop__nav-item {
+    padding: 0.95rem 1.3rem;
+    font-size: 0.92rem;
+    gap: 14px;
+  }
+  
+  .header-desktop__nav-item i {
+    font-size: 1.15rem;
+  }
+  
+  .header-desktop__profile-section {
+    padding: 2.5rem 1.5rem 0 1.5rem;
+  }
+  
+  .header-desktop__profile-avatar {
+    width: 54px;
+    height: 54px;
+  }
+  
+  .header-desktop__profile-initials {
+    font-size: 20px;
+  }
+  
+  .header-desktop__profile-dropdown {
+    width: 300px;
+  }
+}
+
+/* Medium Screens (1024px - 1279px) */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .header-desktop {
+    width: 240px;
+    margin-left: 5%;
+    border-top-left-radius: 55px;
+    border-bottom-left-radius: 55px;
+  }
+  
+  .header-desktop__logo {
+    left: 1rem;
+    top: 3.5rem;
+  }
+  
+  .header-desktop__logo img {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .header-desktop__name {
+    font-size: 1.55rem;
+  }
+  
+  .header-desktop__logo-section {
+    padding: 0 1.2rem 6rem 1.2rem;
+  }
+  
+  .header-desktop__nav {
+    padding: 1.5rem 1rem;
+    gap: 5px;
+  }
+  
+  .header-desktop__nav-item {
+    padding: 0.85rem 1.1rem;
+    font-size: 0.88rem;
+    gap: 12px;
+    border-radius: 10px;
+  }
+  
+  .header-desktop__nav-item i {
+    font-size: 1.1rem;
+    width: 22px;
+  }
+  
+  .header-desktop__profile-section {
+    padding: 2rem 1.2rem 0 1.2rem;
+  }
+  
+  .header-desktop__profile-avatar {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .header-desktop__profile-initials {
+    font-size: 19px;
+  }
+  
+  .header-desktop__profile-dropdown {
+    width: 280px;
+    border-radius: 14px;
+  }
+  
+  .profile-dropdown__header {
+    padding: 1.2rem;
+    gap: 12px;
+  }
+  
+  .profile-dropdown__avatar-large {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+  }
+  
+  .profile-dropdown__user-info h3 {
+    font-size: 15px;
+  }
+  
+  .profile-dropdown__user-info span {
+    font-size: 12px;
+  }
+  
+  .profile-dropdown__item {
+    padding: 0.85rem 1.2rem;
+    font-size: 0.9rem;
+    gap: 10px;
+  }
+  
+  .profile-dropdown__social a {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+/* Hide on tablets and mobile */
+@media (max-width: 1023px) {
+  .header-desktop {
+    display: none;
+  }
+}

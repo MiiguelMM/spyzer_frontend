@@ -36,11 +36,51 @@ export default function FxiMetricsCards() {
     );
   }
 
+  // 🔧 SOLUCIÓN: Obtener el cierre del día anterior correctamente
+  const getYesterdayClose = () => {
+    if (!historicalData || historicalData.length === 0) return null;
+
+    // Obtener la fecha de hoy (sin hora)
+    const todayDate = new Date();
+    todayDate.setHours(0, 0, 0, 0);
+    const todayTimestamp = Math.floor(todayDate.getTime() / 1000);
+
+    // Encontrar todos los puntos del día anterior
+    const yesterdayPoints = [];
+    for (let i = historicalData.length - 1; i >= 0; i--) {
+      const pointDate = new Date(historicalData[i].time * 1000);
+      pointDate.setHours(0, 0, 0, 0);
+      const pointTimestamp = Math.floor(pointDate.getTime() / 1000);
+
+      // Si el punto es de ayer, agregarlo
+      if (pointTimestamp < todayTimestamp) {
+        yesterdayPoints.push(historicalData[i]);
+      }
+      
+      // Si encontramos puntos de ayer y luego pasamos a días anteriores, parar
+      if (yesterdayPoints.length > 0 && pointTimestamp < todayTimestamp - 86400) {
+        break;
+      }
+    }
+
+    // Retornar el último punto de ayer (el cierre)
+    return yesterdayPoints.length > 0 ? yesterdayPoints[0] : historicalData[historicalData.length - 2];
+  };
+
   const today = historicalData[historicalData.length - 1];
-  const yesterday = historicalData[historicalData.length - 2];
+  const yesterday = getYesterdayClose();
+
+  if (!yesterday) {
+    return (
+      <div className="error-container">
+        <div className="error-icon">⚠️</div>
+        Not enough historical data
+      </div>
+    );
+  }
   
   // Usar datos calculados del contexto
-  const priceChange = dailyChange || (today.close - yesterday.close);
+  const priceChange = dailyChange || (currentPrice || today.close) - yesterday.close;
   const percentageChange = percentChange || ((priceChange / yesterday.close) * 100);
   const isPositive = priceChange >= 0;
 
@@ -56,7 +96,7 @@ export default function FxiMetricsCards() {
           <div className="metric-row">
             <span className="metric-label">Current:</span>
             <span className="metric-value">
-              ${currentPrice?.toFixed(2) || today.close.toFixed(2)}
+              ${(currentPrice || today.close).toFixed(2)}
             </span>
           </div>
         </div>

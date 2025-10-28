@@ -92,23 +92,63 @@ export default function FxiRangeSwitcherChart() {
     if (range.value === 'todos') {
       filteredData = [...historicalData];
     } else {
-      // Calcular la fecha de inicio basada en días reales
+      // Determinar si usar días de mercado o días calendario
+      let useMarketDays = false;
+      let marketDaysToShow;
       let daysToSubtract;
+      
       switch (range.value) {
-        case '3dias': daysToSubtract = 3; break;
-        case '1semana': daysToSubtract = 7; break;
-        case '1mes': daysToSubtract = 30; break;
-        case '3meses': daysToSubtract = 90; break;
-        case '6meses': daysToSubtract = 180; break;
-        case '1year': daysToSubtract = 365; break;
-        default: daysToSubtract = 365;
+        case '3dias':
+          useMarketDays = true;
+          marketDaysToShow = 3; // 3 días de trading
+          break;
+        case '1semana':
+          useMarketDays = true;
+          marketDaysToShow = 5; // 1 semana laboral = 5 días de mercado
+          break;
+        case '1mes':
+          daysToSubtract = 30;
+          break;
+        case '3meses':
+          daysToSubtract = 90;
+          break;
+        case '6meses':
+          daysToSubtract = 180;
+          break;
+        case '1year':
+          daysToSubtract = 365;
+          break;
+        default:
+          daysToSubtract = 365;
       }
 
-      // Timestamp de inicio (fecha actual - días)
-      const startTimestamp = nowTimestamp - (daysToSubtract * 24 * 60 * 60);
-      
-      // Filtrar por fecha real
-      filteredData = historicalData.filter(item => item.time >= startTimestamp);
+      if (useMarketDays) {
+        // Filtrar por días de mercado únicos (para rangos cortos)
+        const uniqueDays = [];
+        const seenDates = new Set();
+        
+        // Recorrer desde el final hacia atrás para encontrar N días únicos
+        for (let i = historicalData.length - 1; i >= 0 && uniqueDays.length < marketDaysToShow; i--) {
+          const dateStr = new Date(historicalData[i].time * 1000).toDateString();
+          
+          if (!seenDates.has(dateStr)) {
+            seenDates.add(dateStr);
+            uniqueDays.unshift(dateStr); // Añadir al principio para mantener orden
+          }
+        }
+        
+        // Filtrar todos los puntos que pertenezcan a esos días de mercado
+        filteredData = historicalData.filter(item => {
+          const itemDate = new Date(item.time * 1000).toDateString();
+          return uniqueDays.includes(itemDate);
+        });
+      } else {
+        // Timestamp de inicio (fecha actual - días calendario)
+        const startTimestamp = nowTimestamp - (daysToSubtract * 24 * 60 * 60);
+        
+        // Filtrar por fecha real - obtiene TODOS los puntos en ese rango
+        filteredData = historicalData.filter(item => item.time >= startTimestamp);
+      }
     }
 
     // Agregar precio actual si existe
