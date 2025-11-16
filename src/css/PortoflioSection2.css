@@ -19,12 +19,12 @@
 }
 
 /* Header */
-.section2-header {
+.portfolio-section2 .section2-header {
   margin-bottom: 1rem;
   text-align: center;
 }
 
-.section2-title {
+.portfolio-section2 .section2-title {
   font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 1.3rem;
   font-weight: 600;
@@ -33,7 +33,7 @@
   letter-spacing: -0.3px;
 }
 
-.section2-subtitle {
+.portfolio-section2 .section2-subtitle {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -43,7 +43,7 @@
 }
 
 /* Chart Container */
-.chart-container {
+.portfolio-section2 .chart-container {
   width: 100%;
   height: auto;
   margin: 1rem 0;
@@ -52,7 +52,7 @@
 }
 
 /* Custom Tooltip */
-.custom-tooltip {
+.portfolio-section2 .custom-tooltip {
   background-color: rgba(24, 24, 24, 0.95);
   border: 1px solid #333333;
   border-radius: 8px;
@@ -61,7 +61,7 @@
   backdrop-filter: blur(10px);
 }
 
-.tooltip-symbol {
+.portfolio-section2 .tooltip-symbol {
   font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 700;
@@ -70,7 +70,7 @@
   letter-spacing: 0.5px;
 }
 
-.tooltip-value {
+.portfolio-section2 .tooltip-value {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 600;
@@ -78,7 +78,7 @@
   margin: 0 0 0.2rem 0;
 }
 
-.tooltip-percentage {
+.portfolio-section2 .tooltip-percentage {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 12px;
   font-weight: 400;
@@ -87,7 +87,7 @@
 }
 
 /* Legend Wrapper */
-.legend-wrapper {
+.portfolio-section2 .legend-wrapper {
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -95,7 +95,7 @@
 }
 
 /* Legend */
-.chart-legend {
+.portfolio-section2 .chart-legend {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   gap: 8px;
@@ -107,26 +107,26 @@
 }
 
 /* Scrollbar para la leyenda */
-.chart-legend::-webkit-scrollbar {
+.portfolio-section2 .chart-legend::-webkit-scrollbar {
   width: 6px;
 }
 
-.chart-legend::-webkit-scrollbar-track {
+.portfolio-section2 .chart-legend::-webkit-scrollbar-track {
   background: #1E1E1E;
   border-radius: 3px;
 }
 
-.chart-legend::-webkit-scrollbar-thumb {
+.portfolio-section2 .chart-legend::-webkit-scrollbar-thumb {
   background: #333333;
   border-radius: 3px;
   transition: background 0.3s ease;
 }
 
-.chart-legend::-webkit-scrollbar-thumb:hover {
+.portfolio-section2 .chart-legend::-webkit-scrollbar-thumb:hover {
   background: #444444;
 }
 
-.legend-item {
+.portfolio-section2 .legend-item {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -138,14 +138,14 @@
   cursor: pointer;
 }
 
-.legend-item:hover {
+.portfolio-section2 .legend-item:hover {
   background-color: #252525;
   border-color: #333333;
   transform: translateY(-2px);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-.legend-color {
+.portfolio-section2 .legend-color {
   width: 12px;
   height: 12px;
   border-radius: 3px;
@@ -153,7 +153,7 @@
   box-shadow: 0 0 6px rgba(0, 191, 255, 0.3);
 }
 
-.legend-label {
+.portfolio-section2 .legend-label {
   font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 12px;
   font-weight: 600;
@@ -162,7 +162,7 @@
   flex: 1;
 }
 
-.legend-percentage {
+.portfolio-section2 .legend-percentage {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 11px;
   font-weight: 500;
@@ -170,7 +170,7 @@
 }
 
 /* Show More Button - Siguiendo Spyzer Design System */
-.show-more-button {
+.portfolio-section2 .show-more-button {
   width: 100%;
   background: linear-gradient(135deg, #007ACC 0%, #005A9E 100%);
   color: #FFFFFF;
@@ -190,7 +190,7 @@
   margin: 0 0.5rem;
 }
 
-.show-more-button:hover {
+.portfolio-section2 .show-more-button:hover {
   background: linear-gradient(135deg, #00BFFF 0%, #007ACC 100%);
   transform: translateY(-2px);
   box-shadow: 
@@ -199,13 +199,13 @@
   border-color: #444444;
 }
 
-.show-more-button:active {
+.portfolio-section2 .show-more-button:active {
   transform: translateY(0);
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 /* Loading State */
-.section2-loading {
+.portfolio-section2 .section2-loading {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -214,16 +214,16 @@
   padding: 3rem 1rem;
 }
 
-.loading-spinner {
+.portfolio-section2 .loading-spinner {
   width: 40px;
   height: 40px;
   border: 3px solid rgba(0, 191, 255, 0.3);
   border-top: 3px solid #00BFFF;
   border-radius: 50%;
-  animation: spin 1s linear infinite;
+  animation: portfolio-section2-spin 1s linear infinite;
 }
 
-.loading-text {
+.portfolio-section2 .loading-text {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -231,18 +231,19 @@
   letter-spacing: 0.3px;
 }
 
-@keyframes spin {
+/* Animación única para este componente */
+@keyframes portfolio-section2-spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
 
 /* Error State */
-.section2-error {
+.portfolio-section2 .section2-error {
   padding: 2rem 1rem;
   text-align: center;
 }
 
-.error-text {
+.portfolio-section2 .error-text {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 500;
@@ -251,12 +252,12 @@
 }
 
 /* Empty State */
-.section2-empty {
+.portfolio-section2 .section2-empty {
   padding: 3rem 1rem;
   text-align: center;
 }
 
-.empty-text {
+.portfolio-section2 .empty-text {
   font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -264,7 +265,7 @@
   margin: 0 0 0.5rem 0;
 }
 
-.empty-subtext {
+.portfolio-section2 .empty-subtext {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -275,25 +276,25 @@
 /* ==================== RESPONSIVE - MOBILE FIRST ==================== */
 
 /* Mobile Base (Por defecto - sin media query) */
-.section2-title {
-  font-size: 1.2rem;
+.portfolio-section2 .section2-title {
+  font-size: 1.52rem;
 }
 
-.section2-subtitle {
+.portfolio-section2 .section2-subtitle {
   font-size: 12px;
 }
 
-.chart-legend {
+.portfolio-section2 .chart-legend {
   grid-template-columns: 1fr;
   gap: 8px;
 }
 
-.legend-item {
+.portfolio-section2 .legend-item {
   padding: 8px 12px;
 }
 
-.show-more-button {
-  padding: 10px 14px;
+.portfolio-section2 .show-more-button {
+  width: 95%;
   font-size: 11px;
 }
 
@@ -303,19 +304,19 @@
     padding: 1.5rem;
   }
 
-  .section2-title {
+  .portfolio-section2 .section2-title {
     font-size: 1.25rem;
   }
 
-  .section2-subtitle {
+  .portfolio-section2 .section2-subtitle {
     font-size: 13px;
   }
 
-  .chart-legend {
+  .portfolio-section2 .chart-legend {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .show-more-button {
+  .portfolio-section2 .show-more-button {
     padding: 12px 16px;
     font-size: 12px;
   }
@@ -329,53 +330,84 @@
     padding: 2rem 1.5rem;
   }
 
-  .section2-title {
+  .portfolio-section2 .section2-title {
     font-size: 1.3rem;
   }
 
-  .section2-subtitle {
+  .portfolio-section2 .section2-subtitle {
     font-size: 14px;
   }
 
-  .chart-legend {
+  .portfolio-section2 .chart-legend {
     grid-template-columns: repeat(3, 1fr);
     gap: 12px;
   }
 
-  .legend-item {
+  .portfolio-section2 .legend-item {
     padding: 10px 14px;
   }
 
-  .show-more-button {
+  .portfolio-section2 .show-more-button {
     padding: 12px 16px;
     font-size: 12px;
   }
 
-  .tooltip-symbol,
-  .tooltip-value {
+  .portfolio-section2 .tooltip-symbol,
+  .portfolio-section2 .tooltip-value {
     font-size: 15px;
   }
 
-  .tooltip-percentage {
+  .portfolio-section2 .tooltip-percentage {
     font-size: 13px;
   }
 }
 
+
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
   .portfolio-section2 {
-    padding: 2rem;
+    padding: 1.5rem;
+    background-color: #1E1E1E;
+    width: 82%;
+    height: 90%; 
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+  }
+  .portfolio-section2 .show-more-button {
+  width: 98.5%;
+  font-size: 11px;
+}
+  .portfolio-section2 .section2-header {
+    flex-shrink: 0; /* Header mantiene su tamaño fijo */
+    margin-bottom: 1.5rem;
+  }
+   
+  .portfolio-section2 .section2-title {
+    font-size: 2rem;
   }
 
-  .chart-legend {
+  .portfolio-section2 .section2-subtitle {
+    font-size: 15px;
+  }
+  
+  .chart-container {
+    flex: 1; /* Ocupa todo el espacio restante */
+    min-height: 0; /* Importante para que el flex funcione */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .portfolio-section2 .chart-legend {
     grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   }
 
-  .legend-label {
+  .portfolio-section2 .legend-label {
     font-size: 13px;
   }
 
-  .legend-percentage {
+  .portfolio-section2 .legend-percentage {
     font-size: 12px;
   }
 }
@@ -387,15 +419,15 @@
     padding: 2rem 1.5rem;
   }
 
-  .section2-title {
-    font-size: 1.4rem;
+  .portfolio-section2 .section2-title {
+    font-size: 2.1rem;
   }
 
-  .section2-subtitle {
-    font-size: 15px;
+  .portfolio-section2 .section2-subtitle {
+    font-size: 17px;
   }
 
-  .chart-legend {
+  .portfolio-section2 .chart-legend {
     gap: 12px;
   }
 }
@@ -406,11 +438,11 @@
     padding: 2.5rem 2rem;
   }
 
-  .chart-legend {
+  .portfolio-section2 .chart-legend {
     gap: 16px;
   }
 
-  .legend-item {
+  .portfolio-section2 .legend-item {
     padding: 12px 16px;
   }
 }

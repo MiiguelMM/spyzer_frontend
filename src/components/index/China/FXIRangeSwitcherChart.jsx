@@ -2,6 +2,7 @@
 import { createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightweight-charts';
 import React, { useEffect, useRef, useState } from 'react';
 import { useFXI, useIndices } from '../../context/IndicesProvider';
+import { useIsDesktop } from '../../../hooks/useIsDesktop';
 import '../../../css/RangeSwitcherChart.css';
 
 export default function FxiRangeSwitcherChart() {
@@ -10,6 +11,9 @@ export default function FxiRangeSwitcherChart() {
   const seriesRef = useRef(null);
   const [selectedRange, setSelectedRange] = useState('1year');
   const [selectedChartType, setSelectedChartType] = useState('area');
+  
+  // 👇 NUEVO: Detectar si es desktop
+  const isDesktop = useIsDesktop(769);
 
   // Obtener datos del contexto centralizado para FXI China
   const {
@@ -345,7 +349,7 @@ export default function FxiRangeSwitcherChart() {
     const chartOptions = {
       layout: {
         textColor: '#B0B0B0',
-        background: { type: 'solid', color: '#181818' },
+        background: { type: 'solid', color: isDesktop ? '#1E1E1E' : '#181818' }, // 👈 Dinámico
         fontSize: 11,
         fontFamily: 'Satoshi, Arial, sans-serif',
       },
@@ -439,7 +443,7 @@ export default function FxiRangeSwitcherChart() {
         seriesRef.current = null;
       }
     };
-  }, [historicalData]);
+  }, [historicalData, isDesktop]); // 👈 Agregar isDesktop como dependencia
 
   // Update when range changes
   useEffect(() => {

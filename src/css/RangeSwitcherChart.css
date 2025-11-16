@@ -39,7 +39,7 @@
   font-family: 'Satoshi', Arial, sans-serif;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: #1E1E1E;
+  background-color: #181818;
   color: #CCCCCC;
   height: 40px;
   width: 29%; 
@@ -173,7 +173,7 @@
   font-family: 'Satoshi', Arial, sans-serif;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background-color: #1E1E1E;
+  background-color: #181818;
   color: #CCCCCC;
   letter-spacing: 0.5px;
   text-transform: uppercase;
@@ -277,43 +277,6 @@
   border: 1px solid #444444;
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-  .chart-type-switcher {
-    height: 55px;
-    gap: 8px;
-  }
-  .chart-container {
-    touch-action: pan-x !important;
-    user-select: none !important;
-  }
-  
-  .chart-container canvas {
-    touch-action: pan-x !important;
-  }
-  
-  .chart-type-button {
-    min-width: 50px;
-    height: 35px;
-    padding: 6px 12px;
-  }
-  
-  .chart-type-label {
-    font-size: 10px;
-  }
-  
-  .range-switcher-header {
-    min-height: 55px;
-    gap: 8px;
-    padding: 0 15px;
-  }
-  
-  .range-button {
-    padding: 6px 12px;
-    font-size: 11px;
-  }
-}
-
 /* Ocultar posibles marcas de agua o logos de TradingView */
 .tv-lightweight-charts [class*="watermark"],
 .tv-lightweight-charts [class*="logo"],
@@ -358,4 +321,254 @@
 .tv-lightweight-charts canvas + div,
 .tv-lightweight-charts canvas + span {
   display: none !important;
+}
+
+/* ===== DESKTOP ADJUSTMENTS ===== */
+@media (min-width: 769px) {
+ .range-switcher-chart {
+  width: 70%;
+  height: 60vh;
+  border-radius: 0 0 20px 20px;
+  background-color: #1E1E1E !important;
+
+  /* Sombras combinadas: superior + inferior */
+  box-shadow:
+    0 4px 12px 0 rgba(0, 0, 0, 0.3),
+    0 1px 4px 0 rgba(0, 0, 0, 0.15),
+    0 8px 24px 0 rgba(0, 0, 0, 0.2);
+   
+
+}
+button.active,.range-button.active {
+    background-color: #007ACC;
+    color: #FFFFFF;
+    box-shadow: 0 0 8px rgba(0, 122, 204, 0.6);
+    transform: translateY(-2px);
+}
+
+
+
+  .chart-type-switcher {
+    height: 70px;
+    gap: 16px;
+    border-radius: 0 0 20px 20px;
+
+    background-color: #1E1E1E;
+  }
+
+  .chart-type-button {
+    padding: 10px 24px;
+    border-radius: 14px;
+    height: 50px;
+    width: auto;
+    min-width: 140px;
+    gap: 6px;
+    background-color: #1E1E1E;
+  }
+
+  .chart-type-label {
+    font-size: 14px;
+    letter-spacing: 1px;
+  }
+
+  .range-switcher-header {
+    min-height: 70px;
+    gap: 14px;
+    padding: 0 30px;
+    border-radius: 20px 20px 0 0;
+    background-color: #1E1E1E;
+  }
+
+  .range-button {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 13px;
+    letter-spacing: 0.6px;
+    background-color: #1E1E1E;
+  }
+
+  .loading-container,
+  .error-container {
+    font-size: 16px;
+    padding: 20px 32px;
+    border-radius: 8px;
+  }
+
+  .chart-container {
+    background-color: #1E1E1E;
+  }
+
+  .loading-spinner {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .range-switcher-chart {
+    width: 85%;
+    height: 53vh;
+    background-color: #1E1E1E !important;
+    
+  }
+
+  .chart-type-switcher {
+    height: 80px;
+    gap: 20px;
+  
+    background-color: #1E1E1E;
+  }
+  
+  .chart-type-button {
+    padding: 6px 24px;
+    border-radius: 16px;
+    height: 48px;
+    min-width: 160px;
+    gap: 8px;
+    background-color: #1E1E1E;
+  }
+
+  .chart-type-button:hover {
+    transform: translateY(-3px);
+  }
+
+  .chart-type-label {
+    font-size: 15px;
+    letter-spacing: 1.1px;
+  }
+
+  .range-switcher-header {
+    min-height: 60px;
+    gap: 16px;
+    padding: 0 40px;
+    background-color: #1E1E1E;
+    margin-top: 10px;
+  }
+
+  .range-button {
+    padding: 10px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    letter-spacing: 0.7px;
+    background-color: #1E1E1E;
+  }
+
+  .range-button:hover {
+    transform: translateY(-2px);
+  }
+
+  .loading-container,
+  .error-container {
+    font-size: 17px;
+    padding: 22px 36px;
+    border-radius: 10px;
+  }
+
+  .chart-container {
+    background-color: #1E1E1E;
+  }
+
+  .loading-spinner {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .range-switcher-chart {
+    width: 85%;
+    height: 54.5vh;
+    background-color: #1E1E1E !important;
+    
+  }
+
+  .chart-type-switcher {
+    height: 80px;
+    gap: 24px;
+    
+    background-color: #1E1E1E;
+  }
+
+  .chart-type-button {
+    padding: 12px 38px;
+    border-radius: 18px;
+    height: 48px;
+    min-width: 165px;
+    gap: 10px;
+    background-color: #1E1E1E;
+  }
+
+  .chart-type-label {
+    font-size: 16px;
+    letter-spacing: 1.2px;
+  }
+
+  .range-switcher-header {
+    min-height: 53px;
+    gap: 20px;
+    
+    background-color: #1E1E1E;
+  }
+
+  .range-button {
+    padding: 9px 23px;
+    border-radius: 14px;
+    font-size: 14px;
+    letter-spacing: 0.8px;
+    background-color: #1E1E1E;
+  }
+
+  .loading-container,
+  .error-container {
+    font-size: 18px;
+
+    border-radius: 12px;
+  }
+
+  .chart-container {
+    background-color: #1E1E1E;
+  }
+
+  .loading-spinner {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* ===== RESPONSIVE DESIGN - MOBILE ===== */
+@media (max-width: 768px) {
+  .chart-type-switcher {
+    height: 55px;
+    gap: 8px;
+  }
+  
+  .chart-container {
+    touch-action: pan-x !important;
+    user-select: none !important;
+  }
+  
+  .chart-container canvas {
+    touch-action: pan-x !important;
+  }
+  
+  .chart-type-button {
+    min-width: 50px;
+    height: 35px;
+    padding: 6px 12px;
+  }
+  
+  .chart-type-label {
+    font-size: 10px;
+  }
+  
+  .range-switcher-header {
+    min-height: 55px;
+    gap: 8px;
+    padding: 0 15px;
+  }
+  
+  .range-button {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
 }

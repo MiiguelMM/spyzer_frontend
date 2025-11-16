@@ -9,6 +9,7 @@ export default function PortfolioSection2() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showAll, setShowAll] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024); // AÑADIR ESTO
 
   // Colores para el pie chart (siguiendo el design system)
   const COLORS = [
@@ -23,6 +24,16 @@ export default function PortfolioSection2() {
     '#95E1D3', // Verde agua
     '#F38181', // Rosa
   ];
+
+  // AÑADIR ESTE useEffect para detectar cambios de tamaño
+  useEffect(() => {
+    const handleResize = () => {
+      setIsDesktop(window.innerWidth >= 1024);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     const loadPortfolioData = async () => {
@@ -122,7 +133,7 @@ export default function PortfolioSection2() {
               setShowAll(!showAll);
             }}
           >
-            {showAll ? 'Ver menos' : `Ver más `}
+            {showAll ? 'Show Less' : `Show More `}
           </button>
         )}
       </div>
@@ -178,15 +189,16 @@ export default function PortfolioSection2() {
       </div>
       
       <div className="chart-container">
-        <ResponsiveContainer width="100%" height={500}>
+        {/* CAMBIAR AQUÍ - usar height condicional */}
+        <ResponsiveContainer width="100%" height={isDesktop ? '100%' : 550}>
           <PieChart>
             <Pie
               data={chartData}
               cx="50%"
-              cy="50%"
+              cy={isDesktop ? "43%" : "50%"}
               labelLine={false}
-              outerRadius={100}
-              innerRadius={60}
+              outerRadius={isDesktop ? 150 : 100}
+              innerRadius={isDesktop ? 100 : 60}
               fill="#8884d8"
               dataKey="value"
               animationBegin={0}

@@ -6,9 +6,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  /* Fondo anterior comentado */
-  /* background: #f3f8fc; */
-  /* Nuevo fondo modo oscuro */
   background-color: #181818;
   border-radius: 16px 16px 0 0;
   width: 90%;
@@ -17,6 +14,7 @@
   overflow: hidden;
   border: 1px solid #333333;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  border-bottom: 0;
 }
 
 .chart-header-content {
@@ -29,14 +27,8 @@
   margin: 0;
   padding: 0;
   font-size: 21px;
-  font-weight: 700; /* Peso para títulos principales */
+  font-weight: 700;
   font-family: 'Satoshi', Arial, sans-serif;
-  /* Gradiente anterior comentado */
-  /* background: #4293d4;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent; */
-  /* Nuevo color para títulos principales */
   color: #FFFFFF;
   letter-spacing: 0.8px;
   margin-top: 6px;
@@ -44,17 +36,87 @@
 
 .chart-header-subtitle {
   font-size: 13px;
-  /* Color anterior comentado */
-  /* color: #28c1ed; */
-  /* Nuevo color para textos secundarios */
   color: #B0B0B0;
   font-family: 'Satoshi', Arial, sans-serif;
-  font-weight: 500; /* Peso para textos secundarios */
+  font-weight: 500;
   letter-spacing: 0.5px;
   margin-top: 4px;
 }
 
-/* Responsive adjustments */
+/* Desktop adjustments */
+@media (min-width: 769px) {
+ .chart-header {
+    margin-top: 2%;
+    width: 85%;
+    height: 100px;
+    
+  
+    border-radius: 20px 20px 0 0;
+    
+    background-color: #1E1E1E;
+    
+    box-shadow: 
+        0 -4px 12px 0 rgba(0, 0, 0, 0.25),
+        0 -1px 4px 0 rgba(0, 0, 0, 0.15),
+        0 -8px 24px 0 rgba(0, 0, 0, 0.2);
+     
+  
+}
+  
+  .chart-header-title {
+    font-size: 28px;
+    letter-spacing: 1px;
+    margin-top: 8px;
+  }
+  
+  .chart-header-subtitle {
+    font-size: 15px;
+    letter-spacing: 0.6px;
+    margin-top: 6px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .chart-header {
+    width: 85%;
+    height: 130px;
+  
+    background-color: #1E1E1E;
+  
+    
+  }
+  
+  .chart-header-title {
+    font-size: 31.5px;
+    letter-spacing: 1.2px;
+  }
+  
+  .chart-header-subtitle {
+    font-size: 16px;
+    letter-spacing: 0.7px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .chart-header {
+    width: 85%;
+    height: 135px;
+    background-color: #1E1E1E;
+    
+  }
+  
+  .chart-header-title {
+    font-size: 33px;
+    letter-spacing: 1.4px;
+  }
+  
+  .chart-header-subtitle {
+    font-size: 16px;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* Responsive adjustments - Mobile */
 @media (max-width: 768px) {
   .chart-header {
     height: 13%;

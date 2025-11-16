@@ -1,23 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react'
 import '../../css_desktop/IndexDesktop.css'
-import RangeSwitcherChart from '../index/Sp500/RangeSwitcherChart'
-import ChartHeader from '../index/Sp500/ChartHeader'
-import MetricsCards from '../index/Sp500/MetricsCards'
-import NasdaqChartHeader from '../index/Nasdaq/NasdaqChartHeader'
-import NasdaqRangeSwitcherChart from '../index/Nasdaq/NasdaqRangeSwitcherChart'
-import NasdaqMetricsCards from '../index/Nasdaq/NasdaqMetricsCards'
-import DaxChartHeader from '../index/Dax/DaxChartHeader'
-import DaxRangeSwitcherChart from '../index/Dax/DaxRangeSwitcherChart'
-import DaxMetricsCards from '../index/Dax/DaxMetricCards'
-import FxiChartHeader from '../index/China/FXIChartHeader'
-import FxiRangeSwitcherChart from '../index/China/FXIRangeSwitcherChart'
-import FxiMetricsCards from '../index/China/FXIMetricCards'
+import PortfolioSection1 from '../MyPortofolio/PortfolioSection1'
+import PortfolioSection2 from '../MyPortofolio/PortfolioSection2'
 
-export default function Desktop() {
+
+export default function PortfolioDesktop() {
   const [currentPage, setCurrentPage] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
   const containerRef = useRef(null)
-  const totalPages = 4
+  const totalPages = 2
 
   // Manejar el scroll con wheel
   useEffect(() => {
@@ -73,32 +64,14 @@ export default function Desktop() {
           transform: `translateY(-${currentPage * 100}%)`,
         }}
       >
-        {/* Página 1: S&P 500 */}
+        {/* Página 1: Portfolio Section 1 */}
         <div className="desktop-component__page">
-          <ChartHeader />
-          <RangeSwitcherChart />
-          <MetricsCards />
+          <PortfolioSection1/>
         </div>
 
-        {/* Página 2: NASDAQ */}
+        {/* Página 2: Portfolio Section 2 */}
         <div className="desktop-component__page">
-          <NasdaqChartHeader/>
-          <NasdaqRangeSwitcherChart/>
-          <NasdaqMetricsCards/>
-        </div>
-
-        {/* Página 3: DAX */}
-        <div className="desktop-component__page">
-          <DaxChartHeader/>
-          <DaxRangeSwitcherChart/>
-          <DaxMetricsCards/>
-        </div>
-
-        {/* Página 4: FXI China */}
-        <div className="desktop-component__page">
-          <FxiChartHeader/>
-          <FxiRangeSwitcherChart/>
-          <FxiMetricsCards/>
+          <PortfolioSection2/>
         </div>
       </div>
 
