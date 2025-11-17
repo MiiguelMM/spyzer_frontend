@@ -100,8 +100,8 @@ export default function PortfolioSection2() {
     
     if (!payload || payload.length === 0) return null;
     
-    // Mostrar solo top 5 o todas según el estado
-    const displayData = showAll ? payload : payload.slice(0, 5);
+    // Mostrar solo top 5 o todas según el estado (en desktop siempre mostrar todo)
+    const displayData = isDesktop ? payload : (showAll ? payload : payload.slice(0, 5));
     
     return (
       <div className="legend-wrapper">
@@ -125,7 +125,7 @@ export default function PortfolioSection2() {
         </div>
         
         {/* Botón Ver Más / Ver Menos */}
-        {payload.length > 5 && (
+        {payload.length > 5 && !isDesktop && (
           <button 
             className="show-more-button"
             onClick={(e) => {
@@ -189,13 +189,13 @@ export default function PortfolioSection2() {
       </div>
       
       <div className="chart-container">
-        {/* CAMBIAR AQUÍ - usar height condicional */}
+      
         <ResponsiveContainer width="100%" height={isDesktop ? '100%' : 550}>
           <PieChart>
             <Pie
               data={chartData}
               cx="50%"
-              cy={isDesktop ? "43%" : "50%"}
+              cy={isDesktop ? "45%" : "50%"}
               labelLine={false}
               outerRadius={isDesktop ? 150 : 100}
               innerRadius={isDesktop ? 100 : 60}

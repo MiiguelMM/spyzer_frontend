@@ -1,0 +1,819 @@
+/* TradingSection1.css - Estilos aislados para el componente TradingSection1 */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@600,700&display=swap');
+
+/* Contenedor principal que aísla todos los estilos */
+.trading-section1-container {
+  /* Container principal */
+  .portfolio-section3 {
+    width: 90%;
+    min-height: 600px;
+    margin: 1.5rem auto;
+    background-color: #181818;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    box-shadow: 
+      0 2px 10px rgba(0, 0, 0, 0.6),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  /* Header */
+  .section3-header {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+
+  .section3-title {
+    font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #FFFFFF;
+    margin: 0 0 0.3rem 0;
+    letter-spacing: -0.3px;
+  }
+
+  .section3-subtitle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: #A0A0A0;
+    margin: 0;
+    letter-spacing: 0.2px;
+  }
+
+  /* Search Bar */
+  .search-container {
+    margin-bottom: 1.5rem;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    box-sizing: border-box;
+  }
+
+  .search-input:focus {
+    outline: none;
+    border-color: #007ACC;
+    box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.2);
+  }
+
+  .search-input::placeholder {
+    color: #666666;
+  }
+
+  /* Category Filters */
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #333333;
+  }
+
+  .category-btn {
+    padding: 0.6rem 1.2rem;
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    color: #CCCCCC;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .category-btn:hover {
+    background-color: #252525;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .category-btn.active {
+    background-color: #007ACC;
+    color: #FFFFFF;
+    border-color: #007ACC;
+    box-shadow: 0 0 8px rgba(0, 122, 204, 0.6);
+  }
+
+  /* Stocks Grid */
+  .stocks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    padding: 0.5rem;
+  }
+
+  .stocks-grid::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .stocks-grid::-webkit-scrollbar-track {
+    background: #1E1E1E;
+    border-radius: 4px;
+  }
+
+  .stocks-grid::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 4px;
+  }
+
+  .stocks-grid::-webkit-scrollbar-thumb:hover {
+    background: #444444;
+  }
+
+  /* Stock Card */
+  .stock-card {
+    padding: 1rem;
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .stock-card:hover {
+    background-color: #252525;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
+    border-color: #007ACC;
+  }
+
+  .stock-symbol {
+    font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 0.3rem;
+    letter-spacing: 0.5px;
+  }
+
+  .stock-name {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: #A0A0A0;
+    line-height: 1.3;
+  }
+
+  /* No Results */
+  .no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+
+  .no-results p {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    color: #A0A0A0;
+    margin: 0;
+  }
+
+  /* Modal Overlay */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(8px);
+    z-index: 1000000;
+    animation: fadeIn 0.3s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Modal Buy */
+  .modal-buy {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background-color: #181818;
+    border: 1px solid #333333;
+    border-radius: 16px;
+    box-shadow: 
+      0 8px 32px rgba(0, 0, 0, 0.9),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    padding: 2rem;
+    z-index: 1000001;
+    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translate(-50%, -45%);
+    }
+    to {
+      opacity: 1;
+      transform: translate(-50%, -50%);
+    }
+  }
+
+  .modal-buy::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-buy::-webkit-scrollbar-track {
+    background: #1E1E1E;
+    border-radius: 3px;
+  }
+
+  .modal-buy::-webkit-scrollbar-thumb {
+    background: #333333;
+    border-radius: 3px;
+  }
+
+  /* Modal Close Button */
+  .modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 36px;
+    height: 36px;
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 50%;
+    color: #CCCCCC;
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  }
+
+  .modal-close:hover {
+    background-color: #FF4757;
+    color: #FFFFFF;
+    border-color: #FF4757;
+    transform: rotate(90deg);
+    box-shadow: 0 0 12px rgba(255, 71, 87, 0.6);
+  }
+
+  /* Modal Header */
+  .modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #333333;
+  }
+
+  .modal-title {
+    font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #00BFFF;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
+  }
+
+  .modal-subtitle {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #A0A0A0;
+    margin: 0;
+  }
+
+  /* Modal Price Section */
+  .modal-price {
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .price-label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #A0A0A0;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-value {
+    font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #00D4AA;
+    text-shadow: 0 0 8px rgba(0, 212, 170, 0.3);
+  }
+
+  .price-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 1rem 0;
+  }
+
+  .loading-spinner-small {
+    width: 24px;
+    height: 24px;
+    border: 2px solid rgba(0, 191, 255, 0.3);
+    border-top: 2px solid #00BFFF;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  .price-loading span {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.85rem;
+    color: #00BFFF;
+  }
+
+  .price-error {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    color: #FF6B6B;
+    padding: 1rem;
+  }
+
+  /* Modal Controls */
+  .modal-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .quantity-control {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .quantity-label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #E0E0E0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .quantity-input-group {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .quantity-btn {
+    width: 48px;
+    height: 48px;
+    background-color: #252525;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-size: 1.4rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .quantity-btn:hover:not(:disabled) {
+    background-color: #007ACC;
+    border-color: #007ACC;
+    transform: scale(1.05);
+    box-shadow: 0 0 12px rgba(0, 122, 204, 0.6);
+  }
+
+  .quantity-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .quantity-input {
+    width: 100px;
+    padding: 0.8rem;
+    text-align: center;
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 10px;
+    color: #FFFFFF;
+    font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  }
+
+  .quantity-input:focus {
+    outline: none;
+    border-color: #007ACC;
+    box-shadow: 0 0 0 2px rgba(0, 122, 204, 0.3);
+  }
+
+  /* Total Cost */
+  .total-cost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: #1E1E1E;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  }
+
+  .total-label {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #A0A0A0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .total-value {
+    font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  /* Modal Buy Button */
+  .modal-buy-btn {
+    width: 100%;
+    padding: 1.2rem 2rem;
+    background: linear-gradient(135deg, #00D4AA 0%, #007ACC 100%);
+    border: none;
+    border-radius: 12px;
+    color: #FFFFFF;
+    font-family: 'Satoshi', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 6px 20px rgba(0, 212, 170, 0.4);
+  }
+
+  .modal-buy-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 212, 170, 0.6);
+  }
+
+  .modal-buy-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* Message */
+  .message {
+    padding: 1rem;
+    border-radius: 10px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: center;
+    animation: slideDown 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .message.success {
+    background-color: rgba(0, 212, 170, 0.15);
+    border: 1px solid rgba(0, 212, 170, 0.4);
+    color: #00D4AA;
+  }
+
+  .message.error {
+    background-color: rgba(255, 71, 87, 0.15);
+    border: 1px solid rgba(255, 71, 87, 0.4);
+    color: #FF6B6B;
+  }
+
+  /* RESPONSIVE - MOBILE FIRST */
+  @media (max-width: 767px) {
+    .portfolio-section3 {
+      width: 90%;
+      min-height: 500px;
+      margin: 1.5rem auto;
+      padding: 1rem 0.8rem;
+    }
+
+    .section3-title {
+      font-size: 1.45rem;
+    }
+
+    .section3-subtitle {
+      font-size: 0.75rem;
+    }
+
+    .category-btn {
+      padding: 0.5rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
+    .stocks-grid {
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 0.8rem;
+      max-height: 300px;
+    }
+
+    .stock-card {
+      padding: 0.8rem;
+    }
+
+    .stock-symbol {
+      font-size: 0.9rem;
+    }
+
+    .stock-name {
+      font-size: 0.7rem;
+    }
+
+    .modal-buy {
+      width: 95%;
+      padding: 1.5rem;
+    }
+
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      font-size: 1.1rem;
+    }
+
+    .modal-title {
+      font-size: 1.4rem;
+    }
+
+    .modal-subtitle {
+      font-size: 0.8rem;
+    }
+
+    .price-value {
+      font-size: 1.6rem;
+    }
+
+    .quantity-btn {
+      width: 40px;
+      height: 40px;
+      font-size: 1.2rem;
+    }
+
+    .quantity-input {
+      width: 80px;
+      font-size: 1.1rem;
+    }
+
+    .total-value {
+      font-size: 1.1rem;
+    }
+
+    .modal-buy-btn {
+      padding: 1rem 1.5rem;
+      font-size: 0.95rem;
+    }
+  }
+
+  /* Tablet (768px - 1023px) */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .portfolio-section3 {
+      width: 92%;
+      min-height: 600px;
+      padding: 1.5rem;
+    }
+
+    .section3-title {
+      font-size: 1.4rem;
+    }
+
+    .section3-subtitle {
+      font-size: 0.85rem;
+    }
+
+    .stocks-grid {
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 1rem;
+      max-height: 450px;
+    }
+
+    .modal-buy {
+      width: 80%;
+      max-width: 500px;
+    }
+  }
+
+  /* Desktop (1024px - 1439px) */
+  @media (min-width: 1024px) and (max-width: 1439px) {
+    .portfolio-section3 {
+      width: 90%;
+      height: 100%;
+      padding: 2rem 1.5rem;
+      background-color: #1E1E1E;
+    }
+    .search-input{
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .category-btn {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .section3-title {
+      font-size: 2.1rem;
+    }
+
+    .category-filters {
+      gap: 1rem;
+    }
+
+    .section3-subtitle {
+      font-size: 0.9rem;
+    }
+
+    .stocks-grid {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.2rem;
+      max-height: 500px;
+    }
+
+    .stock-card {
+      padding: 1.2rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .modal-buy {
+      width: 70%;
+      max-width: 550px;
+      padding: 2.5rem;
+    }
+
+    .modal-title {
+      font-size: 2rem;
+    }
+
+    .price-value {
+      font-size: 2.2rem;
+    }
+  }
+
+  /* Desktop Large (1440px+) */
+  @media (min-width: 1440px) {
+    .portfolio-section3 {
+      width: 90%;
+      min-height: 650px;
+      padding: 2.5rem 2rem;
+      background-color: #1E1E1E;
+    }
+
+    .section3-title {
+      font-size: 2.1rem;
+    }
+
+    .section3-subtitle {
+      font-size: 0.95rem;
+    }
+
+    .category-filters {
+      gap: 0.8rem;
+    }
+
+    .category-btn {
+      padding: 0.7rem 1.4rem;
+      font-size: 0.9rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .stocks-grid {
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-height: 550px;
+      padding: 1rem;
+    }
+
+    .stock-card {
+      padding: 1.5rem;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    }
+
+    .stock-symbol {
+      font-size: 1.1rem;
+    }
+
+    .stock-name {
+      font-size: 0.8rem;
+    }
+
+    .modal-buy {
+      width: 60%;
+      max-width: 600px;
+      padding: 3rem;
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+    }
+
+    .modal-title {
+      font-size: 2.2rem;
+    }
+
+    .modal-subtitle {
+      font-size: 1rem;
+    }
+
+    .price-value {
+      font-size: 2.4rem;
+    }
+
+    .quantity-btn {
+      width: 52px;
+      height: 52px;
+      font-size: 1.5rem;
+    }
+
+    .quantity-input {
+      width: 110px;
+      font-size: 1.4rem;
+    }
+
+    .total-value {
+      font-size: 1.4rem;
+    }
+
+    .modal-buy-btn {
+      padding: 1.3rem 2.2rem;
+      font-size: 1.15rem;
+    }
+  }
+
+  /* Desktop Extra Large (1920px+) */
+  @media (min-width: 1920px) {
+    .portfolio-section3 {
+      width: 100%;
+      max-width: 1600px;
+      min-height: 750px;
+    }
+
+    .stocks-grid {
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 2rem;
+      max-height: 600px;
+    }
+
+    .section3-title {
+      font-size: 1.8rem;
+    }
+  }
+}

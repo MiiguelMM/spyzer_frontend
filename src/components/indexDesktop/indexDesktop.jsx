@@ -73,36 +73,31 @@ export default function Desktop() {
           transform: `translateY(-${currentPage * 100}%)`,
         }}
       >
-        {/* Página 1: S&P 500 */}
-        <div className="desktop-component__page">
+        <div className="desktop-component__page section1">
           <ChartHeader />
           <RangeSwitcherChart />
           <MetricsCards />
         </div>
 
-        {/* Página 2: NASDAQ */}
-        <div className="desktop-component__page">
+        <div className="desktop-component__page section3">
           <NasdaqChartHeader/>
           <NasdaqRangeSwitcherChart/>
           <NasdaqMetricsCards/>
         </div>
 
-        {/* Página 3: DAX */}
-        <div className="desktop-component__page">
+        <div className="desktop-component__page section4">
           <DaxChartHeader/>
           <DaxRangeSwitcherChart/>
           <DaxMetricsCards/>
         </div>
 
-        {/* Página 4: FXI China */}
-        <div className="desktop-component__page">
+        <div className="desktop-component__page section2">
           <FxiChartHeader/>
           <FxiRangeSwitcherChart/>
           <FxiMetricsCards/>
         </div>
       </div>
 
-      {/* Indicadores de página */}
       <div className="desktop-component__pagination">
         {[...Array(totalPages)].map((_, index) => (
           <button

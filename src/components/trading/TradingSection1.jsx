@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import tradingService from '../../service/tradingService';
 import userService from '../../service/userService';
-import '../../css/PortfolioSection3.css';
+import '../../css/TradingSection1.css';
 
-export default function PortfolioSection3() {
+export default function TradingSection1() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedStock, setSelectedStock] = useState(null);
@@ -202,6 +202,7 @@ export default function PortfolioSection3() {
   };
 
   return (
+    <div className="trading-section1-container">
     <div className="portfolio-section3">
       <div className="section3-header">
         <h2 className="section3-title">Buy Stocks</h2>
@@ -329,6 +330,7 @@ export default function PortfolioSection3() {
           </div>
         </>
       )}
+    </div>
     </div>
   );
 }
