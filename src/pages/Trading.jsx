@@ -16,7 +16,7 @@ import '../css/Trading.css'
 export default function Trading({ setCurrentPage, onLogout, currentUser }) {
   const { endTransition } = usePageTransition()
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024)
-  
+
   useEffect(() => {
     // Terminar la transición cuando la página cargue
     endTransition()
@@ -37,9 +37,9 @@ export default function Trading({ setCurrentPage, onLogout, currentUser }) {
         <>
           <HeaderDesktop onLogout={onLogout} currentUser={currentUser} />
           <div className="index-page__content-desktop">
-         
-              <TradingDesktop/>
-           
+
+            <TradingDesktop />
+
           </div>
         </>
       ) : (

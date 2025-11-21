@@ -206,7 +206,7 @@
 /* Alerts Grid */
 .alerts-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: 1fr; /* Single column for vertical layout */
   gap: 1rem;
   max-height: 500px;
   overflow-y: auto;
@@ -947,7 +947,7 @@
   }
 
   .alerts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-template-columns: 1fr; /* Single column for vertical layout */
     gap: 1rem;
     max-height: 500px;
   }
@@ -983,7 +983,7 @@
   }
 
   .alerts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-template-columns: 1fr; /* Single column for vertical layout */
     gap: 1.1rem;
     max-height: 550px;
   }
@@ -1083,7 +1083,7 @@
   }
 
   .alerts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+    grid-template-columns: 1fr; /* Single column for vertical layout */
     gap: 1.2rem;
     max-height: 580px;
     padding: 0.7rem;
@@ -1202,7 +1202,7 @@
   }
 
   .alerts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(370px, 1fr));
+    grid-template-columns: 1fr; /* Single column for vertical layout */
     gap: 1.3rem;
     max-height: 620px;
     padding: 0.8rem;
@@ -1337,7 +1337,7 @@
   }
 
   .alerts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    grid-template-columns: 1fr; /* Single column for vertical layout */
     gap: 1.5rem;
     max-height: 650px;
     padding: 1rem;
@@ -1500,7 +1500,7 @@
   }
 
   .alerts-grid {
-    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    grid-template-columns: 1fr; /* Single column for vertical layout */
     gap: 1.8rem;
     max-height: 700px;
     padding: 1.2rem;
