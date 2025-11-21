@@ -1,8 +1,9 @@
 // src/config/axiosConfig.js
 import axios from 'axios';
+import authService from '../service/authService';
 
 // Configuración base de Axios
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'https://nine-squids-build.loca.lt/api';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080/api';
 
 // Crear instancia de axios con configuración base
 const apiClient = axios.create({
@@ -18,11 +19,11 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     // Agregar token si existe
-    const token = localStorage.getItem('authToken');
+    const token = authService.getToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
-    
+
     // Log de requests en desarrollo
     if (process.env.NODE_ENV === 'development') {
       console.log('🚀 API Request:', {
@@ -31,7 +32,7 @@ apiClient.interceptors.request.use(
         data: config.data
       });
     }
-    
+
     return config;
   },
   (error) => {
@@ -51,7 +52,7 @@ apiClient.interceptors.response.use(
         data: response.data
       });
     }
-    
+
     return response;
   },
   (error) => {
@@ -59,15 +60,16 @@ apiClient.interceptors.response.use(
     if (error.response) {
       // Error con respuesta del servidor
       const { status, data } = error.response;
-      
+
       switch (status) {
         case 401:
           // Token expirado o no autorizado
-          localStorage.removeItem('authToken');
-          window.location.href = '/login';
+          console.warn('⚠️ Sesión expirada o no autorizada. Redirigiendo al login...');
+          authService.logout();
           break;
         case 403:
           console.error('🚫 Acceso prohibido');
+          authService.logout();
           break;
         case 404:
           console.error('🔍 Recurso no encontrado');
@@ -85,7 +87,7 @@ apiClient.interceptors.response.use(
       // Error en la configuración
       console.error('⚙️ Error de configuración:', error.message);
     }
-    
+
     return Promise.reject(error);
   }
 );

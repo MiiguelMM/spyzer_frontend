@@ -4,30 +4,21 @@ import Logo from '../assets/Logo5.png';
 import Circulo from '../assets/circulo.png';
 import authService from '../service/authService';
 
-export default function LandingPage({ onLoginSuccess }) {
+export default function LandingPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
-  const handleLogin = async () => {
+  const handleLogin = () => {
     try {
       setIsLoading(true);
       setError('');
-      
-      console.log('Iniciando login con Google...');
-      
-      // Login con Google usando popup
-      const result = await authService.loginWithGoogle();
-      
-      console.log('Login exitoso:', result);
-      
-      // Llamar callback de éxito
-      if (onLoginSuccess) {
-        onLoginSuccess(result.user);
-      }
-      
+
+      console.log('Redirigiendo al login con Google...');
+      authService.loginWithGoogle();
+
     } catch (error) {
       console.error('Error en login:', error);
-      setError(error.message || 'Error al iniciar sesión. Intenta nuevamente.');
+      setError('Error al iniciar sesión. Intenta nuevamente.');
       setIsLoading(false);
     }
   };
@@ -40,13 +31,13 @@ export default function LandingPage({ onLoginSuccess }) {
         <div className="star star-2"></div>
         <div className="star star-3"></div>
         <div className="star star-4"></div>
-        <div className="star star-5"></div> 
+        <div className="star star-5"></div>
         <div className="star star-6"></div>
         <div className="star star-7"></div>
         <div className="star star-8"></div>
         <div className="star star-9"></div>
         <div className="star star-10"></div>
-        
+
         {/* Estrellas fugaces */}
         <div className="shooting-star shooting-star-1"></div>
         <div className="shooting-star shooting-star-2"></div>
@@ -54,7 +45,7 @@ export default function LandingPage({ onLoginSuccess }) {
       </div>
 
       {/* Círculo central con logo */}
-      <div className='circle' style={{backgroundImage:`url(${Circulo})`}}>
+      <div className='circle' style={{ backgroundImage: `url(${Circulo})` }}>
         {/* Líneas de energía decorativas */}
         <div className="energy-lines">
           <div className="energy-line"></div>
@@ -66,10 +57,10 @@ export default function LandingPage({ onLoginSuccess }) {
           <div className="energy-line"></div>
           <div className="energy-line"></div>
         </div>
-        
+
         <div className='logo' style={{ backgroundImage: `url(${Logo})` }}></div>
         <div className='name'> SPYZER </div>
-        
+
         {/* Sistema de órbitas y planetas */}
         <div className="orbit-container">
           {/* S&P 500 - Azul principal */}
@@ -90,17 +81,17 @@ export default function LandingPage({ onLoginSuccess }) {
           </div>
         </div>
       </div>
-      
+
       {/* Mensaje de error si existe */}
       {error && (
         <div className="error-message">
           {error}
         </div>
       )}
-      
+
       {/* Botón único */}
       <div className="buttons-group">
-        <button 
+        <button
           className="login-button"
           onClick={handleLogin}
           disabled={isLoading}

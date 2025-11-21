@@ -80,7 +80,7 @@ export default function HeaderDesktop({ onLogout, currentUser }) {
             case 'logout':
                 try {
                     console.log('Cerrando sesión desde HeaderDesktop...')
-                    
+
                     if (onLogout) {
                         await onLogout()
                     } else {
@@ -267,7 +267,7 @@ export default function HeaderDesktop({ onLogout, currentUser }) {
                     </div>
                 </div>
             </div>
-            
+
             {/* Modal renderizado fuera del sidebar usando Portal */}
             <ProfileModal />
         </>

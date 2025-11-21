@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { usePageTransition } from '../loading/PageTransitionContext.jsx' 
+import { usePageTransition } from '../loading/PageTransitionContext.jsx'
 import authService from '../../service/authService'
 import '../../css/Header.css'
 import logo from '../../assets/Logo5.png'
@@ -19,7 +19,7 @@ export default function Header({ onLogout }) {
     const profileMenuRef = useRef(null)
     const navigate = useNavigate()
     const location = useLocation()
-    const { startTransition } = usePageTransition() 
+    const { startTransition } = usePageTransition()
 
     // Obtener datos del usuario al cargar
     useEffect(() => {
@@ -129,7 +129,7 @@ export default function Header({ onLogout }) {
             case 'logout':
                 try {
                     console.log('Cerrando sesión desde Header...')
-                    
+
                     // Llamar al callback de logout del App.jsx
                     if (onLogout) {
                         await onLogout()
@@ -267,7 +267,7 @@ export default function Header({ onLogout }) {
                                 <i className="fas fa-chevron-right menu-arrow"></i>
                             </div>
 
-        
+
                         </div>
 
                         <div className="hamburger-footer">

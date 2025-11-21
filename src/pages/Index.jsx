@@ -17,7 +17,7 @@ import Desktop from '../components/indexDesktop/indexDesktop.jsx'
 export default function Index({ onLogout, currentUser }) {
   const { endTransition } = usePageTransition()
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024)
-  
+
   useEffect(() => {
     // Terminar la transición cuando la página cargue
     endTransition()

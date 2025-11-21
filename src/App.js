@@ -9,6 +9,7 @@ import LandingPage from './pages/LandingPage.jsx'
 import Trading from './pages/Trading.jsx'
 import Rankings from './pages/Rankings.jsx'
 import Alert from './pages/Alert.jsx'
+import OAuth2RedirectHandler from './pages/OAuth2RedirectHandler.jsx'
 
 // Context providers
 import { IndicesProvider } from './components/context/IndicesProvider.jsx'
@@ -27,7 +28,7 @@ import authService from '../src/service/authService.js'
 // Componente para rutas protegidas
 function ProtectedRoute({ children, isLoggedIn }) {
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/login', { replace: true })
@@ -37,14 +38,14 @@ function ProtectedRoute({ children, isLoggedIn }) {
   if (!isLoggedIn) {
     return null
   }
-  
+
   return children
 }
 
 // Componente para redirigir cuando ya está logueado
 function PublicRoute({ children, isLoggedIn }) {
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     if (isLoggedIn) {
       navigate('/dashboard', { replace: true })
@@ -54,7 +55,7 @@ function PublicRoute({ children, isLoggedIn }) {
   if (isLoggedIn) {
     return null
   }
-  
+
   return children
 }
 
@@ -70,40 +71,18 @@ function AppContent() {
   const checkAuthAndRedirect = async () => {
     try {
       console.log('=== Verificando autenticación ===')
-      
-      // Verificar si hay resultado de redirect primero
-      const redirectResult = await authService.checkRedirectResult()
-      
-      if (redirectResult && redirectResult.success) {
-        console.log('Login exitoso desde redirect:', redirectResult.user)
-        setCurrentUser(redirectResult.user)
-        setIsLoggedIn(true)
-        setIsLoading(false)
-        return
-      }
-      
-      // Si no hay redirect, verificar sesión existente
-      const user = authService.obtenerUsuarioActual()
-      console.log('Usuario en localStorage:', user)
-      
-      if (user) {
-        console.log('Usuario encontrado, verificando validez...')
-        const isValid = await authService.verificarSesion()
-        
-        if (isValid) {
-          console.log('Sesión válida')
-          setCurrentUser(user)
-          setIsLoggedIn(true)
-        } else {
-          console.log('Sesión expirada')
-          authService.limpiarSesion()
-          setIsLoggedIn(false)
-          setCurrentUser(null)
-        }
+
+      const isAuthenticated = authService.isAuthenticated();
+
+      if (isAuthenticated) {
+        const user = authService.getUser();
+        console.log('Usuario autenticado:', user);
+        setCurrentUser(user);
+        setIsLoggedIn(true);
       } else {
-        console.log('No hay usuario')
-        setIsLoggedIn(false)
-        setCurrentUser(null)
+        console.log('No hay sesión activa');
+        setIsLoggedIn(false);
+        setCurrentUser(null);
       }
     } catch (error) {
       console.error('Error verificando autenticación:', error)
@@ -114,23 +93,13 @@ function AppContent() {
     }
   }
 
-  const handleLoginSuccess = (user) => {
-    console.log('Usuario logueado:', user)
-    setCurrentUser(user)
-    setIsLoggedIn(true)
-  }
-
   const handleLogout = async () => {
     try {
       console.log('Iniciando logout...')
-      await authService.logout()
-      
+      authService.logout()
+
       setCurrentUser(null)
       setIsLoggedIn(false)
-      
-      setTimeout(() => {
-        window.location.href = '/login'
-      }, 100)
     } catch (error) {
       console.error('Error en logout:', error)
       setCurrentUser(null)
@@ -146,53 +115,58 @@ function AppContent() {
   return (
     <div className="App">
       <Routes>
-        <Route 
-          path="/login" 
+        <Route
+          path="/login"
           element={
             <PublicRoute isLoggedIn={isLoggedIn}>
-              <LandingPage onLoginSuccess={handleLoginSuccess} />
+              <LandingPage />
             </PublicRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="/dashboard" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Index 
-                onLogout={handleLogout} 
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          } 
+        <Route
+          path="/oauth2/redirect"
+          element={<OAuth2RedirectHandler />}
         />
 
-        <Route 
-          path="/" 
+        <Route
+          path="/dashboard"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Index 
-                onLogout={handleLogout} 
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          } 
-        />
-
-        <Route 
-          path="/my-portfolio" 
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <MyPortfolio 
+              <Index
                 onLogout={handleLogout}
                 currentUser={currentUser}
               />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="/trading" 
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <Index
+                onLogout={handleLogout}
+                currentUser={currentUser}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/my-portfolio"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <MyPortfolio
+                onLogout={handleLogout}
+                currentUser={currentUser}
+              />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/trading"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Trading
@@ -200,11 +174,11 @@ function AppContent() {
                 currentUser={currentUser}
               />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="/rankings" 
+        <Route
+          path="/rankings"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Rankings
@@ -212,11 +186,11 @@ function AppContent() {
                 currentUser={currentUser}
               />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="/my-alerts" 
+        <Route
+          path="/my-alerts"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
               <Alert
@@ -224,14 +198,14 @@ function AppContent() {
                 currentUser={currentUser}
               />
             </ProtectedRoute>
-          } 
+          }
         />
 
-        <Route 
-          path="*" 
+        <Route
+          path="*"
           element={
             <Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />
-          } 
+          }
         />
       </Routes>
     </div>
