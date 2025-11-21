@@ -212,9 +212,8 @@
   /* Modal Buy */
   .modal-buy {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 10%;
+    left: 2.5%;
     width: 90%;
     max-width: 500px;
     max-height: 90vh;
@@ -227,18 +226,18 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
     padding: 2rem;
     z-index: 1000001;
-    animation: slideIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: slideIn 0.2s ease-out both;
     box-sizing: border-box;
   }
 
   @keyframes slideIn {
     from {
       opacity: 0;
-      transform: translate(-50%, -45%);
+      transform: translate(-50%, -50%) scale(0.95);
     }
     to {
       opacity: 1;
-      transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%) scale(1);
     }
   }
 
@@ -655,7 +654,7 @@
   /* Desktop (1024px - 1439px) */
   @media (min-width: 1024px) and (max-width: 1439px) {
     .portfolio-section3 {
-      width: 90%;
+      width: 85%;
       height: 100%;
       padding: 2rem 1.5rem;
       background-color: #1E1E1E;
@@ -675,7 +674,11 @@
     .category-filters {
       gap: 1rem;
     }
-
+    .modal-buy{
+      position: relative;
+         top: -30%;
+        left: 20%;
+    }
     .section3-subtitle {
       font-size: 0.9rem;
     }
@@ -726,7 +729,11 @@
     .category-filters {
       gap: 0.8rem;
     }
-
+    .modal-buy{
+      
+          top: 20%;
+          left: 25%;
+    }
     .category-btn {
       padding: 0.7rem 1.4rem;
       font-size: 0.9rem;
@@ -797,6 +804,13 @@
       font-size: 1.15rem;
     }
   }
+  @media (min-width: 1600px){
+    .modal-buy{
+      
+          top: 20%;
+          left: 30%;
+    }
+  }
 
   /* Desktop Extra Large (1920px+) */
   @media (min-width: 1920px) {
@@ -814,6 +828,11 @@
 
     .section3-title {
       font-size: 1.8rem;
+    }
+    .modal-buy{
+      
+          top: 20%;
+          left: 35%;
     }
   }
 }
