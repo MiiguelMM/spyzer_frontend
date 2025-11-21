@@ -569,3 +569,71 @@ button.active,.range-button.active {
     font-size: 11px;
   }
 }
+/* Height-based responsive adjustments for short screens - DESKTOP ONLY */
+@media (min-width: 1024px) and (max-height: 768px) {
+  .range-switcher-chart {
+    height: 40vh;
+  }
+  
+  .chart-type-switcher {
+    height: 60px;
+    gap: 12px;
+  }
+  
+  .chart-type-button {
+    padding: 6px 18px;
+    height: 40px;
+    min-width: 130px;
+    gap: 4px;
+  }
+  
+  .chart-type-label {
+    font-size: 13px;
+  }
+  
+  .range-switcher-header {
+    min-height: 50px;
+    gap: 12px;
+    padding: 0 30px;
+    margin-top: 6px;
+  }
+  
+  .range-button {
+    padding: 8px 18px;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .range-switcher-chart {
+    height: 48vh;
+  }
+  
+  .chart-type-switcher {
+    height: 70px;
+    gap: 16px;
+  }
+  
+  .chart-type-button {
+    padding: 8px 20px;
+    height: 44px;
+    min-width: 145px;
+    gap: 6px;
+  }
+  
+  .chart-type-label {
+    font-size: 14px;
+  }
+  
+  .range-switcher-header {
+    min-height: 55px;
+    gap: 14px;
+    padding: 0 35px;
+    margin-top: 8px;
+  }
+  
+  .range-button {
+    padding: 9px 20px;
+    font-size: 13px;
+  }
+}

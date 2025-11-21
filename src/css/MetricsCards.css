@@ -461,3 +461,115 @@
     font-size: 24px;
   }
 }
+/* Height-based responsive adjustments for short screens - DESKTOP ONLY */
+@media (min-width: 1024px) and (max-height: 768px) {
+  .metrics-container {
+    height: 90px;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .metrics-card {
+    padding: 12px 10px;
+  }
+
+  .card-header {
+    margin-bottom: 4px;
+    gap: 6px;
+  }
+
+  .card-indicator {
+    width: 10px;
+    height: 10px;
+  }
+
+  .card-title {
+    font-size: 12px;
+  }
+
+  .card-content {
+    font-size: 11px;
+  }
+
+  .metric-label {
+    font-size: 10px;
+  }
+
+  .metric-value {
+    font-size: 18px;
+  }
+
+  .metric-value.positive,
+  .metric-value.negative {
+    font-size: 15px;
+  }
+
+  .change-indicator {
+    padding: 6px;
+    margin-top: 4px;
+  }
+
+  .change-icon {
+    font-size: 14px;
+  }
+
+  .change-label {
+    font-size: 10px;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .metrics-container {
+    height: 110px;
+    gap: 12px;
+    margin-top: 12px;
+  }
+
+  .metrics-card {
+    padding: 16px 12px;
+  }
+
+  .card-header {
+    margin-bottom: 6px;
+    gap: 8px;
+  }
+
+  .card-indicator {
+    width: 12px;
+    height: 12px;
+  }
+
+  .card-title {
+    font-size: 14px;
+  }
+
+  .card-content {
+    font-size: 12px;
+  }
+
+  .metric-label {
+    font-size: 11px;
+  }
+
+  .metric-value {
+    font-size: 20px;
+  }
+
+  .metric-value.positive,
+  .metric-value.negative {
+    font-size: 17px;
+  }
+
+  .change-indicator {
+    padding: 8px;
+    margin-top: 6px;
+  }
+
+  .change-icon {
+    font-size: 16px;
+  }
+
+  .change-label {
+    font-size: 12px;
+  }
+}

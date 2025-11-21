@@ -1,5 +1,6 @@
 /* Reset para prevenir scroll */
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -17,7 +18,8 @@ html, body {
 .index-page__content-desktop {
   width: 100%;
   height: 100vh;
-  padding-left: 340px; /* 280px (ancho header) + 60px (margin-left header) */
+  padding-left: 340px;
+  /* 280px (ancho header) + 60px (margin-left header) */
   display: flex;
   flex-direction: column;
   background-color: #0D0D0D;
@@ -58,7 +60,7 @@ html, body {
   justify-content: center;
   box-sizing: border-box;
   padding: 2rem 0;
-  background-color: #181818
+  background-color: #181818;
 }
 
 /* Indicadores de paginación */
@@ -100,9 +102,10 @@ html, body {
 /* Responsive - Extra Large Screens (1920px+) */
 @media (min-width: 1920px) {
   .index-page__content-desktop {
-    padding-left: 360px; /* 300px (ancho header) + 60px (margin-left header) */
+    padding-left: 360px;
+    /* 300px (ancho header) + 60px (margin-left header) */
   }
-  
+
   .desktop-component {
     margin-right: 60px;
   }
@@ -111,9 +114,10 @@ html, body {
 /* Large Screens (1440px - 1919px) */
 @media (min-width: 1440px) and (max-width: 1919px) {
   .index-page__content-desktop {
-    padding-left: 340px; /* 280px (ancho header) + 60px (margin-left header) */
+    padding-left: 340px;
+    /* 280px (ancho header) + 60px (margin-left header) */
   }
-  
+
   .desktop-component {
     margin-right: 60px;
   }
@@ -122,9 +126,10 @@ html, body {
 /* Medium-Large Screens (1280px - 1439px) */
 @media (min-width: 1280px) and (max-width: 1439px) {
   .index-page__content-desktop {
-    padding-left: 320px; /* 260px (ancho header) + 60px (margin-left header) */
+    padding-left: 320px;
+    /* 260px (ancho header) + 60px (margin-left header) */
   }
-  
+
   .desktop-component {
     margin-right: 60px;
   }
@@ -133,12 +138,36 @@ html, body {
 /* Medium Screens (1024px - 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .index-page__content-desktop {
-    padding-left: 300px; /* 240px (ancho header) + 60px (margin-left header) */
+    padding-left: 300px;
+    /* 240px (ancho header) + 60px (margin-left header) */
   }
-  
+
   .desktop-component {
     margin-right: 60px;
     border-radius: 0px 55px 55px 0px;
+  }
+}
+
+/* Height-based responsive adjustments for short screens */
+@media (min-width: 1024px) and (max-height: 768px) {
+  .desktop-component {
+    margin-top: 3vh;
+    height: 94vh;
+  }
+
+  .desktop-component__page {
+    padding: 1rem 0;
+  }
+}
+
+@media (min-width: 1024px) and (max-height: 900px) {
+  .desktop-component {
+    margin-top: 4vh;
+    height: 92vh;
+  }
+
+  .desktop-component__page {
+    padding: 1.5rem 0;
   }
 }
 
@@ -147,7 +176,7 @@ html, body {
   .index-page__content-desktop {
     padding-left: 0;
   }
-  
+
   .desktop-component {
     display: none;
   }
