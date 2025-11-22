@@ -1163,8 +1163,8 @@
 @media (min-width: 1440px) and (max-width: 1919px) {
   .alert-section1 {
     width: 85%;
-    height: 90%;
-    padding: 2.25rem;
+    height: 100%;
+    padding: 2.25rem 2rem;
     background: #1E1E1E;
     display: flex;
     flex-direction: column;
@@ -1234,7 +1234,7 @@
     max-height: none;
     flex-grow: 1;
     overflow-y: auto;
-    padding: 0.8rem;
+    padding: 0.5rem 2rem;
   }
 
   .alert-card {
@@ -1649,7 +1649,7 @@
   }
 
   .alert-section1-title {
-    font-size: 1.6rem;
+    font-size: 1.7rem;
     margin-bottom: 0.2rem;
   }
 
@@ -1663,7 +1663,7 @@
   }
 
   .search-input {
-    padding: 0.6rem 1rem 0.6rem 3rem;
+    padding: 1rem;
     /* Adjusted padding */
     font-size: 0.85rem;
   }
@@ -1674,8 +1674,8 @@
   }
 
   .category-filters {
-    margin-bottom: 0.8rem;
-    padding-bottom: 0.5rem;
+
+    padding: 1rem 0rem;
     gap: 0.5rem;
     flex-shrink: 0;
   }
@@ -1690,7 +1690,7 @@
     max-height: none;
     overflow-y: auto;
     gap: 0.8rem;
-    padding-bottom: 0.5rem;
+    padding: 0.5rem 2rem;
   }
 
   .alert-card {

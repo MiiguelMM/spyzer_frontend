@@ -12,7 +12,7 @@
   border: 1px solid #333333;
   border-top-left-radius: 65px;
   border-bottom-left-radius: 65px;
-  box-shadow: 
+  box-shadow:
     2px 0 10px rgba(0, 0, 0, 0.6),
     inset -1px 0 0 rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(30px) saturate(180%);
@@ -134,7 +134,7 @@
   border-color: #333333;
   color: #FFFFFF;
   transform: translateX(3px);
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.8),
     0 0 8px rgba(0, 191, 255, 0.3);
 }
@@ -150,7 +150,7 @@
   border-color: #007ACC;
   color: #FFFFFF;
   font-weight: 600;
-  box-shadow: 
+  box-shadow:
     0 2px 10px rgba(0, 0, 0, 0.6),
     0 0 12px rgba(0, 122, 204, 0.6);
 }
@@ -162,7 +162,7 @@
 .header-desktop__nav-item.active:hover {
   background-color: #0099FF;
   border-color: #0099FF;
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.8),
     0 0 15px rgba(0, 191, 255, 0.5);
 }
@@ -189,7 +189,7 @@
   border-radius: 50%;
   background-color: #2D2D2D;
   border: 2px solid #444444;
-  box-shadow: 
+  box-shadow:
     0 2px 10px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   display: flex;
@@ -202,7 +202,7 @@
   background-color: #252525;
   border-color: #007ACC;
   transform: scale(1.08);
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.8),
     0 0 12px rgba(0, 191, 255, 0.4);
 }
@@ -271,6 +271,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -313,7 +314,7 @@
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   letter-spacing: 1px;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-  box-shadow: 
+  box-shadow:
     0 2px 10px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   flex-shrink: 0;
@@ -441,7 +442,7 @@
   background: #252525;
   color: #E0E0E0;
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.8),
     0 0 8px rgba(0, 191, 255, 0.3);
 }
@@ -454,7 +455,7 @@
 .logout-item:hover {
   background: rgba(255, 107, 107, 0.1) !important;
   color: #FF8A8A !important;
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.8),
     0 0 8px rgba(255, 107, 107, 0.3) !important;
 }
@@ -525,7 +526,7 @@
   background-color: #252525;
   border-color: #007ACC;
   transform: translateY(-3px) scale(1.1);
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.8),
     0 0 8px rgba(0, 191, 255, 0.3);
 }
@@ -552,30 +553,30 @@
     width: 300px;
     height: 89.9vh;
   }
-  
+
   .header-desktop__logo img {
     width: 55px;
     height: 55px;
   }
-  
+
   .header-desktop__name {
     font-size: 1.95rem;
   }
-  
+
   .header-desktop__nav-item {
     padding: 1.1rem 1.6rem;
     font-size: 1rem;
   }
-  
+
   .header-desktop__profile-avatar {
     width: 62px;
     height: 62px;
   }
-  
+
   .header-desktop__profile-initials {
     font-size: 24px;
   }
-  
+
   .header-desktop__profile-dropdown {
     width: 340px;
   }
@@ -589,12 +590,14 @@
     width: 280px;
     height: 89.9vh;
   }
-  .header-desktop__container{
+
+  .header-desktop__container {
     padding: 2rem 0;
   }
+
   .header-desktop__name {
     font-size: 1.9rem;
-   
+
   }
 }
 
@@ -606,60 +609,61 @@
     width: 260px;
     height: 89.9vh;
   }
-    .header-desktop__container{
+
+  .header-desktop__container {
     padding: 3.5rem 0;
   }
-  
+
   .header-desktop__logo {
     left: 1.2rem;
   }
-  
+
   .header-desktop__logo img {
     width: 48px;
     height: 48px;
     position: relative;
-    bottom:  1rem;
-    
+    bottom: 1rem;
+
   }
-  
+
   .header-desktop__name {
     font-size: 1.8rem;
     position: relative;
-    bottom:  1rem;
+    bottom: 1rem;
   }
-  
+
   .header-desktop__logo-section {
     padding: 0 1.5rem 5.5rem 1.5rem;
   }
-  
+
   .header-desktop__nav {
     padding: 1.5rem 1.2rem;
     gap: 6px;
   }
-  
+
   .header-desktop__nav-item {
     padding: 0.95rem 1.3rem;
     font-size: 0.92rem;
     gap: 14px;
   }
-  
+
   .header-desktop__nav-item i {
     font-size: 1.15rem;
   }
-  
+
   .header-desktop__profile-section {
     padding: 2.5rem 1.5rem 0 1.5rem;
   }
-  
+
   .header-desktop__profile-avatar {
     width: 54px;
     height: 54px;
   }
-  
+
   .header-desktop__profile-initials {
     font-size: 20px;
   }
-  
+
   .header-desktop__profile-dropdown {
     width: 300px;
   }
@@ -675,88 +679,89 @@
     border-top-left-radius: 55px;
     border-bottom-left-radius: 55px;
   }
-  .header-desktop__container{
+
+  .header-desktop__container {
     padding: 3rem 0;
   }
-  
+
   .header-desktop__logo {
     left: 1rem;
     top: 3.5rem;
   }
-  
+
   .header-desktop__logo img {
     width: 45px;
     height: 45px;
   }
-  
+
   .header-desktop__name {
     font-size: 1.7rem;
   }
-  
+
   .header-desktop__logo-section {
     padding: 0 1.2rem 6rem 1.2rem;
   }
-  
+
   .header-desktop__nav {
     padding: 1.5rem 1rem;
     gap: 5px;
   }
-  
+
   .header-desktop__nav-item {
     padding: 0.85rem 1.1rem;
     font-size: 0.88rem;
     gap: 12px;
     border-radius: 10px;
   }
-  
+
   .header-desktop__nav-item i {
     font-size: 1.1rem;
     width: 22px;
   }
-  
+
   .header-desktop__profile-section {
     padding: 2rem 1.2rem 0 1.2rem;
   }
-  
+
   .header-desktop__profile-avatar {
     width: 50px;
     height: 50px;
   }
-  
+
   .header-desktop__profile-initials {
     font-size: 19px;
   }
-  
+
   .header-desktop__profile-dropdown {
     width: 280px;
     border-radius: 14px;
   }
-  
+
   .profile-dropdown__header {
     padding: 1.2rem;
     gap: 12px;
   }
-  
+
   .profile-dropdown__avatar-large {
     width: 50px;
     height: 50px;
     font-size: 18px;
   }
-  
+
   .profile-dropdown__user-info h3 {
     font-size: 15px;
   }
-  
+
   .profile-dropdown__user-info span {
     font-size: 12px;
   }
-  
+
   .profile-dropdown__item {
     padding: 0.85rem 1.2rem;
     font-size: 0.9rem;
     gap: 10px;
   }
-  
+
   .profile-dropdown__social a {
     width: 32px;
     height: 32px;
@@ -769,116 +774,117 @@
     display: none;
   }
 }
+
 /* Height-based responsive adjustments for short screens - DESKTOP ONLY */
 @media (min-width: 1024px) and (max-height: 768px) {
   .header-desktop {
     top: 3vh;
     height: 94vh;
   }
-  
+
   .header-desktop__container {
     padding: 1rem 0;
     gap: 12px;
   }
-  
+
   .header-desktop__logo-section {
     padding: 0 1.5rem 3rem 1.5rem;
   }
-  
+
   .header-desktop__logo {
     top: 2rem;
   }
-  
+
   .header-desktop__logo img {
     width: 40px;
     height: 40px;
   }
-  
+
   .header-desktop__name {
     font-size: 1.4rem;
   }
-  
+
   .header-desktop__nav {
     padding: 1rem 1rem;
     gap: 4px;
   }
-  
+
   .header-desktop__nav-item {
     padding: 0.7rem 1rem;
     font-size: 0.85rem;
     gap: 10px;
   }
-  
+
   .header-desktop__nav-item i {
     font-size: 1rem;
   }
-  
+
   .header-desktop__profile-section {
     padding: 1.5rem 1.5rem 0 1.5rem;
   }
-  
+
   .header-desktop__profile-avatar {
     width: 45px;
     height: 45px;
   }
-  
+
   .header-desktop__profile-initials {
     font-size: 17px;
   }
 }
 
-@media (min-width: 1024px) and (max-height: 900px) {
+@media (min-width: 1024px) and (max-height: 800px) {
   .header-desktop {
     top: 4vh;
     height: 92vh;
   }
-  
+
   .header-desktop__container {
     padding: 1.5rem 0;
     gap: 15px;
   }
-  
+
   .header-desktop__logo-section {
-    padding: 0 1.5rem 4rem 1.5rem;
+    padding: 0 1.5rem 5rem 1.5rem;
   }
-  
+
   .header-desktop__logo {
-    top: 3rem;
+    top: 3.5rem;
   }
-  
+
   .header-desktop__logo img {
     width: 45px;
     height: 45px;
   }
-  
+
   .header-desktop__name {
     font-size: 1.6rem;
   }
-  
+
   .header-desktop__nav {
     padding: 1.5rem 1.2rem;
     gap: 6px;
   }
-  
+
   .header-desktop__nav-item {
     padding: 0.8rem 1.2rem;
     font-size: 0.9rem;
     gap: 12px;
   }
-  
+
   .header-desktop__nav-item i {
     font-size: 1.1rem;
   }
-  
+
   .header-desktop__profile-section {
     padding: 2rem 1.5rem 0 1.5rem;
   }
-  
+
   .header-desktop__profile-avatar {
     width: 50px;
     height: 50px;
   }
-  
+
   .header-desktop__profile-initials {
     font-size: 19px;
   }
