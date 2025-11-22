@@ -698,7 +698,7 @@
     .stocks-grid {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1.2rem;
-
+      max-height: 500px;
     }
 
     .stock-card {
@@ -921,18 +921,16 @@
 
     /* Modal adjustments */
     .modal-buy {
-      top: -45%;
-      left: 25%;
+      position: fixed;
+      top: 10%;
+      left: 24%;
       transform: translate(-50%, -50%);
-      width: 70%;
-      height: 85vh;
+      width: 60%;
+      max-width: 500px;
+      max-height: 85vh;
       padding: 1.5rem;
       display: flex;
       flex-direction: column;
-    }
-
-    .trading-section1-container {
-      overflow-y: none;
     }
 
     .modal-header,
@@ -956,8 +954,16 @@
       font-size: 1.4rem;
     }
 
+    .modal-header,
+    .modal-price {
+      flex-shrink: 0;
+      height: 60px;
+    }
+
     .modal-buy {
-      padding: 1rem;
+      padding: 3rem;
+      top: 5%;
+      left: 22%;
     }
   }
 
