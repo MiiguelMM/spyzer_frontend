@@ -446,3 +446,119 @@
     padding: 12px 16px;
   }
 }
+/* ==================== HEIGHT-BASED RESPONSIVE (Desktop) ==================== */
+
+/* Desktop with very short height (768px) */
+@media (min-width: 1024px) and (max-height: 768px) {
+  .portfolio-section2 {
+    padding: 1rem 1.2rem;
+    height: 88%;
+  }
+
+  .portfolio-section2 .section2-header {
+    margin-bottom: 0.8rem;
+  }
+
+  .portfolio-section2 .section2-title {
+    font-size: 1.5rem;
+    margin: 0 0 0.2rem 0;
+  }
+
+  .portfolio-section2 .section2-subtitle {
+    font-size: 13px;
+  }
+
+  .portfolio-section2 .chart-container {
+    margin: 0.5rem 0;
+  }
+
+  /* Reduce chart legend max-height for short screens */
+  .portfolio-section2 .chart-legend {
+    max-height: 180px;
+    gap: 6px;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  }
+
+  .portfolio-section2 .legend-item {
+    padding: 6px 10px;
+  }
+
+  .portfolio-section2 .legend-label {
+    font-size: 11px;
+  }
+
+  .portfolio-section2 .legend-percentage {
+    font-size: 10px;
+  }
+
+  .portfolio-section2 .legend-color {
+    width: 10px;
+    height: 10px;
+  }
+
+  /* Show more button adjustments */
+  .portfolio-section2 .show-more-button {
+    padding: 8px 12px;
+    font-size: 10px;
+    margin: 0.5rem 0.5rem 0 0.5rem;
+  }
+}
+
+/* Desktop with short height (769px - 900px) */
+@media (min-width: 1024px) and (min-height: 769px) and (max-height: 900px) {
+  .portfolio-section2 {
+    padding: 1.2rem 1.5rem;
+    height: 89%;
+  }
+
+  .portfolio-section2 .section2-header {
+    margin-bottom: 1rem;
+  }
+
+  .portfolio-section2 .section2-title {
+    font-size: 1.7rem;
+  }
+
+  .portfolio-section2 .section2-subtitle {
+    font-size: 14px;
+  }
+
+  .portfolio-section2 .chart-container {
+    margin: 0.8rem 0;
+  }
+
+  .portfolio-section2 .chart-legend {
+    max-height: 220px;
+    gap: 8px;
+  }
+
+  .portfolio-section2 .legend-item {
+    padding: 8px 12px;
+  }
+
+  .portfolio-section2 .legend-label {
+    font-size: 12px;
+  }
+
+  .portfolio-section2 .legend-percentage {
+    font-size: 11px;
+  }
+
+  /* Show more button adjustments */
+  .portfolio-section2 .show-more-button {
+    padding: 10px 14px;
+    font-size: 11px;
+    margin: 0.6rem 0.5rem 0 0.5rem;
+  }
+}
+
+/* Desktop con altura menor a 820px - Ajustar posición del gráfico */
+@media (min-width: 1024px) and (max-height: 820px) {
+  .portfolio-section2 .chart-container {
+    padding-top: 1rem;
+  }
+  
+  .portfolio-section2 .section2-header {
+    margin-bottom: 0.5rem;
+  }
+}

@@ -9,7 +9,7 @@ export default function PortfolioSection2() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [showAll, setShowAll] = useState(false);
-  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024); // AÑADIR ESTO
 
   // Colores para el pie chart (siguiendo el design system)
   const COLORS = [
@@ -25,7 +25,7 @@ export default function PortfolioSection2() {
     '#F38181', // Rosa
   ];
 
-  // Detectar cambios de tamaño de ventana
+  // AÑADIR ESTE useEffect para detectar cambios de tamaño
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
@@ -39,12 +39,12 @@ export default function PortfolioSection2() {
     const loadPortfolioData = async () => {
       try {
         const usuario = userService.obtenerUsuarioSesion();
-
-        console.log('Usuario de sesión:', usuario);
-
+        
+        console.log('Usuario de sesión:', usuario); 
+        
         if (usuario) {
           const posiciones = await portfolioService.obtenerPortfolioOrdenado(usuario.id);
-
+          
           // Transformar datos para el pie chart
           const data = posiciones.map((posicion, index) => ({
             name: posicion.symbol,
@@ -62,7 +62,7 @@ export default function PortfolioSection2() {
 
           setChartData(dataWithPercentages);
         }
-
+        
         setIsLoading(false);
       } catch (error) {
         console.error('Error loading portfolio data:', error);
@@ -97,12 +97,12 @@ export default function PortfolioSection2() {
 
   const renderLegend = (props) => {
     const { payload } = props;
-
+    
     if (!payload || payload.length === 0) return null;
-
-    // Siempre mostrar solo top 5 inicialmente con botón show more/less
-    const displayData = showAll ? payload : payload.slice(0, 5);
-
+    
+    // Mostrar solo top 5 o todas según el estado (en desktop siempre mostrar todo)
+    const displayData = isDesktop ? payload : (showAll ? payload : payload.slice(0, 5));
+    
     return (
       <div className="legend-wrapper">
         <div className="chart-legend">
@@ -111,8 +111,8 @@ export default function PortfolioSection2() {
             const dataItem = chartData.find(item => item.name === entry.value);
             return (
               <div key={`legend-${index}`} className="legend-item">
-                <div
-                  className="legend-color"
+                <div 
+                  className="legend-color" 
                   style={{ backgroundColor: entry.color }}
                 ></div>
                 <span className="legend-label">{entry.value}</span>
@@ -123,17 +123,17 @@ export default function PortfolioSection2() {
             );
           })}
         </div>
-
-        {/* Botón Ver Más / Ver Menos - Mostrar siempre cuando hay más de 5 posiciones */}
-        {payload.length > 5 && (
-          <button
+        
+        {/* Botón Ver Más / Ver Menos */}
+        {payload.length > 5 && !isDesktop && (
+          <button 
             className="show-more-button"
             onClick={(e) => {
               e.preventDefault();
               setShowAll(!showAll);
             }}
           >
-            {showAll ? 'Show Less' : 'Show More'}
+            {showAll ? 'Show Less' : `Show More `}
           </button>
         )}
       </div>
@@ -187,9 +187,9 @@ export default function PortfolioSection2() {
         <h2 className="section2-title">Portfolio Distribution</h2>
         <p className="section2-subtitle">{chartData.length} positions</p>
       </div>
-
+      
       <div className="chart-container">
-
+      
         <ResponsiveContainer width="100%" height={isDesktop ? '100%' : 550}>
           <PieChart>
             <Pie
