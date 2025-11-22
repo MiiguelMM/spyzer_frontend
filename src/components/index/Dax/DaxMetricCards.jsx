@@ -1,4 +1,4 @@
-// DaxMetricCards.jsx - DAX usando DataDistributor
+// DaxMetricCards.jsx - DAX usando DataDistributor (VERSIÓN LIMPIA)
 import React from 'react';
 import { useDAX } from '../../context/IndicesProvider';
 import '../../../css/MetricsCards.css';
@@ -13,6 +13,7 @@ export default function DaxMetricsCards() {
     currentPrice,
     dailyChange,
     percentChange,
+    previousClose,
     marketInfo
   } = useDAX();
 
@@ -36,41 +37,70 @@ export default function DaxMetricsCards() {
     );
   }
 
-  // 🔧 SOLUCIÓN: Obtener el cierre del día anterior correctamente
-  const getYesterdayClose = () => {
-    if (!historicalData || historicalData.length === 0) return null;
+  // 🔧 SOLUCIÓN: Usar el día de la semana REAL para determinar qué mostrar
+  const getPreviousClose = () => {
+    if (historicalData.length < 3) return null;
 
-    // Obtener la fecha de hoy (sin hora)
-    const todayDate = new Date();
-    todayDate.setHours(0, 0, 0, 0);
-    const todayTimestamp = Math.floor(todayDate.getTime() / 1000);
+    const now = new Date();
+    const dayOfWeek = now.getDay(); // 0=Domingo, 1=Lunes, ..., 5=Viernes, 6=Sábado
 
-    // Encontrar todos los puntos del día anterior
-    const yesterdayPoints = [];
+    // Determinar cuántos días de trading retroceder
+    let diasAtras;
+
+    if (dayOfWeek === 0 || dayOfWeek === 6) {
+      // Sábado o Domingo → 2 días de trading atrás (jueves)
+      diasAtras = 2;
+    } else if (dayOfWeek === 5) {
+      // Viernes → 1 día de trading atrás (jueves)
+      diasAtras = 1;
+    } else if (dayOfWeek === 1) {
+      // Lunes → 1 día de trading atrás (viernes)
+      diasAtras = 1;
+    } else {
+      // Martes, Miércoles, Jueves → 1 día atrás
+      diasAtras = 1;
+    }
+
+    // Buscar hacia atrás los días de trading necesarios
+    const tradingDays = [];
+    let lastDate = null;
+
     for (let i = historicalData.length - 1; i >= 0; i--) {
       const pointDate = new Date(historicalData[i].time * 1000);
       pointDate.setHours(0, 0, 0, 0);
-      const pointTimestamp = Math.floor(pointDate.getTime() / 1000);
+      const pointDay = pointDate.getTime();
 
-      // Si el punto es de ayer, agregarlo
-      if (pointTimestamp < todayTimestamp) {
-        yesterdayPoints.push(historicalData[i]);
-      }
-      
-      // Si encontramos puntos de ayer y luego pasamos a días anteriores, parar
-      if (yesterdayPoints.length > 0 && pointTimestamp < todayTimestamp - 86400) {
-        break;
+      // Solo agregar si es un día diferente al anterior
+      if (lastDate === null || pointDay < lastDate) {
+        tradingDays.push({
+          date: pointDate,
+          close: historicalData[i].close,
+          index: i
+        });
+        lastDate = pointDay;
+
+        // Si ya tenemos suficientes días, parar
+        if (tradingDays.length > diasAtras) {
+          break;
+        }
       }
     }
 
-    // Retornar el último punto de ayer (el cierre)
-    return yesterdayPoints.length > 0 ? yesterdayPoints[0] : historicalData[historicalData.length - 2];
+    // Retornar el día correcto
+    if (tradingDays.length > diasAtras) {
+      const targetDay = tradingDays[diasAtras];
+      console.log(`[DAX] Previous Close: ${targetDay.date.toDateString()} - €${targetDay.close}`);
+      return targetDay.close;
+    }
+
+    // Fallback
+    return tradingDays[tradingDays.length - 1]?.close || historicalData[historicalData.length - 2].close;
   };
 
-  const today = historicalData[historicalData.length - 1];
-  const yesterday = getYesterdayClose();
+  const latestPoint = historicalData[historicalData.length - 1];
+  const yesterdayClose = previousClose || getPreviousClose();
 
-  if (!yesterday) {
+  if (!yesterdayClose) {
     return (
       <div className="error-container">
         <div className="error-icon">⚠️</div>
@@ -79,9 +109,9 @@ export default function DaxMetricsCards() {
     );
   }
 
-  // Usar datos calculados del contexto
-  const priceChange = dailyChange || (currentPrice || today.close) - yesterday.close;
-  const percentageChange = percentChange || ((priceChange / yesterday.close) * 100);
+  // Calcular cambios
+  const priceChange = dailyChange || (currentPrice || latestPoint.close) - yesterdayClose;
+  const percentageChange = percentChange || ((priceChange / yesterdayClose) * 100);
   const isPositive = priceChange >= 0;
 
   return (
@@ -96,13 +126,13 @@ export default function DaxMetricsCards() {
           <div className="metric-row">
             <span className="metric-label">Current:</span>
             <span className="metric-value">
-              €{(currentPrice || today.close).toFixed(2)}
+              €{(currentPrice || latestPoint.close).toFixed(2)}
             </span>
           </div>
         </div>
       </div>
 
-      {/* Yesterday's Metrics */}
+      {/* Previous Close */}
       <div className="metrics-card">
         <div className="card-header">
           <div className="card-indicator yesterday"></div>
@@ -112,7 +142,7 @@ export default function DaxMetricsCards() {
           <div className="metric-row yesterday-close">
             <span className="metric-label">Close:</span>
             <span className="metric-value yesterday-close">
-              €{yesterday.close.toFixed(2)}
+              €{yesterdayClose.toFixed(2)}
             </span>
           </div>
         </div>

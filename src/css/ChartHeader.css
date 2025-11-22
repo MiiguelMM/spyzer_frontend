@@ -48,7 +48,7 @@
   .chart-header {
     position: relative;
     margin-top: 2%;
-    top: 2px;
+    top: 6px;
     width: 85%;
     height: 100px;
 
@@ -86,7 +86,7 @@
   }
 
   .chart-header-title {
-    font-size: 2rem;
+    font-size: 1.85rem;
     letter-spacing: 1.2px;
   }
 

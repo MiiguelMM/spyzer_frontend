@@ -695,9 +695,9 @@
     }
 
     .modal-buy {
-      position: relative;
-      top: -30%;
-      left: 20%;
+
+      top: 20%;
+      left: 25%;
     }
 
     .section3-subtitle {
