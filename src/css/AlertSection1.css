@@ -1640,6 +1640,7 @@
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    background-color: #1E1E1E;
   }
 
   .alert-section1-header {
