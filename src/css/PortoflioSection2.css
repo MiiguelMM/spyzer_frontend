@@ -9,7 +9,7 @@
   background-color: #181818;
   border: 1px solid #333333;
   border-radius: 12px;
-  box-shadow: 
+  box-shadow:
     0 2px 10px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   transition: all 0.3s ease;
@@ -184,7 +184,7 @@
   letter-spacing: 0.8px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 
+  box-shadow:
     0 2px 10px rgba(0, 0, 0, 0.6),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
   margin: 0 0.5rem;
@@ -193,7 +193,7 @@
 .portfolio-section2 .show-more-button:hover {
   background: linear-gradient(135deg, #00BFFF 0%, #007ACC 100%);
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 4px 15px rgba(0, 0, 0, 0.8),
     0 0 8px rgba(0, 191, 255, 0.3);
   border-color: #444444;
@@ -233,8 +233,13 @@
 
 /* Animación única para este componente */
 @keyframes portfolio-section2-spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* Error State */
@@ -369,20 +374,23 @@
     padding: 1.5rem;
     background-color: #1E1E1E;
     width: 82%;
-    height: 90%; 
+    height: 90%;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
   }
+
   .portfolio-section2 .show-more-button {
-  width: 98.5%;
-  font-size: 11px;
-}
+    width: 98.5%;
+    font-size: 11px;
+  }
+
   .portfolio-section2 .section2-header {
-    flex-shrink: 0; /* Header mantiene su tamaño fijo */
+    flex-shrink: 0;
+    /* Header mantiene su tamaño fijo */
     margin-bottom: 1.5rem;
   }
-   
+
   .portfolio-section2 .section2-title {
     font-size: 2rem;
   }
@@ -390,10 +398,12 @@
   .portfolio-section2 .section2-subtitle {
     font-size: 15px;
   }
-  
+
   .chart-container {
-    flex: 1; /* Ocupa todo el espacio restante */
-    min-height: 0; /* Importante para que el flex funcione */
+    flex: 1;
+    /* Ocupa todo el espacio restante */
+    min-height: 0;
+    /* Importante para que el flex funcione */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -446,6 +456,7 @@
     padding: 12px 16px;
   }
 }
+
 /* ==================== HEIGHT-BASED RESPONSIVE (Desktop) ==================== */
 
 /* Desktop with very short height (768px) */
@@ -557,7 +568,7 @@
   .portfolio-section2 .chart-container {
     padding-top: 1rem;
   }
-  
+
   .portfolio-section2 .section2-header {
     margin-bottom: 0.5rem;
   }
@@ -573,7 +584,7 @@
   }
 
   .portfolio-section2 .section2-title {
-    font-size: 1.6rem;
+    font-size: 2rem;
   }
 
   .portfolio-section2 .section2-subtitle {

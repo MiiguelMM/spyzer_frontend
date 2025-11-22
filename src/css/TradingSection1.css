@@ -878,7 +878,8 @@
   @media (min-width: 1024px) and (max-height: 900px) {
     .portfolio-section3 {
       min-height: auto;
-      height: 85vh;
+      height: 80vh;
+      width: 95%;
       margin: 2vh auto;
       padding: 1.5rem;
       display: flex;
