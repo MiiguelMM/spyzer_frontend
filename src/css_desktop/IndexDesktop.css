@@ -38,7 +38,7 @@ body {
   backdrop-filter: blur(20px) saturate(180%);
   overflow: hidden;
   box-sizing: border-box;
-  height: 90vh;
+  height: 90.1vh;
   position: relative;
 }
 
@@ -148,26 +148,15 @@ body {
   }
 }
 
-/* Height-based responsive adjustments for short screens */
-@media (min-width: 1024px) and (max-height: 768px) {
-  .desktop-component {
-    margin-top: 3vh;
-    height: 94vh;
-  }
-
-  .desktop-component__page {
-    padding: 1rem 0;
-  }
-}
-
-@media (min-width: 1024px) and (max-height: 900px) {
+/* Height-based responsive adjustments for short screens (up to 800px) */
+@media (min-width: 1024px) and (max-height: 800px) {
   .desktop-component {
     margin-top: 4vh;
-    height: 92vh;
+    height: 92.2vh;
   }
 
   .desktop-component__page {
-    padding: 1.5rem 0;
+    padding: 0.5rem 0;
   }
 }
 
