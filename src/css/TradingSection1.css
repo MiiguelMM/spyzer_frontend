@@ -664,7 +664,7 @@
   @media (min-width: 1024px) and (max-width: 1439px) {
     .portfolio-section3 {
       width: 85%;
-      height: 100%;
+      height: 93%;
       padding: 2rem 1.5rem;
       background-color: #1E1E1E;
     }
@@ -698,7 +698,7 @@
     .stocks-grid {
       grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
       gap: 1.2rem;
-      max-height: 500px;
+
     }
 
     .stock-card {
@@ -743,7 +743,6 @@
     }
 
     .modal-buy {
-
       top: 20%;
       left: 25%;
     }
@@ -821,7 +820,6 @@
 
   @media (min-width: 1600px) {
     .modal-buy {
-
       top: 20%;
       left: 30%;
     }
@@ -846,180 +844,121 @@
     }
 
     .modal-buy {
-
       top: 20%;
-      left: 35%;
+      width: 80%;
+      max-width: 500px;
     }
   }
-}
 
-/* ==================== HEIGHT-BASED RESPONSIVE (Desktop) ==================== */
+  /* ==================== HEIGHT-BASED RESPONSIVE (Desktop) ==================== */
 
-/* Desktop with very short height (768px) */
-@media (min-width: 1024px) and (max-height: 768px) {
-  .portfolio-section3 {
-    padding: 1rem 1.2rem;
-    min-height: auto;
+  /* Desktop Short Screens (Height < 900px) */
+  @media (min-width: 1024px) and (max-height: 900px) {
+    .portfolio-section3 {
+      min-height: auto;
+      height: 85vh;
+      margin: 2vh auto;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .section3-header {
+      margin-bottom: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .section3-title {
+      font-size: 1.6rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .section3-subtitle {
+      font-size: 0.8rem;
+    }
+
+    .search-container {
+      margin-bottom: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .search-input {
+      padding: 0.6rem 1rem;
+      font-size: 0.85rem;
+    }
+
+    .category-filters {
+      margin-bottom: 0.8rem;
+      padding-bottom: 0.5rem;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .category-btn {
+      padding: 0.4rem 0.8rem;
+      font-size: 0.75rem;
+    }
+
+    .stocks-grid {
+      flex-grow: 1;
+      max-height: none;
+      overflow-y: auto;
+      gap: 0.8rem;
+      padding-bottom: 0.5rem;
+    }
+
+    .stock-card {
+      padding: 0.8rem;
+    }
+
+    .stock-symbol {
+      font-size: 0.9rem;
+    }
+
+    .stock-name {
+      font-size: 0.7rem;
+    }
+
+    /* Modal adjustments */
+    .modal-buy {
+      top: -45%;
+      left: 25%;
+      transform: translate(-50%, -50%);
+      width: 70%;
+      height: 85vh;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .trading-section1-container {
+      overflow-y: none;
+    }
+
+    .modal-header,
+    .modal-price {
+      flex-shrink: 0;
+    }
+
+    .modal-controls {
+      overflow-y: auto;
+    }
   }
 
-  .section3-header {
-    margin-bottom: 1rem;
+  /* Desktop Very Short Screens (Height < 700px) */
+  @media (min-width: 1024px) and (max-height: 700px) {
+    .portfolio-section3 {
+      height: 81vh;
+      padding: 1rem;
+    }
+
+    .section3-title {
+      font-size: 1.4rem;
+    }
+
+    .modal-buy {
+      padding: 1rem;
+    }
   }
 
-  .section3-title {
-    font-size: 1.5rem;
-    margin: 0 0 0.2rem 0;
-  }
-
-  .section3-subtitle {
-    font-size: 0.75rem;
-  }
-
-  .search-container {
-    margin-bottom: 1rem;
-  }
-
-  .search-input {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.85rem;
-  }
-
-  .category-filters {
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-    padding-bottom: 0.8rem;
-  }
-
-  .category-btn {
-    padding: 0.5rem 0.9rem;
-    font-size: 0.75rem;
-  }
-
-  .stocks-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 0.8rem;
-    max-height: 280px;
-    padding: 0.3rem;
-  }
-
-  .stock-card {
-    padding: 0.8rem;
-  }
-
-  .stock-symbol {
-    font-size: 0.9rem;
-  }
-
-  .stock-name {
-    font-size: 0.7rem;
-  }
-}
-
-/* Desktop with short height (769px - 900px) */
-@media (min-width: 1024px) and (min-height: 769px) and (max-height: 900px) {
-  .portfolio-section3 {
-    padding: 1.5rem;
-    min-height: auto;
-  }
-
-  .section3-header {
-    margin-bottom: 1.2rem;
-  }
-
-  .section3-title {
-    font-size: 1.7rem;
-  }
-
-  .section3-subtitle {
-    font-size: 0.8rem;
-  }
-
-  .search-container {
-    margin-bottom: 1.2rem;
-  }
-
-  .category-filters {
-    gap: 0.6rem;
-    margin-bottom: 1.2rem;
-  }
-
-  .category-btn {
-    padding: 0.6rem 1rem;
-    font-size: 0.8rem;
-  }
-
-  .stocks-grid {
-    grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-    gap: 1rem;
-    max-height: 350px;
-  }
-
-  .stock-card {
-    padding: 1rem;
-  }
-
-  .stock-symbol {
-    font-size: 0.95rem;
-  }
-
-  .stock-name {
-    font-size: 0.72rem;
-  }
-}
-
-/* Desktop pequeño con poco ancho (1024-1280px) */
-@media (min-width: 1024px) and (max-width: 1280px) {
-  .portfolio-section3 {
-    width: 88%;
-    padding: 1.5rem 1.2rem;
-  }
-
-  .section3-title {
-    font-size: 1.8rem;
-  }
-
-  .stocks-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 1rem;
-  }
-
-  .modal-buy {
-    width: 75%;
-    left: 18%;
-  }
-}
-
-/* Combinación: Desktop pequeño Y altura corta */
-@media (min-width: 1024px) and (max-width: 1280px) and (max-height: 900px) {
-  .portfolio-section3 {
-    padding: 1rem;
-    min-height: auto;
-  }
-
-  .section3-title {
-    font-size: 1.5rem;
-  }
-
-  .section3-subtitle {
-    font-size: 0.75rem;
-  }
-
-  .category-filters {
-    gap: 0.5rem;
-  }
-
-  .category-btn {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.75rem;
-  }
-
-  .stocks-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 0.8rem;
-    max-height: 300px;
-  }
-
-  .stock-card {
-    padding: 0.8rem;
-  }
 }
