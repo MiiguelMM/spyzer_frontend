@@ -10,6 +10,7 @@ export default function PortfolioSection2() {
   const [error, setError] = useState(null);
   const [showAll, setShowAll] = useState(false);
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
+  const [isShortScreen, setIsShortScreen] = useState(window.innerHeight <= 900);
 
   // Colores para el pie chart (siguiendo el design system)
   const COLORS = [
@@ -25,10 +26,11 @@ export default function PortfolioSection2() {
     '#F38181', // Rosa
   ];
 
-  // Detectar cambios de tamaño de ventana
+  // Detectar cambios de tamaño de ventana (ancho y alto)
   useEffect(() => {
     const handleResize = () => {
       setIsDesktop(window.innerWidth >= 1024);
+      setIsShortScreen(window.innerHeight <= 900);
     };
 
     window.addEventListener('resize', handleResize);
@@ -140,6 +142,37 @@ export default function PortfolioSection2() {
     );
   };
 
+  // Calcular tamaños del gráfico basados en el tamaño de pantalla
+  const getChartSizes = () => {
+    if (isDesktop) {
+      // Desktop: ajustar según altura
+      if (isShortScreen) {
+        // Pantalla desktop corta: gráfico más pequeño
+        return {
+          outerRadius: 100,
+          innerRadius: 65,
+          cy: "40%"
+        };
+      } else {
+        // Pantalla desktop normal: gráfico grande
+        return {
+          outerRadius: 150,
+          innerRadius: 100,
+          cy: "45%"
+        };
+      }
+    } else {
+      // Mobile: tamaño estándar
+      return {
+        outerRadius: 100,
+        innerRadius: 60,
+        cy: "50%"
+      };
+    }
+  };
+
+  const chartSizes = getChartSizes();
+
   if (isLoading) {
     return (
       <div className="portfolio-section2">
@@ -195,10 +228,10 @@ export default function PortfolioSection2() {
             <Pie
               data={chartData}
               cx="50%"
-              cy={isDesktop ? "45%" : "50%"}
+              cy={chartSizes.cy}
               labelLine={false}
-              outerRadius={isDesktop ? 150 : 100}
-              innerRadius={isDesktop ? 100 : 60}
+              outerRadius={chartSizes.outerRadius}
+              innerRadius={chartSizes.innerRadius}
               fill="#8884d8"
               dataKey="value"
               animationBegin={0}
