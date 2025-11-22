@@ -3,6 +3,7 @@ import { createChart, AreaSeries, LineSeries, CandlestickSeries } from 'lightwei
 import React, { useEffect, useRef, useState } from 'react';
 import { useSP500, useIndices } from '../../context/IndicesProvider';
 import { useIsDesktop } from '../../../hooks/useIsDesktop';
+import { usePageTransition } from '../../../components/loading/PageTransitionContext.jsx';
 import '../../../css/RangeSwitcherChart.css';
 
 export default function RangeSwitcherChart() {
@@ -11,9 +12,12 @@ export default function RangeSwitcherChart() {
   const seriesRef = useRef(null);
   const [selectedRange, setSelectedRange] = useState('1year');
   const [selectedChartType, setSelectedChartType] = useState('area');
-  
+
   // 👇 NUEVO: Detectar si es desktop
   const isDesktop = useIsDesktop(769);
+
+  // 👇 NUEVO: Hook para controlar el loader de transición
+  const { startTransition, endTransition } = usePageTransition();
 
   // Obtener datos del contexto centralizado
   const {
@@ -26,6 +30,15 @@ export default function RangeSwitcherChart() {
   } = useSP500();
 
   const { refresh } = useIndices();
+
+  // 👇 NUEVO: Efecto para manejar el loader cuando cambia isLoading
+  useEffect(() => {
+    if (isLoading) {
+      startTransition();
+    } else {
+      endTransition();
+    }
+  }, [isLoading, startTransition, endTransition]);
 
   // Chart types configuration
   const chartTypes = [
@@ -91,7 +104,7 @@ export default function RangeSwitcherChart() {
 
     // Fecha actual en segundos
     const nowTimestamp = Math.floor(Date.now() / 1000);
-    
+
     let filteredData;
 
     if (range.value === 'todos') {
@@ -101,7 +114,7 @@ export default function RangeSwitcherChart() {
       let useMarketDays = false;
       let marketDaysToShow;
       let daysToSubtract;
-      
+
       switch (range.value) {
         case '3dias':
           useMarketDays = true;
@@ -131,17 +144,17 @@ export default function RangeSwitcherChart() {
         // Filtrar por días de mercado únicos (para rangos cortos)
         const uniqueDays = [];
         const seenDates = new Set();
-        
+
         // Recorrer desde el final hacia atrás para encontrar N días únicos
         for (let i = historicalData.length - 1; i >= 0 && uniqueDays.length < marketDaysToShow; i--) {
           const dateStr = new Date(historicalData[i].time * 1000).toDateString();
-          
+
           if (!seenDates.has(dateStr)) {
             seenDates.add(dateStr);
             uniqueDays.unshift(dateStr); // Añadir al principio para mantener orden
           }
         }
-        
+
         // Filtrar todos los puntos que pertenezcan a esos días de mercado
         filteredData = historicalData.filter(item => {
           const itemDate = new Date(item.time * 1000).toDateString();
@@ -150,7 +163,7 @@ export default function RangeSwitcherChart() {
       } else {
         // Timestamp de inicio (fecha actual - días calendario)
         const startTimestamp = nowTimestamp - (daysToSubtract * 24 * 60 * 60);
-        
+
         // Filtrar por fecha real - obtiene TODOS los puntos en ese rango
         filteredData = historicalData.filter(item => item.time >= startTimestamp);
       }
@@ -159,7 +172,7 @@ export default function RangeSwitcherChart() {
     // Agregar precio actual si existe
     if (currentPrice !== undefined && currentPrice !== null) {
       const lastPoint = filteredData[filteredData.length - 1];
-      
+
       if (!lastPoint || lastPoint.close !== currentPrice) {
         filteredData.push({
           time: nowTimestamp,
@@ -172,13 +185,13 @@ export default function RangeSwitcherChart() {
       }
     }
 
-  
-  
+
+
     // 1. Asegurar orden ascendente por tiempo (del más antiguo al más reciente)
-    filteredData.sort((a, b) => a.time - b.time); 
-    
+    filteredData.sort((a, b) => a.time - b.time);
+
     // 2. Filtrar entradas con el mismo timestamp consecutivo
-    const uniqueData = filteredData.filter((item, index, self) => 
+    const uniqueData = filteredData.filter((item, index, self) =>
       index === 0 || item.time !== self[index - 1].time
     );
 
@@ -453,12 +466,6 @@ export default function RangeSwitcherChart() {
   return (
     <div className="range-switcher-chart">
       <div ref={chartContainerRef} className="chart-container">
-        {isLoading && (
-          <div className="loading-container">
-            <div className="loading-spinner"></div>
-            <span className="loading-text">📊 Loading {marketInfo?.name} data...</span>
-          </div>
-        )}
         {hasError && (
           <div className="error-container">
             <span>⚠️ Error loading data: {error}</span>

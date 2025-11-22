@@ -86,7 +86,7 @@
   }
 
   .chart-header-title {
-    font-size: 31.5px;
+    font-size: 2rem;
     letter-spacing: 1.2px;
   }
 
@@ -148,7 +148,7 @@
   }
 }
 
-@media (min-width: 1024px) and (max-height: 900px) {
+@media (min-width: 1024px) and (max-height: 800px) {
   .chart-header {
     height: 100px;
     margin-top: 1.5%;
