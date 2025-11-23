@@ -875,7 +875,7 @@
   /* ==================== HEIGHT-BASED RESPONSIVE (Desktop) ==================== */
 
   /* Desktop Short Screens (Height < 900px) */
-  @media (min-width: 1024px) and (max-height: 900px) {
+  @media (min-width: 1024px) and (max-height: 800px) {
     .portfolio-section3 {
       min-height: auto;
       height: 80vh;
