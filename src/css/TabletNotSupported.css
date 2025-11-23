@@ -1,0 +1,262 @@
+/* TabletNotSupported.css - Estilo Corporativo Fintech */
+@import url('https://api.fontshare.com/v2/css?f[]=satoshi@500,600,700,900&display=swap');
+
+.tablet-not-supported {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: #0D0D0D;
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    font-family: 'Satoshi', Arial, sans-serif;
+}
+
+.tablet-not-supported-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+    animation: fadeIn 0.4s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.tablet-info-card {
+    background-color: #181818;
+    border: 1px solid #333333;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    text-align: center;
+}
+
+.tablet-header-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tablet-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    opacity: 0.95;
+}
+
+.info-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-icon svg {
+    width: 48px;
+    height: 48px;
+    color: #B0B0B0;
+}
+
+.tablet-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin: 0 0 1.25rem 0;
+    font-family: 'Satoshi', Arial, sans-serif;
+    letter-spacing: 0.5px;
+}
+
+.tablet-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #333333, transparent);
+    margin: 0 auto 1.5rem auto;
+}
+
+.tablet-message {
+    font-size: 1rem;
+    color: #CCCCCC;
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.tablet-suggestion {
+    font-size: 0.9375rem;
+    color: #B0B0B0;
+    margin: 0 0 2rem 0;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
+.supported-devices {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #333333;
+}
+
+.device-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    transition: all 0.3s ease;
+}
+
+.device-item:hover .device-icon-wrapper {
+    background-color: #1E1E1E;
+    border-color: #00BFFF;
+}
+
+.device-item:hover .device-label {
+    color: #FFFFFF;
+}
+
+.device-icon-wrapper {
+    width: 64px;
+    height: 64px;
+    background-color: #0D0D0D;
+    border: 1px solid #333333;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.device-icon-wrapper svg {
+    width: 32px;
+    height: 32px;
+    color: #B0B0B0;
+}
+
+.device-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #B0B0B0;
+    letter-spacing: 0.3px;
+    transition: color 0.3s ease;
+}
+
+.device-separator {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(180deg, transparent, #333333, transparent);
+}
+
+/* Media query para tablets (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .tablet-not-supported {
+        display: flex;
+    }
+
+    /* Ocultar todo el contenido de la app cuando se muestra el mensaje de tablet */
+    body .App {
+        display: none !important;
+    }
+}
+
+/* Ajustes para tablets en orientación portrait */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+    .tablet-info-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .tablet-title {
+        font-size: 1.5rem;
+    }
+
+    .tablet-message {
+        font-size: 0.9375rem;
+    }
+
+    .tablet-suggestion {
+        font-size: 0.875rem;
+    }
+
+    .supported-devices {
+        gap: 1.5rem;
+    }
+
+    .device-icon-wrapper {
+        width: 56px;
+        height: 56px;
+    }
+
+    .device-icon-wrapper svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .device-label {
+        font-size: 0.8125rem;
+    }
+}
+
+/* Ajustes para tablets más pequeñas */
+@media (min-width: 768px) and (max-width: 900px) {
+    .tablet-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tablet-header-icons {
+        gap: 1.25rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .info-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+
+    .tablet-title {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tablet-divider {
+        margin-bottom: 1.25rem;
+    }
+
+    .tablet-message,
+    .tablet-suggestion {
+        font-size: 0.875rem;
+    }
+
+    .supported-devices {
+        gap: 1.25rem;
+    }
+
+    .device-icon-wrapper {
+        width: 52px;
+        height: 52px;
+    }
+
+    .device-icon-wrapper svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .device-separator {
+        height: 50px;
+    }
+}
