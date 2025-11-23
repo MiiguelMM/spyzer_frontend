@@ -115,8 +115,8 @@ body {
 /* Large Screens (1440px - 1919px) */
 @media (min-width: 1440px) and (max-width: 1919px) {
   .index-page__content-desktop {
-    padding-left: 340px;
-    /* 280px (ancho header) + 60px (margin-left header) */
+    padding-left: 320px;
+
   }
 
   .desktop-component {
@@ -127,8 +127,8 @@ body {
 /* Medium-Large Screens (1280px - 1439px) */
 @media (min-width: 1280px) and (max-width: 1439px) {
   .index-page__content-desktop {
-    padding-left: 320px;
-    /* 260px (ancho header) + 60px (margin-left header) */
+    padding-left: 300px;
+
   }
 
   .desktop-component {
@@ -139,7 +139,7 @@ body {
 /* Medium Screens (1024px - 1279px) */
 @media (min-width: 1024px) and (max-width: 1279px) {
   .index-page__content-desktop {
-    padding-left: 300px;
+    padding-left: 280px;
     /* 240px (ancho header) + 60px (margin-left header) */
   }
 

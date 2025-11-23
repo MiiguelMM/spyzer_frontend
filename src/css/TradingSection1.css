@@ -671,7 +671,7 @@
   @media (min-width: 1024px) and (max-width: 1439px) {
     .portfolio-section3 {
       width: 85%;
-      height: 85vh;
+      height: 80vh;
       padding: 2rem 1.5rem;
       background-color: #1E1E1E;
       display: flex;
@@ -739,7 +739,7 @@
   @media (min-width: 1440px) {
     .portfolio-section3 {
       width: 90%;
-      height: 85vh;
+      height: 75vh;
       padding: 2.5rem 2rem;
       background-color: #1E1E1E;
       display: flex;
@@ -879,7 +879,7 @@
     .portfolio-section3 {
       min-height: auto;
       height: 80vh;
-      width: 95%;
+      width: 85%;
       margin: 2vh auto;
       padding: 1.5rem;
       display: flex;

@@ -587,7 +587,7 @@
   .header-desktop {
     top: 5vh;
     left: 60px;
-    width: 280px;
+    width: 260px;
     height: 89.9vh;
   }
 
@@ -601,13 +601,24 @@
   }
 }
 
+@media (min-width: 1439px) {
+  .header-desktop {}
+
+  .header-desktop__logo {
+    left: 0.5rem;
+  }
+}
+
 /* Medium-Large Screens (1280px - 1439px) */
 @media (min-width: 1280px) and (max-width: 1439px) {
   .header-desktop {
     top: 5vh;
     left: 60px;
-    width: 260px;
+    width: 240px;
     height: 89.9vh;
+
+    border-top-left-radius: 55px;
+    border-bottom-left-radius: 55px;
   }
 
   .header-desktop__container {
@@ -615,7 +626,8 @@
   }
 
   .header-desktop__logo {
-    left: 1.2rem;
+    left: 0.5rem;
+    top: 4.5rem !important;
   }
 
   .header-desktop__logo img {
@@ -674,7 +686,7 @@
   .header-desktop {
     top: 5vh;
     left: 60px;
-    width: 240px;
+    width: 220px;
     height: 89.9vh;
     border-top-left-radius: 55px;
     border-bottom-left-radius: 55px;
@@ -685,7 +697,7 @@
   }
 
   .header-desktop__logo {
-    left: 1rem;
+    left: 0.5rem;
     top: 3.5rem;
   }
 
@@ -862,7 +874,7 @@
   }
 
   .header-desktop__nav {
-    padding: 1.5rem 1.2rem;
+    padding: 0.5rem 1.5rem;
     gap: 6px;
   }
 
