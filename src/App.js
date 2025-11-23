@@ -18,6 +18,7 @@ import { PageTransitionProvider } from './components/loading/PageTransitionConte
 // Components
 import SpyzerLoadingAnimation from './components/loading/SpyzerLoadingAnimation.jsx'
 import PageTransitionLoader from './components/loading/PageTransitionLoader.jsx'
+import TabletNotSupported from './components/TabletNotSupported.jsx'
 
 // Assets
 import Logo from './assets/Logo5.png'
@@ -113,102 +114,105 @@ function AppContent() {
   }
 
   return (
-    <div className="App">
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <PublicRoute isLoggedIn={isLoggedIn}>
-              <LandingPage />
-            </PublicRoute>
-          }
-        />
+    <>
+      <TabletNotSupported />
+      <div className="App">
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <PublicRoute isLoggedIn={isLoggedIn}>
+                <LandingPage />
+              </PublicRoute>
+            }
+          />
 
-        <Route
-          path="/oauth2/redirect"
-          element={<OAuth2RedirectHandler />}
-        />
+          <Route
+            path="/oauth2/redirect"
+            element={<OAuth2RedirectHandler />}
+          />
 
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Index
-                onLogout={handleLogout}
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Index
+                  onLogout={handleLogout}
+                  currentUser={currentUser}
+                />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Index
-                onLogout={handleLogout}
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Index
+                  onLogout={handleLogout}
+                  currentUser={currentUser}
+                />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/my-portfolio"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <MyPortfolio
-                onLogout={handleLogout}
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/my-portfolio"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <MyPortfolio
+                  onLogout={handleLogout}
+                  currentUser={currentUser}
+                />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/trading"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Trading
-                onLogout={handleLogout}
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/trading"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Trading
+                  onLogout={handleLogout}
+                  currentUser={currentUser}
+                />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/rankings"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Rankings
-                onLogout={handleLogout}
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/rankings"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Rankings
+                  onLogout={handleLogout}
+                  currentUser={currentUser}
+                />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/my-alerts"
-          element={
-            <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <Alert
-                onLogout={handleLogout}
-                currentUser={currentUser}
-              />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/my-alerts"
+            element={
+              <ProtectedRoute isLoggedIn={isLoggedIn}>
+                <Alert
+                  onLogout={handleLogout}
+                  currentUser={currentUser}
+                />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="*"
-          element={
-            <Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />
-          }
-        />
-      </Routes>
-    </div>
+          <Route
+            path="*"
+            element={
+              <Navigate to={isLoggedIn ? "/dashboard" : "/login"} replace />
+            }
+          />
+        </Routes>
+      </div>
+    </>
   )
 }
 
