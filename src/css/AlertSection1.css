@@ -1635,7 +1635,7 @@
 @media (min-width: 1024px) and (max-height: 900px) {
   .alert-section1 {
     min-height: auto;
-    height: 85vh;
+    height: 75vh;
     margin: 2vh auto;
     padding: 1.5rem;
     display: flex;
