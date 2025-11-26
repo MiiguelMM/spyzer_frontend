@@ -366,164 +366,202 @@ const TradingSection2 = () => {
                     </div>
                   </div>
                 </div>
-
-                {selectedPosition?.symbol === position.symbol && (
-                  <div className="position-detail">
-                    <div className="detail-grid">
-                      <div className="detail-item">
-                        <span className="detail-label">Average Price</span>
-                        <span className="detail-value">
-                          ${position.averagePrice.toFixed(2)}
-                        </span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Current Price</span>
-                        <span className="detail-value">
-                          ${position.currentPrice.toFixed(2)}
-                        </span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Amount</span>
-                        <span className="detail-value">{position.amount}</span>
-                      </div>
-                      <div className="detail-item">
-                        <span className="detail-label">Total Investment</span>
-                        <span className="detail-value">
-                          ${(position.averagePrice * position.amount).toFixed(2)}
-                        </span>
-                      </div>
-                    </div>
-
-                    {/* Sell Section */}
-                    <div className="sell-section">
-                      {!isShowingSell ? (
-                        <button 
-                          className="sell-button"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            handleShowSell();
-                          }}
-                        >
-                          SELL
-                        </button>
-                      ) : (
-                        <div className="sell-form" onClick={(e) => e.stopPropagation()}>
-                          <div className="sell-form-header">
-                            <h4>Sell {position.symbol}</h4>
-                            <span className="disponible">Available: {position.amount} shares</span>
-                          </div>
-                          
-                          <div className="sell-input-group">
-                            <label htmlFor="sellAmount">Amount to sell:</label>
-                            <input
-                              id="sellAmount"
-                              type="number"
-                              min="1"
-                              max={position.amount}
-                              value={sellAmount}
-                              onChange={(e) => setSellAmount(e.target.value)}
-                              placeholder="0"
-                              className="sell-input"
-                            />
-                            <div className="quick-buttons">
-                              <button onClick={(e) => { e.stopPropagation(); setSellAmount(Math.floor(position.amount * 0.25)); }}>25%</button>
-                              <button onClick={(e) => { e.stopPropagation(); setSellAmount(Math.floor(position.amount * 0.5)); }}>50%</button>
-                              <button onClick={(e) => { e.stopPropagation(); setSellAmount(Math.floor(position.amount * 0.75)); }}>75%</button>
-                              <button onClick={(e) => { e.stopPropagation(); setSellAmount(position.amount); }}>100%</button>
-                            </div>
-                          </div>
-
-                          {sellAmount > 0 && (
-                            <div className="sell-summary">
-                              <div className="summary-row">
-                                <span>Current price:</span>
-                                <span>${position.currentPrice.toFixed(2)}</span>
-                              </div>
-                              <div className="summary-row">
-                                <span>Amount:</span>
-                                <span>{sellAmount} shares</span>
-                              </div>
-                              <div className="summary-row total">
-                                <span>Total to receive:</span>
-                                <span>${(sellAmount * position.currentPrice).toFixed(2)}</span>
-                              </div>
-                            </div>
-                          )}
-
-                          <div className="sell-actions">
-                            <button 
-                              className="cancel-button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleShowSell();
-                              }}
-                              disabled={isProcessingSell}
-                            >
-                              Cancel
-                            </button>
-                            <button 
-                              className="confirm-sell-button"
-                              onClick={(e) => {
-                                e.stopPropagation();
-                                handleSellShares();
-                              }}
-                              disabled={isProcessingSell || !sellAmount || sellAmount <= 0}
-                            >
-                              {isProcessingSell ? 'Processing...' : 'Confirm Sale'}
-                            </button>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-
-                    <div className="transactions-section">
-                      <h3 className="transactions-title">Transaction History</h3>
-                      
-                      {loadingTransactions ? (
-                        <div className="loading-spinner small" />
-                      ) : transactions.length === 0 ? (
-                        <p className="no-transactions">No transactions</p>
-                      ) : (
-                        <div className="transactions-list">
-                          {transactions.map((trans, idx) => (
-                            <div key={idx} className="transaction-item">
-                              <div className="transaction-header">
-                                <span className={`transaction-type ${trans.tipo.toLowerCase()}`}>
-                                  {trans.tipo === 'BUY' ? 'BUY' : 'SELL'}
-                                </span>
-                                <span className="transaction-date">
-                                  {new Date(trans.timestamp || trans.fecha).toLocaleDateString('en-US', {
-                                    day: '2-digit',
-                                    month: '2-digit',
-                                    year: 'numeric',
-                                    hour: '2-digit',
-                                    minute: '2-digit'
-                                  })}
-                                </span>
-                              </div>
-                              <div className="transaction-details">
-                                <span>{trans.cantidad} shares @ ${parseFloat(trans.precio).toFixed(2)}</span>
-                                <span className="transaction-total">
-                                  ${(parseFloat(trans.cantidad) * parseFloat(trans.precio)).toFixed(2)}
-                                </span>
-                              </div>
-                              {trans.ejecutadaPor && (
-                                <span className="transaction-executed">
-                                  {trans.ejecutadaPor === 'MANUAL' ? 'Manual' : 'Bot'}
-                                </span>
-                              )}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
               </div>
             </div>
           ))
         )}
       </div>
+
+      {/* Portfolio Modal */}
+      {selectedPosition && (
+        <div
+          className="portfolio-modal-overlay"
+          onClick={() => {
+            setSelectedPosition(null);
+            setTransactions([]);
+            setIsShowingSell(false);
+            setSellAmount('');
+          }}
+        >
+          <div
+            className="portfolio-modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              className="portfolio-modal-close"
+              onClick={() => {
+                setSelectedPosition(null);
+                setTransactions([]);
+                setIsShowingSell(false);
+                setSellAmount('');
+              }}
+            >
+              ✕
+            </button>
+
+            {/* Modal Header */}
+            <div className="portfolio-modal-header">
+              <h3 className="portfolio-modal-title">{selectedPosition.symbol}</h3>
+              <p className="portfolio-modal-subtitle">{selectedPosition.name}</p>
+            </div>
+
+            {/* Modal Body */}
+            <div className="portfolio-modal-body">
+              {/* Detail Grid */}
+              <div className="detail-grid">
+                <div className="detail-item">
+                  <span className="detail-label">Average Price</span>
+                  <span className="detail-value">
+                    ${selectedPosition.averagePrice.toFixed(2)}
+                  </span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Current Price</span>
+                  <span className="detail-value">
+                    ${selectedPosition.currentPrice.toFixed(2)}
+                  </span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Amount</span>
+                  <span className="detail-value">{selectedPosition.amount}</span>
+                </div>
+                <div className="detail-item">
+                  <span className="detail-label">Total Investment</span>
+                  <span className="detail-value">
+                    ${(selectedPosition.averagePrice * selectedPosition.amount).toFixed(2)}
+                  </span>
+                </div>
+              </div>
+
+              {/* Sell Section */}
+              <div className="sell-section">
+                {!isShowingSell ? (
+                  <button
+                    className="sell-button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleShowSell();
+                    }}
+                  >
+                    SELL
+                  </button>
+                ) : (
+                  <div className="sell-form" onClick={(e) => e.stopPropagation()}>
+                    <div className="sell-form-header">
+                      <h4>Sell {selectedPosition.symbol}</h4>
+                      <span className="disponible">Available: {selectedPosition.amount} shares</span>
+                    </div>
+
+                    <div className="sell-input-group">
+                      <label htmlFor="sellAmount">Amount to sell:</label>
+                      <input
+                        id="sellAmount"
+                        type="number"
+                        min="1"
+                        max={selectedPosition.amount}
+                        value={sellAmount}
+                        onChange={(e) => setSellAmount(e.target.value)}
+                        placeholder="0"
+                        className="sell-input"
+                      />
+                      <div className="quick-buttons">
+                        <button onClick={(e) => { e.stopPropagation(); setSellAmount(Math.floor(selectedPosition.amount * 0.25)); }}>25%</button>
+                        <button onClick={(e) => { e.stopPropagation(); setSellAmount(Math.floor(selectedPosition.amount * 0.5)); }}>50%</button>
+                        <button onClick={(e) => { e.stopPropagation(); setSellAmount(Math.floor(selectedPosition.amount * 0.75)); }}>75%</button>
+                        <button onClick={(e) => { e.stopPropagation(); setSellAmount(selectedPosition.amount); }}>100%</button>
+                      </div>
+                    </div>
+
+                    {sellAmount > 0 && (
+                      <div className="sell-summary">
+                        <div className="summary-row">
+                          <span>Current price:</span>
+                          <span>${selectedPosition.currentPrice.toFixed(2)}</span>
+                        </div>
+                        <div className="summary-row">
+                          <span>Amount:</span>
+                          <span>{sellAmount} shares</span>
+                        </div>
+                        <div className="summary-row total">
+                          <span>Total to receive:</span>
+                          <span>${(sellAmount * selectedPosition.currentPrice).toFixed(2)}</span>
+                        </div>
+                      </div>
+                    )}
+
+                    <div className="sell-actions">
+                      <button
+                        className="cancel-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleShowSell();
+                        }}
+                        disabled={isProcessingSell}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="confirm-sell-button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleSellShares();
+                        }}
+                        disabled={isProcessingSell || !sellAmount || sellAmount <= 0}
+                      >
+                        {isProcessingSell ? 'Processing...' : 'Confirm Sale'}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Transactions Section */}
+              <div className="transactions-section">
+                <h3 className="transactions-title">Transaction History</h3>
+
+                {loadingTransactions ? (
+                  <div className="loading-spinner small" />
+                ) : transactions.length === 0 ? (
+                  <p className="no-transactions">No transactions</p>
+                ) : (
+                  <div className="transactions-list">
+                    {transactions.map((trans, idx) => (
+                      <div key={idx} className="transaction-item">
+                        <div className="transaction-header">
+                          <span className={`transaction-type ${trans.tipo.toLowerCase()}`}>
+                            {trans.tipo === 'BUY' ? 'BUY' : 'SELL'}
+                          </span>
+                          <span className="transaction-date">
+                            {new Date(trans.timestamp || trans.fecha).toLocaleDateString('en-US', {
+                              day: '2-digit',
+                              month: '2-digit',
+                              year: 'numeric',
+                              hour: '2-digit',
+                              minute: '2-digit'
+                            })}
+                          </span>
+                        </div>
+                        <div className="transaction-details">
+                          <span>{trans.cantidad} shares @ ${parseFloat(trans.precio).toFixed(2)}</span>
+                          <span className="transaction-total">
+                            ${(parseFloat(trans.cantidad) * parseFloat(trans.precio)).toFixed(2)}
+                          </span>
+                        </div>
+                        {trans.ejecutadaPor && (
+                          <span className="transaction-executed">
+                            {trans.ejecutadaPor === 'MANUAL' ? 'Manual' : 'Bot'}
+                          </span>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

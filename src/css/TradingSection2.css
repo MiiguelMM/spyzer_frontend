@@ -10,6 +10,7 @@
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   box-sizing: border-box;
+  position: relative; /* Necesario para position: absolute del modal en desktop */
 }
 
 /* Header Section */
@@ -184,13 +185,7 @@
   margin-top: 2px;
 }
 
-/* Position Detail - Expanded */
-.position-detail {
-  margin-top: 1.5rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid #333333;
-  animation: slideDown 0.3s ease-out;
-}
+/* Position Detail - Moved to modal */
 
 .detail-grid {
   display: grid;
@@ -396,6 +391,145 @@
 
 .transactions-list::-webkit-scrollbar-thumb:hover {
   background: #444444;
+}
+
+/* ==================== PORTFOLIO MODAL STYLES ==================== */
+
+/* Modal Overlay - Flexbox Centering Pattern */
+.portfolio-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000000;
+  animation: fadeIn 0.3s ease;
+  /* FLEXBOX CENTERING */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Modal Content Container */
+.portfolio-modal-content {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  background-color: #181818;
+  border: 1px solid #333333;
+  border-radius: 16px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.9),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Modal Close Button */
+.portfolio-modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  background-color: #1E1E1E;
+  border: 1px solid #333333;
+  border-radius: 50%;
+  color: #CCCCCC;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  z-index: 10;
+}
+
+.portfolio-modal-close:hover {
+  background-color: #FF4757;
+  color: #FFFFFF;
+  border-color: #FF4757;
+  transform: rotate(90deg);
+  box-shadow: 0 0 12px rgba(255, 71, 87, 0.6);
+}
+
+/* Modal Header */
+.portfolio-modal-header {
+  flex-shrink: 0;
+  padding: 2rem 2rem 1.5rem;
+  border-bottom: 1px solid #333333;
+  text-align: center;
+}
+
+.portfolio-modal-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #00BFFF;
+  margin: 0 0 0.5rem 0;
+  letter-spacing: 1px;
+  text-shadow: 0 0 12px rgba(0, 191, 255, 0.4);
+}
+
+.portfolio-modal-subtitle {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: #A0A0A0;
+  margin: 0;
+}
+
+/* Modal Body - Scrollable Content */
+.portfolio-modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  min-height: 0; /* Critical for flexbox scrolling */
+}
+
+/* Scrollbar for Modal Body */
+.portfolio-modal-body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.portfolio-modal-body::-webkit-scrollbar-track {
+  background: #181818;
+  border-radius: 4px;
+}
+
+.portfolio-modal-body::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #333333 0%, #2A2A2A 100%);
+  border-radius: 4px;
+  border: 1px solid #252525;
+}
+
+.portfolio-modal-body::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #444444 0%, #3A3A3A 100%);
+  border-color: #007ACC;
 }
 
 /* ==================== SELL SECTION STYLES ==================== */
@@ -1113,5 +1247,91 @@
 
   .value-amount {
     font-size: 13px;
+  }
+}
+
+/* ==================== MODAL RESPONSIVE STYLES ==================== */
+
+/* Mobile (< 768px) */
+@media (max-width: 767px) {
+  .portfolio-modal-content {
+    width: 95%;
+    border-radius: 12px;
+  }
+
+  .portfolio-modal-close {
+    width: 32px;
+    height: 32px;
+    font-size: 1.1rem;
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+
+  .portfolio-modal-header {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .portfolio-modal-title {
+    font-size: 1.4rem;
+  }
+
+  .portfolio-modal-body {
+    padding: 1.5rem 1rem;
+  }
+
+  .portfolio-modal-body .detail-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* Tablet (768px - 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .portfolio-modal-content {
+    width: 85%;
+    max-width: 700px;
+  }
+
+  .portfolio-modal-body .detail-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Desktop (1024px+) */
+@media (min-width: 1024px) {
+  /* Cambiar overlay a absolute para que se quede en la página del slider */
+  .portfolio-modal-overlay {
+    position: absolute;
+  }
+
+  .portfolio-modal-content {
+    width: 80%;
+    max-width: 900px;
+  }
+
+  .portfolio-modal-close {
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+  }
+
+  .portfolio-modal-title {
+    font-size: 2rem;
+  }
+
+  .portfolio-modal-body .detail-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+  }
+}
+
+/* Desktop Large (1440px+) */
+@media (min-width: 1440px) {
+  .portfolio-modal-content {
+    max-width: 1000px;
+  }
+
+  .portfolio-modal-body {
+    padding: 2.5rem;
   }
 }
