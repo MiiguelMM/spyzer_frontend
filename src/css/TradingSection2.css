@@ -1299,9 +1299,12 @@
 
 /* Desktop (1024px+) */
 @media (min-width: 1024px) {
-  /* Cambiar overlay a absolute para que se quede en la página del slider */
   .portfolio-modal-overlay {
-    position: absolute;
+    position: absolute; /* Quedarse solo en página 2 del slider */
+    left: -10%; /* Expandir más allá del contenedor (90% centrado) */
+    right: -10%;
+    top: -10%;
+    bottom: -10%;
   }
 
   .portfolio-modal-content {
