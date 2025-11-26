@@ -252,8 +252,8 @@ export default function TradingSection1() {
 
       {selectedStock && (
         <>
-          <div className="modal-overlay" onClick={handleCloseModal}></div>
-          <div className="modal-buy">
+          <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-buy" onClick={(e) => e.stopPropagation()}>
             <button className="modal-close" onClick={handleCloseModal}>✕</button>
             
             <div className="modal-header">
@@ -327,6 +327,7 @@ export default function TradingSection1() {
                 </div>
               )}
             </div>
+          </div>
           </div>
         </>
       )}

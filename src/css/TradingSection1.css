@@ -207,6 +207,13 @@
     backdrop-filter: blur(8px);
     z-index: 1000000;
     animation: fadeIn 0.3s ease;
+    /* Flexbox centering */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    box-sizing: border-box;
   }
 
   @keyframes fadeIn {
@@ -221,9 +228,7 @@
 
   /* Modal Buy */
   .modal-buy {
-    position: fixed;
-    top: 10%;
-    left: 2.5%;
+    position: relative;
     width: 90%;
     max-width: 500px;
     max-height: 90vh;
@@ -243,12 +248,12 @@
   @keyframes slideIn {
     from {
       opacity: 0;
-      transform: translate(-50%, -50%) scale(0.95);
+      transform: scale(0.95);
     }
 
     to {
       opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
+      transform: scale(1);
     }
   }
 
@@ -697,11 +702,6 @@
 
     }
 
-    .modal-buy {
-
-      top: 20%;
-      left: 25%;
-    }
 
     .section3-subtitle {
       font-size: 0.9rem;
@@ -765,10 +765,6 @@
       gap: 0.8rem;
     }
 
-    .modal-buy {
-      top: 20%;
-      left: 25%;
-    }
 
     .category-btn {
       padding: 0.7rem 1.4rem;
@@ -846,12 +842,6 @@
     }
   }
 
-  @media (min-width: 1600px) {
-    .modal-buy {
-      top: 20%;
-      left: 30%;
-    }
-  }
 
   /* Desktop Extra Large (1920px+) */
   @media (min-width: 1920px) {
@@ -876,7 +866,6 @@
     }
 
     .modal-buy {
-      top: 20%;
       width: 80%;
       max-width: 500px;
     }
@@ -956,10 +945,6 @@
 
     /* Modal adjustments */
     .modal-buy {
-      position: fixed;
-      top: 10%;
-      left: 24%;
-      transform: translate(-50%, -50%);
       width: 60%;
       max-width: 500px;
       max-height: 85vh;
@@ -997,8 +982,6 @@
 
     .modal-buy {
       padding: 3rem;
-      top: 5%;
-      left: 22%;
     }
   }
 }
