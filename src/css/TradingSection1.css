@@ -708,12 +708,12 @@
     }
 
     .stocks-grid {
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(135px, 1fr));
       gap: 1.2rem;
       max-height: none;
       flex-grow: 1;
       overflow-y: auto;
-      padding-bottom: 9rem;
+      padding-bottom: 12rem;
 
 
 
@@ -779,7 +779,7 @@
       flex-grow: 1;
       overflow-y: auto;
       padding: 1rem;
-      padding-bottom: 6rem;
+      padding-bottom: 13rem;
     }
 
     .stock-card {
