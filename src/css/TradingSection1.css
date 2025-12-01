@@ -984,4 +984,10 @@
       padding: 3rem;
     }
   }
-}
+  }
+
+  @media (min-width: 1024px) and (max-height: 600px) {
+    .stocks-grid {
+      padding-bottom: 0em !important;
+    }
+  }

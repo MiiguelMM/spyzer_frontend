@@ -534,17 +534,8 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.05);
   }
 
-  .ranking-card {
-
-
-    background: #1E1E1E;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
-
-  }
-
   .section1-header {
     flex-shrink: 0;
-    /* Header mantiene su tamaño fijo */
     margin-bottom: 1.5rem;
   }
 
@@ -558,12 +549,11 @@
 
   .ranking-list {
     flex: 1;
-    /* Ocupa todo el espacio restante */
     min-height: 0;
-    /* Importante para que el flex funcione */
-
     padding-right: 0.5rem;
     padding-top: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
   }
 
   /* Scrollbar para la lista en desktop */
@@ -586,14 +576,64 @@
     background: #444444;
   }
 
+  /* Firefox scrollbar */
+  .ranking-list {
+    scrollbar-width: thin;
+    scrollbar-color: #333333 #1E1E1E;
+  }
+
   .ranking-card {
-    padding: 1.8rem;
+    padding: 1.2rem 1.5rem;
+    background: #1E1E1E;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 0 1px 3px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: nowrap;
+  }
+
+  .ranking-position {
+    width: 50px;
+    min-width: 50px;
+    height: 50px;
+    font-size: 20px;
+  }
+
+  .ranking-card.top-three .ranking-position {
+    font-size: 24px;
+  }
+
+  .ranking-user-info {
+    flex: 1;
+    min-width: 150px;
+  }
+
+  .user-name {
+    font-size: 15px;
+  }
+
+  .ranking-stats {
+    display: flex;
+    gap: 2rem;
+    flex-shrink: 0;
+  }
+
+  .stat-item {
+    min-width: 100px;
+  }
+
+  .stat-label {
+    font-size: 10px;
+  }
+
+  .stat-value {
+    font-size: 16px;
   }
 
   .user-avatar {
-    width: 56px;
-    height: 56px;
-    min-width: 56px;
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
   }
 }
 
@@ -618,6 +658,42 @@
     gap: 16px;
     padding: 2rem;
   }
+
+  .ranking-card {
+    padding: 1.5rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .ranking-position {
+    width: 55px;
+    min-width: 55px;
+    height: 55px;
+    font-size: 22px;
+  }
+
+  .ranking-card.top-three .ranking-position {
+    font-size: 26px;
+  }
+
+  .user-name {
+    font-size: 16px;
+  }
+
+  .ranking-stats {
+    gap: 2.5rem;
+  }
+
+  .stat-item {
+    min-width: 120px;
+  }
+
+  .stat-value {
+    font-size: 17px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+  }
 }
 
 /* Extra Large Desktop (1920px+) */
@@ -627,10 +703,42 @@
   }
 
   .ranking-list {
-    gap: 16px;
+    gap: 18px;
   }
 
   .ranking-card {
-    padding: 2rem;
+    padding: 1.8rem 2.5rem;
+    gap: 2rem;
+  }
+
+  .ranking-position {
+    width: 60px;
+    min-width: 60px;
+    height: 60px;
+    font-size: 24px;
+  }
+
+  .ranking-card.top-three .ranking-position {
+    font-size: 28px;
+  }
+
+  .user-name {
+    font-size: 17px;
+  }
+
+  .ranking-stats {
+    gap: 3rem;
+  }
+
+  .stat-item {
+    min-width: 140px;
+  }
+
+  .stat-value {
+    font-size: 18px;
+  }
+
+  .stat-label {
+    font-size: 11px;
   }
 }
