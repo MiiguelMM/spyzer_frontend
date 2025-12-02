@@ -310,40 +310,257 @@
 }
 
 /* 📱 RESPONSIVE PREMIUM */
+
+/* Mobile - Small screens */
 @media (max-width: 480px) {
     .content {
         min-height: 100vh;
         gap: 0rem;
         padding: 0;
     }
-    
+
     .circle {
         width: 130px;
         height: 130px;
         margin-top: 55px;
     }
-    
+
     .logo {
         width: 47px;
         height: 47px;
     }
-    
+
     .name {
         font-size: 22px;
     }
-    
+
     .orbit-1 { width: 200px; height: 200px; }
     .orbit-2 { width: 250px; height: 250px; }
     .orbit-3 { width: 300px; height: 300px; }
     .orbit-4 { width: 350px; height: 350px; }
-    
+
     .buttons-group {
         margin-top: 200px;
     }
-    
+
     .login-button, .register-button {
         padding: 14px 32px;
         min-width: 180px;
         font-size: 15px;
+    }
+}
+
+/* Tablets - Medium screens */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .circle {
+        width: 160px;
+        height: 160px;
+    }
+
+    .logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .name {
+        font-size: 24px;
+    }
+
+    .circle::before {
+        width: 240px;
+        height: 240px;
+    }
+
+    .orbit-1 { width: 260px; height: 260px; }
+    .orbit-2 { width: 330px; height: 330px; }
+    .orbit-3 { width: 400px; height: 400px; }
+    .orbit-4 { width: 470px; height: 470px; }
+
+    .planet-1 { width: 7px; height: 7px; top: -3.5px; }
+    .planet-2 { width: 5px; height: 5px; top: -2.5px; }
+    .planet-3 { width: 4px; height: 4px; top: -2px; }
+    .planet-4 { width: 3px; height: 3px; top: -1.5px; }
+
+    .buttons-group {
+        margin-top: 220px;
+    }
+
+    .login-button, .register-button {
+        padding: 16px 44px;
+        min-width: 220px;
+        font-size: 16px;
+    }
+
+    .register-text {
+        font-size: 14px;
+        margin-top: 1rem;
+    }
+}
+
+/* Desktop - Large screens */
+@media (min-width: 1024px) {
+    .content {
+        gap: 2.5rem;
+    }
+
+    .circle {
+        width: 170px;
+        height: 170px;
+    }
+
+    .logo {
+        width: 65px;
+        height: 65px;
+    }
+
+    .name {
+        font-size: 26px;
+        letter-spacing: 0.8px;
+    }
+
+    .circle::before {
+        width: 250px;
+        height: 250px;
+    }
+
+    .orbit-1 { width: 280px; height: 280px; }
+    .orbit-2 { width: 360px; height: 360px; }
+    .orbit-3 { width: 440px; height: 440px; }
+    .orbit-4 { width: 520px; height: 520px; }
+
+    .planet-1 {
+        width: 8px;
+        height: 8px;
+        top: -4px;
+        box-shadow: 0 0 10px currentColor;
+    }
+    .planet-2 {
+        width: 6px;
+        height: 6px;
+        top: -3px;
+        box-shadow: 0 0 8px currentColor;
+    }
+    .planet-3 {
+        width: 5px;
+        height: 5px;
+        top: -2.5px;
+        box-shadow: 0 0 7px currentColor;
+    }
+    .planet-4 {
+        width: 4px;
+        height: 4px;
+        top: -2px;
+        box-shadow: 0 0 6px currentColor;
+    }
+
+    .buttons-group {
+        margin-top: 260px;
+    }
+
+    .login-button, .register-button {
+        padding: 18px 48px;
+        min-width: 250px;
+        font-size: 17px;
+        border-radius: 50px;
+    }
+
+    .register-text {
+        font-size: 15px;
+        margin-top: 1.25rem;
+    }
+
+    /* Mejoras visuales para desktop */
+    .star {
+        animation: twinkle 5s ease-in-out infinite alternate;
+    }
+
+    .star-7 { width: 1.5px; height: 1.5px; top: 30%; left: 10%; animation-delay: 0.5s; }
+    .star-8 { width: 1.5px; height: 1.5px; top: 50%; left: 90%; animation-delay: 1.8s; }
+    .star-9 { width: 1px; height: 1px; top: 85%; left: 60%; animation-delay: 3.2s; }
+    .star-10 { width: 1px; height: 1px; top: 10%; left: 50%; animation-delay: 2.8s; }
+}
+
+/* Large Desktop - Extra large screens */
+@media (min-width: 1440px) {
+    .circle {
+        width: 180px;
+        height: 180px;
+    }
+
+    .logo {
+        width: 70px;
+        height: 70px;
+    }
+
+    .name {
+        font-size: 28px;
+        letter-spacing: 1px;
+    }
+
+    .circle::before {
+        width: 260px;
+        height: 260px;
+    }
+
+    .orbit-1 { width: 300px; height: 300px; }
+    .orbit-2 { width: 400px; height: 400px; }
+    .orbit-3 { width: 500px; height: 500px; }
+    .orbit-4 { width: 600px; height: 600px; }
+
+    .planet-1 { width: 9px; height: 9px; top: -4.5px; }
+    .planet-2 { width: 7px; height: 7px; top: -3.5px; }
+    .planet-3 { width: 6px; height: 6px; top: -3px; }
+    .planet-4 { width: 5px; height: 5px; top: -2.5px; }
+
+    .buttons-group {
+        margin-top: 280px;
+    }
+
+    .login-button, .register-button {
+        padding: 19px 52px;
+        min-width: 270px;
+        font-size: 17px;
+    }
+
+    .register-text {
+        font-size: 15px;
+    }
+}
+
+/* Ultra-wide screens */
+@media (min-width: 1920px) {
+    .circle {
+        width: 190px;
+        height: 190px;
+    }
+
+    .logo {
+        width: 75px;
+        height: 75px;
+    }
+
+    .name {
+        font-size: 30px;
+        letter-spacing: 1.2px;
+    }
+
+    .circle::before {
+        width: 280px;
+        height: 280px;
+    }
+
+    .orbit-1 { width: 320px; height: 320px; }
+    .orbit-2 { width: 430px; height: 430px; }
+    .orbit-3 { width: 540px; height: 540px; }
+    .orbit-4 { width: 650px; height: 650px; }
+
+    .buttons-group {
+        margin-top: 300px;
+    }
+
+    .login-button, .register-button {
+        padding: 20px 56px;
+        min-width: 290px;
+        font-size: 18px;
     }
 }
