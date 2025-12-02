@@ -134,6 +134,37 @@ class AuthService {
         this.removeToken();
         this.removeUser();
     }
+
+    async deleteAccount(userId) {
+        try {
+            const token = this.getToken();
+
+            if (!token) {
+                throw new Error('No se encontró el token de autenticación');
+            }
+
+            const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({}));
+                throw new Error(errorData.message || 'Error al eliminar la cuenta');
+            }
+
+            // Limpiar sesión local
+            this.limpiarSesion();
+
+            return true;
+        } catch (error) {
+            console.error('Error en deleteAccount:', error);
+            throw error;
+        }
+    }
 }
 
 export default new AuthService();

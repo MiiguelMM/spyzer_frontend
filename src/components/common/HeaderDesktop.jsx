@@ -61,21 +61,30 @@ export default function HeaderDesktop({ onLogout, currentUser }) {
         setShowProfileMenu(false)
 
         switch (action) {
-            case 'profile':
-                console.log('Ver perfil')
-                // navigate('/profile')
-                break
-            case 'account':
-                console.log('Mi cuenta')
-                // navigate('/account')
-                break
-            case 'settings':
-                console.log('Ir a configuración')
-                // navigate('/settings')
-                break
-            case 'help':
-                console.log('Centro de ayuda')
-                // navigate('/help')
+            case 'deleteAccount':
+                const confirmDelete = window.confirm(
+                    'Are you sure you want to delete your account? This action cannot be undone and you will lose all your data, including your portfolio and transactions.'
+                )
+
+                if (confirmDelete) {
+                    try {
+                        console.log('Deleting account...')
+                        const user = authService.obtenerUsuarioActual()
+
+                        if (user && user.userId) {
+                            await authService.deleteAccount(user.userId)
+                            alert('Your account has been successfully deleted.')
+
+                            // Clear data and redirect
+                            authService.logout()
+                        } else {
+                            throw new Error('Could not obtain user ID')
+                        }
+                    } catch (error) {
+                        console.error('Error deleting account:', error)
+                        alert('Error deleting account. Please try again.')
+                    }
+                }
                 break
             case 'logout':
                 try {
@@ -139,19 +148,10 @@ export default function HeaderDesktop({ onLogout, currentUser }) {
                     <div className="profile-modal-nav">
                         <div
                             className="profile-modal-item"
-                            onClick={() => handleProfileAction('profile')}
+                            onClick={() => handleProfileAction('deleteAccount')}
                         >
-                            <i className="fas fa-user"></i>
-                            Mi Perfil
-                            <i className="fas fa-chevron-right menu-arrow"></i>
-                        </div>
-
-                        <div
-                            className="profile-modal-item"
-                            onClick={() => handleProfileAction('settings')}
-                        >
-                            <i className="fas fa-cog"></i>
-                            Configuración
+                            <i className="fas fa-trash-alt"></i>
+                            Eliminar Cuenta
                             <i className="fas fa-chevron-right menu-arrow"></i>
                         </div>
                     </div>

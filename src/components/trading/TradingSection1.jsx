@@ -17,11 +17,16 @@ export default function TradingSection1() {
     'All',
     'ETF',
     'Tech',
+    'Semiconductors',
     'Financial',
+    'Fintech',
     'Health',
     'Consumer',
     'Energy',
+    'Clean Energy',
     'Media',
+    'Cloud/Security',
+    'E-commerce',
     'Other'
   ];
 
@@ -36,7 +41,17 @@ export default function TradingSection1() {
       { symbol: 'VTI', name: 'Total Stock Market ETF' },
       { symbol: 'XLF', name: 'Financial Sector ETF' },
       { symbol: 'XLK', name: 'Technology Sector ETF' },
-      { symbol: 'XLE', name: 'Energy Sector ETF' }
+      { symbol: 'XLE', name: 'Energy Sector ETF' },
+      { symbol: 'ARKK', name: 'ARK Innovation ETF' },
+      { symbol: 'TLT', name: 'iShares 20+ Year Treasury ETF' },
+      { symbol: 'GLD', name: 'SPDR Gold Shares' },
+      { symbol: 'SLV', name: 'iShares Silver Trust' },
+      { symbol: 'XBI', name: 'SPDR S&P Biotech ETF' },
+      { symbol: 'IBB', name: 'iShares Biotechnology ETF' },
+      { symbol: 'XRT', name: 'SPDR S&P Retail ETF' },
+      { symbol: 'XHB', name: 'SPDR S&P Homebuilders ETF' },
+      { symbol: 'ITB', name: 'iShares U.S. Home Construction ETF' },
+      { symbol: 'KRE', name: 'SPDR S&P Regional Banking ETF' }
     ],
     'Tech': [
       { symbol: 'AAPL', name: 'Apple Inc.' },
@@ -55,12 +70,29 @@ export default function TradingSection1() {
       { symbol: 'AMD', name: 'Advanced Micro Devices' },
       { symbol: 'QCOM', name: 'Qualcomm Inc.' }
     ],
+    'Semiconductors': [
+      { symbol: 'NVDA', name: 'NVIDIA Corporation' },
+      { symbol: 'AMD', name: 'Advanced Micro Devices' },
+      { symbol: 'TSM', name: 'Taiwan Semiconductor' },
+      { symbol: 'ASML', name: 'ASML Holding' },
+      { symbol: 'INTC', name: 'Intel Corporation' },
+      { symbol: 'QCOM', name: 'Qualcomm Inc.' },
+      { symbol: 'SMH', name: 'VanEck Semiconductor ETF' },
+      { symbol: 'SOXX', name: 'iShares Semiconductor ETF' }
+    ],
     'Financial': [
       { symbol: 'JPM', name: 'JPMorgan Chase & Co.' },
       { symbol: 'V', name: 'Visa Inc.' },
       { symbol: 'MA', name: 'Mastercard Inc.' },
       { symbol: 'WFC', name: 'Wells Fargo & Company' },
       { symbol: 'GS', name: 'Goldman Sachs Group' }
+    ],
+    'Fintech': [
+      { symbol: 'PYPL', name: 'PayPal Holdings Inc.' },
+      { symbol: 'SQ', name: 'Block Inc. (Square)' },
+      { symbol: 'COIN', name: 'Coinbase Global Inc.' },
+      { symbol: 'V', name: 'Visa Inc.' },
+      { symbol: 'MA', name: 'Mastercard Inc.' }
     ],
     'Health': [
       { symbol: 'JNJ', name: 'Johnson & Johnson' },
@@ -84,9 +116,31 @@ export default function TradingSection1() {
       { symbol: 'CVX', name: 'Chevron Corporation' },
       { symbol: 'COP', name: 'ConocoPhillips' }
     ],
+    'Clean Energy': [
+      { symbol: 'TAN', name: 'Invesco Solar ETF' },
+      { symbol: 'ICLN', name: 'iShares Global Clean Energy ETF' },
+      { symbol: 'TSLA', name: 'Tesla Inc.' }
+    ],
     'Media': [
       { symbol: 'DIS', name: 'Walt Disney Company' },
-      { symbol: 'CMCSA', name: 'Comcast Corporation' }
+      { symbol: 'CMCSA', name: 'Comcast Corporation' },
+      { symbol: 'NFLX', name: 'Netflix Inc.' },
+      { symbol: 'SPOT', name: 'Spotify Technology' },
+      { symbol: 'ROKU', name: 'Roku Inc.' }
+    ],
+    'Cloud/Security': [
+      { symbol: 'NET', name: 'Cloudflare Inc.' },
+      { symbol: 'CRWD', name: 'CrowdStrike Holdings' },
+      { symbol: 'ZS', name: 'Zscaler Inc.' },
+      { symbol: 'CRM', name: 'Salesforce Inc.' },
+      { symbol: 'ORCL', name: 'Oracle Corporation' }
+    ],
+    'E-commerce': [
+      { symbol: 'AMZN', name: 'Amazon.com Inc.' },
+      { symbol: 'SHOP', name: 'Shopify Inc.' },
+      { symbol: 'BABA', name: 'Alibaba Group' },
+      { symbol: 'UBER', name: 'Uber Technologies' },
+      { symbol: 'LYFT', name: 'Lyft Inc.' }
     ],
     'Other': [
       { symbol: 'BABA', name: 'Alibaba Group' },
@@ -96,7 +150,11 @@ export default function TradingSection1() {
   };
 
   const getAllStocks = () => {
-    return Object.values(stocks).flat();
+    const allStocks = Object.values(stocks).flat();
+    const uniqueStocks = allStocks.filter((stock, index, self) =>
+      index === self.findIndex((s) => s.symbol === stock.symbol)
+    );
+    return uniqueStocks;
   };
 
   const getFilteredStocks = () => {

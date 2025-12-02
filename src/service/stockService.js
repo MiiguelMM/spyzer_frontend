@@ -1,18 +1,65 @@
 // src/service/stocksService.js
 import marketDataService from './marketDataService.js';
 
-// Lista COMPLETA de los 51 símbolos gestionados por el backend (Armonizada)
+// Lista COMPLETA de los 80 símbolos gestionados por el backend (Armonizada)
 const POPULAR_STOCKS = [
-  'SPY', 'QQQ', 'DAX', 'FXI', // Índices/ETFs Principales
-  'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'NVDA', 'NFLX', // Mega Tech
-  'JPM', 'V', 'MA', 'WFC', 'GS', // Financieros
-  'JNJ', 'PFE', 'UNH', 'ABT', 'TMO', // Salud
-  'WMT', 'HD', 'MCD', 'NKE', 'SBUX', 'KO', 'PG', // Consumo
-  'XOM', 'CVX', 'COP', // Energía
-  'DIS', 'CMCSA', // Media
-  'ORCL', 'CRM', 'ADBE', 'CSCO', 'INTC', 'AMD', 'QCOM', // Tech adicional
-  'IWM', 'DIA', 'VTI', 'XLF', 'XLK', 'XLE', // ETFs principales
-  'BABA', 'TSM', 'NVO', 'ASML' // Otros populares
+  // === GRUPO PREMIUM (20 símbolos) ===
+  // Índices principales
+  'SPY', 'QQQ', 'DAX',
+  // Mega Tech
+  'AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'TSLA', 'NVDA', 'NFLX', 'AMD',
+  // Top Financieros
+  'JPM', 'V', 'MA',
+  // International Tech
+  'BABA', 'TSM', 'ADBE',
+  // Enterprise Software
+  'ORCL', 'CRM',
+
+  // === GRUPO STANDARD (42 símbolos) ===
+  // ETF China
+  'FXI',
+  // Financieros adicionales
+  'WFC', 'GS',
+  // Salud
+  'JNJ', 'PFE', 'UNH', 'ABT', 'TMO',
+  // Consumo
+  'WMT', 'HD', 'MCD', 'NKE', 'SBUX', 'KO', 'PG',
+  // Energía
+  'XOM', 'CVX', 'COP',
+  // Media
+  'DIS', 'CMCSA',
+  // Tech adicional
+  'CSCO', 'INTC', 'QCOM',
+  // ETFs
+  'IWM', 'DIA', 'VTI', 'XLF', 'XLK', 'XLE',
+  // European ADRs
+  'NVO', 'ASML',
+  // Semiconductors adicionales
+  'SMH', 'SOXX',
+  // Fintech
+  'PYPL', 'SQ', 'COIN',
+  // E-commerce/Gig
+  'SHOP', 'UBER', 'LYFT',
+
+  // === GRUPO EXTENDED (18 símbolos) ===
+  // ETFs de Innovación/Growth
+  'ARKK',
+  // Commodities & Treasuries
+  'TLT', 'GLD', 'SLV',
+  // Biotech
+  'XBI', 'IBB',
+  // Clean Energy
+  'TAN', 'ICLN',
+  // Retail
+  'XRT',
+  // Homebuilders
+  'XHB', 'ITB',
+  // Regional Banks
+  'KRE',
+  // Streaming/Entertainment
+  'SPOT', 'ROKU',
+  // Cloud/Cybersecurity
+  'NET', 'CRWD', 'ZS'
 ];
 
 const obtenerAccionesPopulares = async () => {
