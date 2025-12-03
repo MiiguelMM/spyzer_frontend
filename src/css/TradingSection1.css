@@ -728,17 +728,33 @@
     }
 
     .modal-buy {
-      width: 70%;
-      max-width: 550px;
-      padding: 2.5rem;
+      width: 50%;
+      max-width: 600px;
+      max-height: 85vh;
+      padding: 2rem;
+      overflow-y: auto;
     }
 
     .modal-title {
-      font-size: 2rem;
+      font-size: 1.8rem;
     }
 
     .price-value {
-      font-size: 2.2rem;
+      font-size: 2rem;
+    }
+
+    .quantity-btn {
+      width: 50px;
+      height: 50px;
+    }
+
+    .quantity-input {
+      width: 105px;
+      font-size: 1.25rem;
+    }
+
+    .modal-buy-btn {
+      font-size: 1.05rem;
     }
   }
 
@@ -798,47 +814,49 @@
     }
 
     .modal-buy {
-      width: 60%;
-      max-width: 600px;
-      padding: 3rem;
+      width: 45%;
+      max-width: 650px;
+      max-height: 85vh;
+      padding: 2.5rem;
+      overflow-y: auto;
     }
 
     .modal-close {
-      width: 40px;
-      height: 40px;
-      font-size: 1.5rem;
+      width: 38px;
+      height: 38px;
+      font-size: 1.4rem;
     }
 
     .modal-title {
-      font-size: 2.2rem;
+      font-size: 2rem;
     }
 
     .modal-subtitle {
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     .price-value {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
     }
 
     .quantity-btn {
-      width: 52px;
-      height: 52px;
-      font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
+      font-size: 1.4rem;
     }
 
     .quantity-input {
       width: 110px;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
     }
 
     .total-value {
-      font-size: 1.4rem;
+      font-size: 1.35rem;
     }
 
     .modal-buy-btn {
-      padding: 1.3rem 2.2rem;
-      font-size: 1.15rem;
+      padding: 1.2rem 2rem;
+      font-size: 1.1rem;
     }
   }
 
@@ -866,8 +884,38 @@
     }
 
     .modal-buy {
-      width: 80%;
-      max-width: 500px;
+      width: 40%;
+      max-width: 700px;
+      max-height: 85vh;
+      padding: 2.5rem 3rem;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      font-size: 1.5rem;
+    }
+
+    .modal-title {
+      font-size: 2.1rem;
+    }
+
+    .price-value {
+      font-size: 2.3rem;
+    }
+
+    .quantity-btn {
+      width: 52px;
+      height: 52px;
+    }
+
+    .quantity-input {
+      width: 115px;
+    }
+
+    .modal-buy-btn {
+      font-size: 1.12rem;
     }
   }
 
@@ -945,12 +993,13 @@
 
     /* Modal adjustments */
     .modal-buy {
-      width: 60%;
-      max-width: 500px;
-      max-height: 85vh;
-      padding: 1.5rem;
+      width: 50%;
+      max-width: 600px;
+      max-height: 80vh;
+      padding: 1.5rem 2rem;
       display: flex;
       flex-direction: column;
+      overflow-y: auto;
     }
 
     .modal-header,
@@ -960,6 +1009,23 @@
 
     .modal-controls {
       overflow-y: auto;
+    }
+
+    .modal-title {
+      font-size: 1.6rem;
+    }
+
+    .price-value {
+      font-size: 1.8rem;
+    }
+
+    .quantity-btn {
+      width: 45px;
+      height: 45px;
+    }
+
+    .quantity-input {
+      width: 95px;
     }
   }
 
@@ -974,14 +1040,24 @@
       font-size: 1.4rem;
     }
 
-    .modal-header,
-    .modal-price {
-      flex-shrink: 0;
-      height: 60px;
+    .modal-buy {
+      width: 50%;
+      max-width: 580px;
+      max-height: 75vh;
+      padding: 1.5rem 2rem;
     }
 
-    .modal-buy {
-      padding: 3rem;
+    .modal-header {
+      padding-bottom: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .modal-title {
+      font-size: 1.5rem;
+    }
+
+    .price-value {
+      font-size: 1.7rem;
     }
   }
   }
