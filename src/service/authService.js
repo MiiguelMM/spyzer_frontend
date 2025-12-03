@@ -6,7 +6,8 @@ class AuthService {
 
     loginWithGoogle() {
         // Redirigir al endpoint de OAuth2 del backend
-        window.location.href = 'http://localhost:8080/oauth2/authorization/google';
+        const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+        window.location.href = `${backendUrl}/oauth2/authorization/google`;
     }
 
     handleLoginSuccess(token) {
@@ -143,7 +144,8 @@ class AuthService {
                 throw new Error('No se encontró el token de autenticación');
             }
 
-            const response = await fetch(`http://localhost:8080/api/users/${userId}`, {
+            const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:8080';
+            const response = await fetch(`${backendUrl}/api/users/${userId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization': `Bearer ${token}`,
