@@ -590,6 +590,7 @@
     align-items: center;
     gap: 1rem;
     flex-wrap: nowrap;
+    min-height: 35px;
   }
 
   .ranking-position {
@@ -662,7 +663,7 @@
   .ranking-card {
     padding: 1.5rem 2rem;
     gap: 1.5rem;
-    min-height: 35px;
+    
   }
 
   .ranking-position {
