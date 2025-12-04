@@ -71,14 +71,22 @@ root.render(
 reportWebVitals();
 
 // Fix para unidades `vh` en móviles (address bar cambia el viewport)
-// Establece una variable CSS `--vh` basada en `window.innerHeight`
-// y la actualiza en resize/orientationchange para evitar que elementos con
-// `vh` se estiren al hacer scroll en móviles.
+// Establece una variable CSS `--vh` basada en `window.innerHeight` pero
+// limita actualizaciones frecuentes durante el scroll para evitar jitter.
+// En móviles sólo establecemos --vh al cargar y en cambios de orientación/visibilidad.
+// Evitamos recalcular durante scroll/resize para que el layout no intente re-ajustarse
+// mientras el usuario scrollea (causa el estiramiento feo que reportaste).
 function setViewportVhProperty() {
+  if (window.innerWidth >= 769) return;
   const vh = window.innerHeight * 0.01;
   document.documentElement.style.setProperty('--vh', `${vh}px`);
 }
 
+// Inicializar al cargar
 setViewportVhProperty();
-window.addEventListener('resize', setViewportVhProperty);
+
+// Recalcular sólo en cambios de orientación (y cuando la pestaña vuelve a visibilidad)
 window.addEventListener('orientationchange', setViewportVhProperty);
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'visible') setViewportVhProperty();
+});
