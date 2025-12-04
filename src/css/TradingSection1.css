@@ -1010,3 +1010,8 @@
       padding-bottom: 0em !important;
     }
   }
+  @media (min-width: 1024px) and (min-height: 800px) {
+    .stocks-grid {
+      padding-bottom: 30em !important;
+    }
+  }
