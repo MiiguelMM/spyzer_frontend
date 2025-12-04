@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  min-height: 100vh;
+  /* Use --vh to avoid mobile address bar resizing issues */
+  min-height: calc(var(--vh, 1vh) * 100);
   width: 100vw;
     background-color: #0D0D0D;
   

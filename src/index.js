@@ -69,3 +69,16 @@ root.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+
+// Fix para unidades `vh` en móviles (address bar cambia el viewport)
+// Establece una variable CSS `--vh` basada en `window.innerHeight`
+// y la actualiza en resize/orientationchange para evitar que elementos con
+// `vh` se estiren al hacer scroll en móviles.
+function setViewportVhProperty() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+
+setViewportVhProperty();
+window.addEventListener('resize', setViewportVhProperty);
+window.addEventListener('orientationchange', setViewportVhProperty);
