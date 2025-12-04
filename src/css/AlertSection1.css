@@ -1159,8 +1159,8 @@
   }
 }
 
-/* Desktop Extra Large (1440px - 1919px) */
-@media (min-width: 1440px) and (max-width: 1919px) {
+/* Desktop Extra Large (1440px) */
+@media (min-width: 1440px)  {
   .alert-section1 {
     width: 85%;
     height: 100%;
