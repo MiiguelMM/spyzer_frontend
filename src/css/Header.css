@@ -481,7 +481,11 @@
   .header__logo {
     width: 45%;
     height: 45%;
-    gap: 2px;
+    gap: 0px;
+  }
+
+  .header__name {
+    margin-left: -8px;
   }
 
   .header__wrapper {
