@@ -19,9 +19,7 @@
 }
 
 .section2-title-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  position: relative;
   margin-bottom: 1rem;
 }
 
@@ -29,10 +27,13 @@
   color: #FFFFFF;
   font-size: 1.5rem;
   font-weight: 700;
-  margin: 0;
+  margin: 0 0 1rem 0;
 }
 
 .total-metrics-button {
+  position: absolute;
+  top: 0;
+  right: 0;
   width: 36px;
   height: 36px;
   background: linear-gradient(135deg, #007ACC 0%, #005A9E 100%);
@@ -1223,7 +1224,7 @@
   }
 }
 
-@media (min-width: 1024px) and (max-width: 1580px) {
+@media (min-width: 1024px)  {
   .metrica-label {
     font-size: 16px;
   }

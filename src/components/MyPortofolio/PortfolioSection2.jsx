@@ -286,9 +286,45 @@ const TradingSection2 = () => {
     setLoadingTotalMetrics(true);
 
     try {
-      const stats = await userService.obtenerEstadisticas(userId);
-      console.log('Total metrics from account creation:', stats);
-      setTotalMetrics(stats);
+      // Obtener datos del usuario
+      const perfil = await userService.obtenerPerfil(userId);
+
+      // Obtener resumen del portfolio
+      const resumenPortfolio = await portfolioService.obtenerResumen(userId);
+
+      // Constantes
+      const balanceInicial = 50000;
+      const balanceActual = parseFloat(metrics?.currentMoney || 0);
+      const valorPortfolio = parseFloat(resumenPortfolio.valorTotal || 0);
+
+      // Cálculos (misma lógica que Rankings)
+      // Balance Total = Balance Actual (cash) + Valor Portfolio (acciones)
+      const balanceTotal = balanceActual + valorPortfolio;
+
+      // Ganancia/Pérdida Total = Balance Total - Balance Inicial
+      const gananciaPerdidaTotal = balanceTotal - balanceInicial;
+
+      // Rentabilidad = ((Balance Total - Balance Inicial) / Balance Inicial) * 100
+      const rentabilidadTotal = ((gananciaPerdidaTotal / balanceInicial) * 100);
+
+      console.log('📊 Total metrics calculation:', {
+        balanceInicial: balanceInicial.toLocaleString(),
+        balanceActual: balanceActual.toLocaleString(),
+        valorPortfolio: valorPortfolio.toLocaleString(),
+        balanceTotal: balanceTotal.toLocaleString(),
+        gananciaPerdidaTotal: gananciaPerdidaTotal.toLocaleString(),
+        rentabilidadTotal: `${rentabilidadTotal.toFixed(2)}%`
+      });
+
+      setTotalMetrics({
+        gananciaPerdida: gananciaPerdidaTotal,
+        porcentajeGanancia: rentabilidadTotal,
+        perfil: {
+          balanceInicial,
+          balanceActual: balanceTotal,
+          createdAt: perfil.createdAt
+        }
+      });
     } catch (error) {
       console.error('Error loading total metrics:', error);
       setTotalMetrics(null);
@@ -645,7 +681,7 @@ const TradingSection2 = () => {
                       </span>
                     </div>
                     <div className="detail-row">
-                      <span className="detail-row-label">Current Balance</span>
+                      <span className="detail-row-label">Total Balance</span>
                       <span className="detail-row-value">
                         ${parseFloat(totalMetrics.perfil?.balanceActual || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
                       </span>
