@@ -796,6 +796,18 @@
     font-size: 1.45rem;
   }
 
+  .total-metrics-button {
+    width: 28px;
+    height: 28px;
+    font-size: 1.3rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .total-metrics-button:hover {
+    transform: translateY(-50%) scale(1.1) rotate(90deg);
+  }
+
   .metricas-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
