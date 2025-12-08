@@ -574,3 +574,39 @@
     font-size: 12px;
   }
 }
+
+/* ==================== SKELETON LOADING STYLES ==================== */
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.skeleton-text,
+.skeleton-indicator {
+  background: linear-gradient(90deg, #2A2A2A 25%, #333333 50%, #2A2A2A 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+.skeleton-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: none;
+}
+
+.metrics-card.loading {
+  pointer-events: none;
+}
+
+.metrics-card.loading:hover {
+  transform: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+}

@@ -1769,3 +1769,78 @@
     font-size: 2.5rem;
   }
 }
+
+/* ==================== SKELETON LOADING STYLES ==================== */
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.skeleton-text,
+.skeleton-value {
+  background: linear-gradient(90deg, #2A2A2A 25%, #333333 50%, #2A2A2A 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.total-metric-card.loading .skeleton-text {
+  width: 120px;
+  height: 14px;
+  margin-bottom: 0.5rem;
+}
+
+.total-metric-card.loading .skeleton-value {
+  width: 160px;
+  height: 40px;
+}
+
+.total-metrics-details.loading .skeleton-text {
+  background: linear-gradient(90deg, #2A2A2A 25%, #333333 50%, #2A2A2A 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Responsive skeleton sizes */
+@media (max-width: 767px) {
+  .total-metric-card.loading .skeleton-value {
+    width: 140px;
+    height: 30px;
+  }
+
+  .total-metric-card.loading .skeleton-text {
+    width: 100px;
+    height: 12px;
+  }
+}
+
+@media (min-width: 768px) {
+  .total-metric-card.loading .skeleton-value {
+    width: 180px;
+    height: 45px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .total-metric-card.loading .skeleton-value {
+    width: 200px;
+    height: 50px;
+  }
+}

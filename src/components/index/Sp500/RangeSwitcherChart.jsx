@@ -466,6 +466,11 @@ export default function RangeSwitcherChart() {
   return (
     <div className="range-switcher-chart">
       <div ref={chartContainerRef} className="chart-container">
+        {isLoading && (
+          <div className="chart-skeleton-loader">
+            <div className="skeleton-chart-area"></div>
+          </div>
+        )}
         {hasError && (
           <div className="error-container">
             <span>⚠️ Error loading data: {error}</span>

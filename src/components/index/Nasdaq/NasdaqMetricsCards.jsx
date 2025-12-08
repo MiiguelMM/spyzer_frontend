@@ -18,9 +18,48 @@ export default function NasdaqMetricsCards() {
 
   if (isLoading) {
     return (
-      <div className="loading-container">
-        <div className="loading-icon">🚀</div>
-        Loading {marketInfo?.name || 'NASDAQ'} data...
+      <div className="metrics-container">
+        {/* Today's Metrics Skeleton */}
+        <div className="metrics-card loading">
+          <div className="card-header">
+            <div className="card-indicator skeleton-indicator"></div>
+            <h3 className="card-title skeleton-text" style={{ width: '60px', height: '16px' }}></h3>
+          </div>
+          <div className="card-content">
+            <div className="metric-row">
+              <span className="metric-label skeleton-text" style={{ width: '60px', height: '14px' }}></span>
+              <span className="metric-value skeleton-text" style={{ width: '80px', height: '20px' }}></span>
+            </div>
+          </div>
+        </div>
+
+        {/* Previous Close Skeleton */}
+        <div className="metrics-card loading">
+          <div className="card-header">
+            <div className="card-indicator skeleton-indicator"></div>
+            <h3 className="card-title skeleton-text" style={{ width: '80px', height: '16px' }}></h3>
+          </div>
+          <div className="card-content">
+            <div className="metric-row">
+              <span className="metric-label skeleton-text" style={{ width: '50px', height: '14px' }}></span>
+              <span className="metric-value skeleton-text" style={{ width: '80px', height: '20px' }}></span>
+            </div>
+          </div>
+        </div>
+
+        {/* Daily Change Skeleton */}
+        <div className="metrics-card loading">
+          <div className="card-header">
+            <div className="card-indicator skeleton-indicator"></div>
+            <h3 className="card-title skeleton-text" style={{ width: '70px', height: '16px' }}></h3>
+          </div>
+          <div className="card-content">
+            <div className="metric-row">
+              <span className="metric-label skeleton-text" style={{ width: '60px', height: '14px' }}></span>
+              <span className="metric-value skeleton-text" style={{ width: '100px', height: '20px' }}></span>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

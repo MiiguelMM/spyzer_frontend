@@ -652,7 +652,34 @@ const TradingSection2 = () => {
             {/* Modal Body */}
             <div className="portfolio-modal-body">
               {loadingTotalMetrics ? (
-                <div className="loading-spinner" />
+                <div className="total-metrics-content">
+                  <div className="total-metrics-grid">
+                    <div className="total-metric-card loading">
+                      <span className="total-metric-label skeleton-text"></span>
+                      <div className="total-metric-value skeleton-value"></div>
+                    </div>
+
+                    <div className="total-metric-card loading">
+                      <span className="total-metric-label skeleton-text"></span>
+                      <div className="total-metric-value skeleton-value"></div>
+                    </div>
+                  </div>
+
+                  <div className="total-metrics-details loading">
+                    <div className="detail-row">
+                      <span className="skeleton-text" style={{ width: '120px', height: '16px' }}></span>
+                      <span className="skeleton-text" style={{ width: '100px', height: '16px' }}></span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="skeleton-text" style={{ width: '120px', height: '16px' }}></span>
+                      <span className="skeleton-text" style={{ width: '100px', height: '16px' }}></span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="skeleton-text" style={{ width: '120px', height: '16px' }}></span>
+                      <span className="skeleton-text" style={{ width: '150px', height: '16px' }}></span>
+                    </div>
+                  </div>
+                </div>
               ) : totalMetrics ? (
                 <div className="total-metrics-content">
                   <div className="total-metrics-grid">
