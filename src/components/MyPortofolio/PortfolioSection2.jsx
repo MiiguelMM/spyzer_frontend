@@ -19,6 +19,11 @@ const TradingSection2 = () => {
   const [isShowingSell, setIsShowingSell] = useState(false);
   const [isProcessingSell, setIsProcessingSell] = useState(false);
 
+  // States for total metrics modal
+  const [showTotalMetricsModal, setShowTotalMetricsModal] = useState(false);
+  const [totalMetrics, setTotalMetrics] = useState(null);
+  const [loadingTotalMetrics, setLoadingTotalMetrics] = useState(false);
+
   useEffect(() => {
     const user = userService.obtenerUsuarioSesion(); // Assuming service names remain
 
@@ -266,13 +271,29 @@ const TradingSection2 = () => {
       console.error('Error selling shares:', error);
 
       // Show more specific error message
-      const errorMessage = error.response?.data?.message || 
-                          error.message || 
+      const errorMessage = error.response?.data?.message ||
+                          error.message ||
                           'Error processing the sale. Please try again.';
 
       alert(`✗ Sale Error\n\n${errorMessage}`);
     } finally {
       setIsProcessingSell(false);
+    }
+  };
+
+  const handleOpenTotalMetrics = async () => {
+    setShowTotalMetricsModal(true);
+    setLoadingTotalMetrics(true);
+
+    try {
+      const stats = await userService.obtenerEstadisticas(userId);
+      console.log('Total metrics from account creation:', stats);
+      setTotalMetrics(stats);
+    } catch (error) {
+      console.error('Error loading total metrics:', error);
+      setTotalMetrics(null);
+    } finally {
+      setLoadingTotalMetrics(false);
     }
   };
 
@@ -287,8 +308,13 @@ const TradingSection2 = () => {
   return (
     <div className="trading-section2-container">
       <div className="section2-header">
-        <h2 className="section2-title">My Portfolio</h2>
-        
+        <div className="section2-title-wrapper">
+          <h2 className="section2-title">My Portfolio</h2>
+          <button className="total-metrics-button" onClick={handleOpenTotalMetrics} title="View total metrics since account creation">
+            +
+          </button>
+        </div>
+
         {metrics && (
           <div className="metricas-grid">
             <div className="metrica-item">
@@ -558,6 +584,91 @@ const TradingSection2 = () => {
                   </div>
                 )}
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Total Metrics Modal */}
+      {showTotalMetricsModal && (
+        <div
+          className="portfolio-modal-overlay"
+          onClick={() => setShowTotalMetricsModal(false)}
+        >
+          <div
+            className="portfolio-modal-content total-metrics-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <button
+              className="portfolio-modal-close"
+              onClick={() => setShowTotalMetricsModal(false)}
+            >
+              ✕
+            </button>
+
+            {/* Modal Header */}
+            <div className="portfolio-modal-header">
+              <h3 className="portfolio-modal-title">Total Performance</h3>
+              <p className="portfolio-modal-subtitle">Since Account Creation</p>
+            </div>
+
+            {/* Modal Body */}
+            <div className="portfolio-modal-body">
+              {loadingTotalMetrics ? (
+                <div className="loading-spinner" />
+              ) : totalMetrics ? (
+                <div className="total-metrics-content">
+                  <div className="total-metrics-grid">
+                    <div className="total-metric-card">
+                      <span className="total-metric-label">Total Profit/Loss</span>
+                      <p className={`total-metric-value ${totalMetrics.gananciaPerdida >= 0 ? 'positive' : 'negative'}`}>
+                        {totalMetrics.gananciaPerdida >= 0 ? '+' : ''}
+                        ${parseFloat(totalMetrics.gananciaPerdida).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+                      </p>
+                    </div>
+
+                    <div className="total-metric-card">
+                      <span className="total-metric-label">Total Return</span>
+                      <p className={`total-metric-value ${totalMetrics.porcentajeGanancia >= 0 ? 'positive' : 'negative'}`}>
+                        {totalMetrics.porcentajeGanancia >= 0 ? '+' : ''}
+                        {parseFloat(totalMetrics.porcentajeGanancia).toFixed(2)}%
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="total-metrics-details">
+                    <div className="detail-row">
+                      <span className="detail-row-label">Initial Balance</span>
+                      <span className="detail-row-value">
+                        ${parseFloat(totalMetrics.perfil?.balanceInicial || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      </span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="detail-row-label">Current Balance</span>
+                      <span className="detail-row-value">
+                        ${parseFloat(totalMetrics.perfil?.balanceActual || 0).toLocaleString('en-US', { minimumFractionDigits: 2 })}
+                      </span>
+                    </div>
+                    <div className="detail-row">
+                      <span className="detail-row-label">Account Created</span>
+                      <span className="detail-row-value">
+                        {totalMetrics.perfil?.createdAt
+                          ? new Date(totalMetrics.perfil.createdAt).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'long',
+                              day: 'numeric'
+                            })
+                          : 'N/A'}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <div className="empty-state">
+                  <p>Unable to load total metrics. Please try again.</p>
+                </div>
+              )}
             </div>
           </div>
         </div>
