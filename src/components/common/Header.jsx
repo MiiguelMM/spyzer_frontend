@@ -216,7 +216,7 @@ export default function Header({ onLogout }) {
                     <div className='menu-container'>
                         <div className="hamburger-header">
                             <div className="hamburger-logo">
-                                <img src={logo} alt="Logo" style={{ width: '42px', height: '39px', marginRight: '12px' }} />
+                                <img src={logo} alt="Logo" style={{ width: '42px', height: '39px', marginRight: '7px' }} />
                                 SPYZER
                             </div>
 
