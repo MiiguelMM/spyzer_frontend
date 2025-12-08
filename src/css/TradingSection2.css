@@ -34,8 +34,8 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 28px;
-  height: 28px;
+  width: 30px;
+  height: 30px;
   background: linear-gradient(135deg, #007ACC 0%, #005A9E 100%);
   border: 1px solid #007ACC;
   border-radius: 50%;
@@ -797,9 +797,9 @@
   }
 
   .total-metrics-button {
-    width: 28px;
-    height: 28px;
-    font-size: 1.3rem;
+    width: 27.5px;
+    height: 27.5px;
+    font-size: 1.1rem;
     top: 50%;
     transform: translateY(-50%);
   }
