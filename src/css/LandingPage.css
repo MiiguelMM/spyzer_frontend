@@ -569,7 +569,7 @@
 /* Para laptops y monitores con altura limitada */
 @media (min-width: 1024px) and (max-height: 815px) {
     .content {
-        gap: 10rem;
+        gap: 1rem;
         padding: 1rem 0;
     }
 
@@ -603,7 +603,7 @@
     .planet-4 { width: 2px; height: 2px; top: -1px; }
 
     .buttons-group {
-        margin-top: 40px;
+        margin-top: 200px;
     }
 
     .login-button, .register-button {
