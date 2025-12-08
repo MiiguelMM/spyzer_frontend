@@ -34,13 +34,13 @@
   position: absolute;
   top: 0;
   right: 0;
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   background: linear-gradient(135deg, #007ACC 0%, #005A9E 100%);
   border: 1px solid #007ACC;
   border-radius: 50%;
   color: #FFFFFF;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   font-weight: 700;
   cursor: pointer;
   transition: all 0.3s ease;
