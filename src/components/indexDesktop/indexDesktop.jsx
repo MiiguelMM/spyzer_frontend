@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useMemo } from 'react'
 import '../../css_desktop/IndexDesktop.css'
 import RangeSwitcherChart from '../index/Sp500/RangeSwitcherChart'
 import ChartHeader from '../index/Sp500/ChartHeader'
@@ -13,11 +13,41 @@ import FxiChartHeader from '../index/China/FXIChartHeader'
 import FxiRangeSwitcherChart from '../index/China/FXIRangeSwitcherChart'
 import FxiMetricsCards from '../index/China/FXIMetricCards'
 
+// Componente placeholder ligero para páginas no cargadas
+const PagePlaceholder = () => (
+  <div className="desktop-component__page-placeholder">
+    <div className="placeholder-content">
+      <div className="placeholder-shimmer"></div>
+    </div>
+  </div>
+)
+
 export default function Desktop() {
   const [currentPage, setCurrentPage] = useState(0)
   const [isScrolling, setIsScrolling] = useState(false)
+  const [loadedPages, setLoadedPages] = useState(new Set([0])) // Solo página inicial
   const containerRef = useRef(null)
   const totalPages = 4
+
+  // Pre-cargar páginas adyacentes cuando cambia la página actual
+  useEffect(() => {
+    const pagesToLoad = new Set(loadedPages)
+    
+    // Cargar página actual
+    pagesToLoad.add(currentPage)
+    
+    // Pre-cargar página siguiente (si existe)
+    if (currentPage < totalPages - 1) {
+      pagesToLoad.add(currentPage + 1)
+    }
+    
+    // Pre-cargar página anterior (si existe)
+    if (currentPage > 0) {
+      pagesToLoad.add(currentPage - 1)
+    }
+    
+    setLoadedPages(pagesToLoad)
+  }, [currentPage, totalPages])
 
   // Manejar el scroll con wheel
   useEffect(() => {
@@ -27,11 +57,9 @@ export default function Desktop() {
       e.preventDefault()
       
       if (e.deltaY > 0 && currentPage < totalPages - 1) {
-        // Scroll hacia abajo
         setCurrentPage(prev => prev + 1)
         setIsScrolling(true)
       } else if (e.deltaY < 0 && currentPage > 0) {
-        // Scroll hacia arriba
         setCurrentPage(prev => prev - 1)
         setIsScrolling(true)
       }
@@ -53,7 +81,7 @@ export default function Desktop() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsScrolling(false)
-    }, 800) // Duración de la transición
+    }, 800)
 
     return () => clearTimeout(timer)
   }, [currentPage])
@@ -65,6 +93,9 @@ export default function Desktop() {
     }
   }
 
+  // Función helper para verificar si una página debe renderizarse
+  const shouldRenderPage = (pageIndex) => loadedPages.has(pageIndex)
+
   return (
     <div className="desktop-component" ref={containerRef}>
       <div 
@@ -73,28 +104,48 @@ export default function Desktop() {
           transform: `translateY(-${currentPage * 100}%)`,
         }}
       >
+        {/* Página 0: S&P 500 */}
         <div className="desktop-component__page section1">
-          <ChartHeader />
-          <RangeSwitcherChart />
-          <MetricsCards />
+          {shouldRenderPage(0) ? (
+            <>
+              <ChartHeader />
+              <RangeSwitcherChart />
+              <MetricsCards />
+            </>
+          ) : <PagePlaceholder />}
         </div>
 
+        {/* Página 1: NASDAQ */}
         <div className="desktop-component__page section3">
-          <NasdaqChartHeader/>
-          <NasdaqRangeSwitcherChart/>
-          <NasdaqMetricsCards/>
+          {shouldRenderPage(1) ? (
+            <>
+              <NasdaqChartHeader />
+              <NasdaqRangeSwitcherChart />
+              <NasdaqMetricsCards />
+            </>
+          ) : <PagePlaceholder />}
         </div>
 
+        {/* Página 2: DAX */}
         <div className="desktop-component__page section4">
-          <DaxChartHeader/>
-          <DaxRangeSwitcherChart/>
-          <DaxMetricsCards/>
+          {shouldRenderPage(2) ? (
+            <>
+              <DaxChartHeader />
+              <DaxRangeSwitcherChart />
+              <DaxMetricsCards />
+            </>
+          ) : <PagePlaceholder />}
         </div>
 
+        {/* Página 3: FXI China */}
         <div className="desktop-component__page section2">
-          <FxiChartHeader/>
-          <FxiRangeSwitcherChart/>
-          <FxiMetricsCards/>
+          {shouldRenderPage(3) ? (
+            <>
+              <FxiChartHeader />
+              <FxiRangeSwitcherChart />
+              <FxiMetricsCards />
+            </>
+          ) : <PagePlaceholder />}
         </div>
       </div>
 
