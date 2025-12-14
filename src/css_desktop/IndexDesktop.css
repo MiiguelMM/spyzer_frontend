@@ -35,7 +35,7 @@ body {
   margin-top: 5vh;
   margin-left: 0;
   margin-right: 60px;
-  backdrop-filter: blur(20px) saturate(180%);
+  /* backdrop-filter eliminado para mejor rendimiento */
   overflow: hidden;
   box-sizing: border-box;
   height: 90.1vh;
@@ -121,19 +121,22 @@ body {
 .placeholder-shimmer {
   width: 100%;
   height: 100%;
-  background: linear-gradient(
-    90deg,
-    #1E1E1E 0%,
-    #252525 50%,
-    #1E1E1E 100%
-  );
+  background: linear-gradient(90deg,
+      #1E1E1E 0%,
+      #252525 50%,
+      #1E1E1E 100%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite ease-in-out;
 }
 
 @keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
 }
 
 /* Responsive - Extra Large Screens (1920px+) */
