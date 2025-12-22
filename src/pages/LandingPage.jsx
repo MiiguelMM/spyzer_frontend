@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/LandingPage.css';
 import Logo from '../assets/Logo5.png';
 import Circulo from '../assets/circulo.png';
 import authService from '../service/authService';
+import { isLinkedInBrowser } from '../utils/browserDetection';
 
 export default function LandingPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [isLinkedIn, setIsLinkedIn] = useState(false);
+
+  useEffect(() => {
+    setIsLinkedIn(isLinkedInBrowser());
+  }, []);
 
   const handleLogin = () => {
     try {
@@ -89,28 +95,42 @@ export default function LandingPage() {
         </div>
       )}
 
-      {/* Botón único */}
+      {/* Botón único o Advertencia LinkedIn */}
       <div className="buttons-group">
-        <button
-          className="login-button"
-          onClick={handleLogin}
-          disabled={isLoading}
-        >
-          {isLoading ? (
-            <>
-              <span className="button-spinner"></span>
-              Loading...
-            </>
-          ) : (
-            'Sign in with Google'
-          )}
-        </button>
+        {isLinkedIn ? (
+          <div className="linkedin-warning">
+            <p className="linkedin-warning-title">¿Estás en LinkedIn?</p>
+            <p className="linkedin-warning-text">
+              Según políticas de Google no puedes iniciar sesión en navegadores privados.
+            </p>
+            <p className="linkedin-warning-action">
+              Dale a los 3 puntos de arriba a la derecha y selecciona <strong>"Abrir en el navegador"</strong>.
+            </p>
+          </div>
+        ) : (
+          <button
+            className="login-button"
+            onClick={handleLogin}
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <>
+                <span className="button-spinner"></span>
+                Loading...
+              </>
+            ) : (
+              'Sign in with Google'
+            )}
+          </button>
+        )}
       </div>
 
-      {/* Texto descriptivo */}
-      <p className="register-text">
-        Sign in with your Google account to start trading
-      </p>
+      {/* Texto descriptivo - Solo si no es LinkedIn */}
+      {!isLinkedIn && (
+        <p className="register-text">
+          Sign in with your Google account to start trading
+        </p>
+      )}
 
       {/* Estilos del spinner según el design system */}
       <style>{`
@@ -159,6 +179,46 @@ export default function LandingPage() {
           margin-bottom: 16px;
           font-size: 14px;
           font-weight: 500;
+        }
+
+        /* Estilos para la advertencia de LinkedIn */
+        .linkedin-warning {
+          background-color: rgba(255, 165, 0, 0.15);
+          border: 1px solid rgba(255, 165, 0, 0.5);
+          border-radius: 12px;
+          padding: 20px;
+          max-width: 320px;
+          text-align: center;
+          margin: 0 auto;
+          backdrop-filter: blur(5px);
+          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .linkedin-warning-title {
+          color: #FFD700;
+          font-size: 18px;
+          font-weight: 700;
+          margin-bottom: 12px;
+        }
+        
+        .linkedin-warning-text {
+          color: #E0E0E0;
+          font-size: 15px;
+          line-height: 1.5;
+          margin-bottom: 12px;
+        }
+        
+        .linkedin-warning-action {
+          color: #FFFFFF;
+          font-size: 14px;
+          font-weight: 500;
+          background-color: rgba(255, 255, 255, 0.1);
+          padding: 10px;
+          border-radius: 8px;
+        }
+        
+        .linkedin-warning-action strong {
+          color: #4CAF50;
         }
       `}</style>
     </div>
